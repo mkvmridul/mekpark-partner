@@ -1,0 +1,108 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="MyTabLayoutTextAppearance" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/montserrat_semi_bold</item>
+    </style>
+
+    <style name="SwitchCompatTheme" >
+        <item name="colorControlActivated">#4cbc17</item>
+    </style>
+
+    <style name="booking_time">
+        <item name="android:drawableRight">@drawable/arrow_right_white</item>
+        <item name="android:drawablePadding">2dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/montserrat_semi_bold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="booking_order">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/montserrat_semi_bold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="need_help">
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/background_button1</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">@font/montserrat_semi_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:text">Need Help?</item>
+    </style>
+
+    <style name="pin">
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/background_button1</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="button_style_1">
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/background_button1</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">@font/montserrat_semi_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="button_style_2">
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/background_button2</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">@font/montserrat_semi_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+
+    <style name="button_style_3">
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/background_button3</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">@font/montserrat_semi_bold</item>
+        <item name="android:textColor">@color/black2</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+</resources>

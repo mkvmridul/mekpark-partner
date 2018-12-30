@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MekParkPartner</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="awaiting_parking">Awaiting Parking</string>
+    <string name="parking_in_progress">Parking in progress</string>
+    <string name="awaiting_confirmation">Awaiting Confirmation</string>
+    <string name="booking_date_amp_time"><![CDATA[Booking date & time]]></string>
+    <string name="parking_date_amp_time"><![CDATA[Parking date & time]]></string>
+</resources>

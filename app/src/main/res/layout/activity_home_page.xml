@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".HomePage">
+
+    <TextView
+        android:id="@+id/parking_partner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Parking Partner"
+        android:gravity="center"
+        android:textSize="16dp"
+        android:padding="8dp"
+        android:fontFamily="@font/montserrat_regular"/>
+
+    <TextView
+        android:layout_marginTop="16dp"
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:gravity="center"
+        android:textSize="16dp"
+        android:padding="8dp"
+        android:fontFamily="@font/montserrat_regular"/>
+
+</LinearLayout>

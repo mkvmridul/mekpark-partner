@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".LoginRelated.LoginPage">
+
+    <!-- Background-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--background blank spaces and faq-->
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1.2"
+                android:background="@mipmap/profile_watermarks" />
+
+            <!--Blank for giving gap-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:orientation="vertical">
+
+        <!--Logo-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:gravity="center"
+            android:text="mekPark"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+        <android.support.v7.widget.CardView
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="40dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:text="Login"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/gotham_book_regular"
+                    android:text="Enter employee ID and password"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="56dp"
+                    android:fontFamily="@font/gotham_book_regular"
+                    android:text="Enter your Employee ID"
+                    android:textSize="8sp" />
+
+                <EditText
+                    android:id="@+id/emp_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/gotham_book_regular"
+                    android:maxLength="10"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="-4dp"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/gotham_book_regular"
+                    android:text="Password"
+                    android:textSize="8sp" />
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/gotham_book_regular"
+                    android:maxLength="10"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="-4dp"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="64dp"
+                    android:text="Submit"
+                    style="@style/button_style_1"/>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <!--FAQ-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/faq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:drawableLeft="@drawable/faq"
+                android:drawablePadding="16dp"
+                android:drawableRight="@drawable/ic_arrow_right"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:text="FAQ's"
+                android:textSize="14sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/send_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="16dp"
+                android:drawableLeft="@drawable/feedback"
+                android:drawablePadding="16dp"
+                android:drawableRight="@drawable/ic_arrow_right"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:paddingBottom="16dp"
+                android:paddingTop="8dp"
+                android:textSize="14sp"
+                android:text="Send Feedback"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+</FrameLayout>
