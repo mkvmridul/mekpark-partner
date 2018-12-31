@@ -11,6 +11,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -24,6 +25,8 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class CoomanVarAndFun {
@@ -133,6 +136,92 @@ public class CoomanVarAndFun {
         else {
             Toast.makeText(context,"Something went wrong",Toast.LENGTH_LONG).show();
         }
+    }
+
+    public static String getFormattedTime(String TAG, String s) {
+
+        String time = "NA";
+        Date date;
+        SimpleDateFormat sdf = new java.text.SimpleDateFormat(TIME_FORMAT);
+
+        try {
+            Long unix   = Long.valueOf(s);
+            date        = new java.util.Date(unix*1000L);
+            time        = sdf.format(date);
+
+        }catch (Exception e){
+            Log.e(TAG,"Exception cought while converting time : "+e.toString());
+
+        }
+
+        return time;
+
+    }
+
+    public static String getFormattedDate(String TAG, String unix) {
+
+        String formatedstring = "NA";
+
+        SimpleDateFormat sdf = new SimpleDateFormat("d");
+        Long longUnix = null;
+
+        try {
+
+            longUnix = Long.valueOf(unix);
+            String date = sdf.format(new Date(longUnix * 1000L));
+
+            if (date.endsWith("1") && !date.endsWith("11"))
+                sdf = new SimpleDateFormat("d'st' MMM, yyyy");
+            else if (date.endsWith("2") && !date.endsWith("12"))
+                sdf = new SimpleDateFormat("d'nd' MMM, yyyy");
+            else if (date.endsWith("3") && !date.endsWith("13"))
+                sdf = new SimpleDateFormat("d'rd' MMM, yyyy");
+            else
+                sdf = new SimpleDateFormat("d'th' MMM, yyyy");
+
+        }catch (Exception e){
+            Log.e(TAG,"Exception cought while converting time : "+e.toString());
+        }
+
+
+        formatedstring = sdf.format(new Date(longUnix*1000L));
+
+
+        return formatedstring;
+
+
+
+    }
+    public static String getFormattedDate2(String TAG, String unix) {
+
+        String formatedstring = "NA";
+
+        SimpleDateFormat sdf = new SimpleDateFormat("d");
+        Long longUnix = null;
+
+        try {
+
+            longUnix = Long.valueOf(unix);
+            String date = sdf.format(new Date(longUnix * 1000L));
+
+            if (date.endsWith("1") && !date.endsWith("11"))
+                sdf = new SimpleDateFormat("EEEE, d'st' MMM");
+            else if (date.endsWith("2") && !date.endsWith("12"))
+                sdf = new SimpleDateFormat("EEEE, d'nd' MMM");
+            else if (date.endsWith("3") && !date.endsWith("13"))
+                sdf = new SimpleDateFormat("EEEE, d'rd' MMM");
+            else
+                sdf = new SimpleDateFormat("EEEE, d'th' MMM");
+
+        }catch (Exception e){
+            Log.e(TAG,"Exception cought while converting time : "+e.toString());
+        }
+
+        formatedstring = sdf.format(new Date(longUnix*1000L));
+        return formatedstring;
+
+
+
     }
 
 }

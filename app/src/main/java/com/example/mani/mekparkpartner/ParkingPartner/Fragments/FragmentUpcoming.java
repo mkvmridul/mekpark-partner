@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.example.mani.mekparkpartner.ParkingPartner.Adapter.NewBookingAdapter;
 import com.example.mani.mekparkpartner.ParkingPartner.Adapter.UpcomingAdapter;
 import com.example.mani.mekparkpartner.ParkingPartner.Booking;
+import com.example.mani.mekparkpartner.ParkingPartner.BookingPage;
 import com.example.mani.mekparkpartner.R;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class FragmentUpcoming extends Fragment {
     private String TAG = "FragmentUpcoming";
     private View mRootView;
     private List<Booking> mUpcomingList;
+    private BookingPage mActivity;
 
     public FragmentUpcoming() {}
 
@@ -31,6 +33,7 @@ public class FragmentUpcoming extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.e(TAG,"onCreate2");
+        mActivity = (BookingPage) getActivity();
     }
 
     @Override
@@ -42,14 +45,10 @@ public class FragmentUpcoming extends Fragment {
         mRootView = inflater.inflate(R.layout.fragment_upcoming, container, false);
         mUpcomingList = new ArrayList<>();
 
-        mUpcomingList.add(new Booking(1,4,"45667",
-                "87","",true,"",0,1234,"",
-                "","","","",""));
+        mUpcomingList = mActivity.fetchBookingFromParent(2);
 
-        mUpcomingList.add(new Booking(1,4,"45667",
-                "87","",true,"",0,1234,"",
-                "","","","",""));
-
+        for(int i=0;i<mUpcomingList.size();i++)
+            Log.e(TAG, "booking Id = "+ mUpcomingList.get(i).getBookingId());
 
 
         RecyclerView recyclerView = mRootView.findViewById(R.id.recycler_view);

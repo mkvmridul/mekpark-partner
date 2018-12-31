@@ -8,4 +8,5 @@
     <string name="awaiting_confirmation">Awaiting Confirmation</string>
     <string name="booking_date_amp_time"><![CDATA[Booking date & time]]></string>
     <string name="parking_date_amp_time"><![CDATA[Parking date & time]]></string>
+    <string name="rupee_symbol">₹</string>
 </resources>

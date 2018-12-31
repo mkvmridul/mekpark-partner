@@ -28,7 +28,7 @@
             android:src="@drawable/arrow_back_red" />
 
         <TextView
-            android:id="@+id/order_id"
+            android:id="@+id/booking_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -72,77 +72,73 @@
                 android:layout_height="1dp"
                 android:background="@color/background4" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:paddingLeft="24dp"
                 android:paddingBottom="40dp"
                 android:paddingTop="40dp">
 
-                <TextView
-                    android:id="@+id/brand"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="@color/search_hint"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:text="Maruti Suzuki" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/model"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/brand"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/montserrat_semi_bold"
-                    android:text="WagonR"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/brand"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:singleLine="true"
+                        android:textColor="@color/search_hint"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Maruti Suzuki" />
+                    <TextView
+                        android:id="@+id/model"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/brand"
+                        android:layout_marginTop="16dp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:text="WagonR"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/plate_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/model"
+                        android:layout_marginTop="8dp"
+                        android:textSize="10sp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="DL1R0ABC" />
 
-
-                <TextView
-                    android:id="@+id/plate_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/model"
-                    android:layout_marginTop="8dp"
-                    android:textSize="10sp"
-                    android:fontFamily="@font/montserrat_regular"
-                    android:text="DL1R0ABC" />
+                </LinearLayout>
 
                 <ImageView
+                    android:layout_marginRight="44dp"
                     android:id="@+id/vehicle_image"
                     android:layout_width="120dp"
                     android:layout_height="100dp"
-                    android:layout_marginLeft="66dp"
-                    android:layout_toRightOf="@id/brand"
                     android:src="@mipmap/dummy" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/background4" />
 
-            <TextView
-                android:id="@+id/address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:drawableLeft="@drawable/ic_location"
-                android:drawablePadding="16dp"
-                android:fontFamily="@font/montserrat_regular"
-                android:paddingLeft="24dp"
-                android:textSize="13sp"
-                android:text="Geeta Colony,\nNew Delhi India" />
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -229,6 +225,7 @@
                         android:textColor="@color/black2" />
 
                     <TextView
+                        android:id="@+id/booking_date"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
@@ -239,6 +236,7 @@
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/booking_time"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
@@ -296,7 +294,7 @@
                         android:textColor="@color/black2" />
 
                     <TextView
-                        android:id="@+id/parking_duration"
+                        android:id="@+id/duration"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -475,8 +473,9 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="24dp"
                 android:background="@color/background4" />
+
             <TextView
-                android:id="@+id/book_again"
+                android:id="@+id/need_help"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"

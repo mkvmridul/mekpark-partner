@@ -19,12 +19,10 @@ import com.example.mani.mekparkpartner.ParkingPartner.Booking;
 import com.example.mani.mekparkpartner.ParkingPartner.ShowDetails.NewBookingDetails;
 import com.example.mani.mekparkpartner.R;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.TIME_FORMAT;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedTime;
+
 
 public class NewBookingAdapter extends RecyclerView.Adapter<NewBookingAdapter.NewBookingViewHolder> {
 
@@ -50,32 +48,17 @@ public class NewBookingAdapter extends RecyclerView.Adapter<NewBookingAdapter.Ne
 
         final Booking booking = mNewBookingList.get(i);
 
-//        Date date;
-//        SimpleDateFormat sdf = new java.text.SimpleDateFormat(TIME_FORMAT);
-//
-//        String bookingTime = "NA";
-//
-//        try {
-//            Long unix   = Long.valueOf(booking.getBookingTime());
-//            date        = new java.util.Date(unix*1000L);
-//            bookingTime = sdf.format(date);
-//
-//        }catch (Exception e){
-//            Log.e(TAG,"Exception cought 1 : "+e.toString());
-//
-//        }
-//
-//        String duration = booking.getDuration();
-//
-//
-//        holder.tv_id.setText("#"+String.valueOf(booking.getBookingId()));
-//        holder.tv_time.setText(bookingTime);
-//        holder.tv_model.setText(booking.getModel());
-//        holder.tv_licence_plate.setText(booking.getLicencePlateNo());
-//        holder.tv_fare.setText("\u20B9 "+booking.getFare());
-//        holder.tv_parking_start.setText(booking.getParkingTime());
-//        holder.tv_duration.setText(booking.getDuration()+" Hrs");
-//
+        holder.tv_id.setText("#"+booking.getBookingId());
+
+        holder.tv_model.setText(booking.getModel());
+        holder.tv_licence_plate.setText(booking.getLicencePlateNo());
+        holder.tv_parking_start.setText(booking.getParkInTime());
+        holder.tv_duration.setText(booking.getDuration()+" hrs");
+        holder.tv_fare.setText(mCtx.getString(R.string.rupee_symbol)+" " + booking.getFare());
+
+        String bookingTime =  getFormattedTime(TAG, booking.getBookingTime());
+        holder.tv_time.setText(bookingTime);
+
         holder.ll_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

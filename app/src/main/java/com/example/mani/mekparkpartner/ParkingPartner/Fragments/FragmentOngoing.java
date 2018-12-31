@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.example.mani.mekparkpartner.ParkingPartner.Adapter.NewBookingAdapter;
 import com.example.mani.mekparkpartner.ParkingPartner.Adapter.OngoingAdapter;
 import com.example.mani.mekparkpartner.ParkingPartner.Booking;
+import com.example.mani.mekparkpartner.ParkingPartner.BookingPage;
 import com.example.mani.mekparkpartner.R;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class FragmentOngoing extends Fragment {
     private String TAG = "FragmentOngoing";
     private View mRootView;
     private List<Booking> mOngoingList;
+    private BookingPage mActivity;
 
     public FragmentOngoing() {}
 
@@ -31,6 +33,7 @@ public class FragmentOngoing extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.e(TAG,"onCreate3");
+        mActivity = (BookingPage) getActivity();
 
     }
 
@@ -43,13 +46,9 @@ public class FragmentOngoing extends Fragment {
         mRootView =  inflater.inflate(R.layout.fragment_fragment_ongoing, container, false);
         mOngoingList = new ArrayList<>();
 
-        mOngoingList.add(new Booking(1,4,"45667",
-                "87","",true,"",0,1234,"",
-                "","","","",""));
-
-        mOngoingList.add(new Booking(1,4,"45667",
-                "87","",true,"",0,1234,"",
-                "","","","",""));
+        mOngoingList = mActivity.fetchBookingFromParent(3);
+        for(int i=0;i<mOngoingList.size();i++)
+            Log.e(TAG, "booking Id = "+ mOngoingList.get(i).getBookingId());
 
 
         RecyclerView recyclerView = mRootView.findViewById(R.id.recycler_view);

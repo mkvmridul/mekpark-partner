@@ -40,6 +40,7 @@
                         android:text="#000" />
 
                     <TextView
+                        android:id="@+id/booking_time"
                         style="@style/booking_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -86,7 +87,7 @@
                                 android:textSize="14sp" />
 
                             <TextView
-                                android:id="@+id/licence_plate_number"
+                                android:id="@+id/licence_plate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/model_name"
