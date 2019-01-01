@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -15,9 +16,25 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.example.mani.mekparkpartner.CommanPart.MySingleton;
 import com.example.mani.mekparkpartner.ParkingPartner.Booking;
 import com.example.mani.mekparkpartner.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_URL;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_RETRY;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.RETRY_SECONDS;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedDate;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedDate2;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedTime;
@@ -141,7 +158,6 @@ public class UpcomingDetail extends AppCompatActivity {
             }
         });
 
-
         et4.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -162,19 +178,6 @@ public class UpcomingDetail extends AppCompatActivity {
 
 
         TextView btn_startBooking = findViewById(R.id.start);
-        btn_startBooking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String inputedOtp = et1.getText().toString().trim()+
-                        et2.getText().toString().trim()+
-                        et3.getText().toString().trim()+
-                        et4.getText().toString().trim();
-
-                Toast.makeText(UpcomingDetail.this,inputedOtp,Toast.LENGTH_SHORT).show();
-
-            }
-        });
 
 
 
@@ -204,6 +207,38 @@ public class UpcomingDetail extends AppCompatActivity {
             }
         });
 
+        btn_startBooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(!vehiCleArrived.isChecked()){
+                    Toast.makeText(UpcomingDetail.this,"Vehicle did not arrived", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String s1 = et1.getText().toString().trim();
+                String s2 = et2.getText().toString().trim();
+                String s3 = et3.getText().toString().trim();
+                String s4 = et4.getText().toString().trim();
+
+                if(s1.equals("") || s2.equals("") || s3.equals("") || s4.equals("")){
+                    Toast.makeText(UpcomingDetail.this,"please fill valid pin",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String inputedOtp = s1+s2+s3+s4;
+
+                if(!inputedOtp.equals(String.valueOf(mBooking.getPin())) )  {
+                    Toast.makeText(UpcomingDetail.this,"wrong pin", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                updateStatus(mBooking.getBookingId(),3,"Booking is moved to Ongoing section");
+
+            }
+        });
+
+
 
 
 
@@ -219,5 +254,59 @@ public class UpcomingDetail extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    private void updateStatus(final int bookingId, final int status, final String message) {
+
+        Log.e(TAG,"called : updateStatus");
+
+        String SEND_URL = BASE_URL + "update_status_of_parking_booking.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e(TAG,response);
+
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    int rc = jsonArray.getJSONObject(0).getInt("rc");
+                    String mess = jsonArray.getJSONObject(0).getString("mess");
+
+                    if(rc<=0){
+                        Log.e(TAG,mess);
+                        Toast.makeText(UpcomingDetail.this,mess,Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    Log.e(TAG,mess);
+                    Toast.makeText(UpcomingDetail.this,message,Toast.LENGTH_SHORT).show();
+
+                    mBooking.setStatus(status);
+                    onBackPressed();
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG,error.toString());
+                Toast.makeText(UpcomingDetail.this,error.toString(),Toast.LENGTH_SHORT).show();
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> params = new HashMap<>();
+                params.put("booking_id",String.valueOf(bookingId));
+                params.put("status",String.valueOf(status));
+                return params;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(RETRY_SECONDS*1000,NO_OF_RETRY,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        MySingleton.getInstance(UpcomingDetail.this).addToRequestQueue(stringRequest);
+
     }
 }

@@ -86,12 +86,6 @@ public class OngoingDetail extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
         ll_Call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

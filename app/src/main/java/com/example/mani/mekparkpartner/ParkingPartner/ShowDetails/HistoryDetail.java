@@ -34,6 +34,7 @@ public class HistoryDetail extends AppCompatActivity {
     private void setData() {
 
         TextView tv_bookingId   = findViewById(R.id.booking_id);
+        TextView  tv_message  = findViewById(R.id.message);
         TextView tv_model       = findViewById(R.id.model);
         TextView tv_brand       = findViewById(R.id.brand);
         TextView tv_plate_no    = findViewById(R.id.plate_no);
@@ -53,6 +54,20 @@ public class HistoryDetail extends AppCompatActivity {
         TextView  tv_totalFare    = findViewById(R.id.total_fare);
 
         TextView btn_needHelp = findViewById(R.id.need_help);
+
+        if(mBooking.getStatus() == 1){
+            tv_message.setText("Parking Complete");
+            tv_message.setBackgroundColor(getResources().getColor(R.color.green));
+        }
+        else if(mBooking.getStatus() == 4){
+            tv_message.setText("Rejected by Partner");
+            tv_message.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        }
+
+        else if(mBooking.getStatus() == 5){
+            tv_message.setText("Canceled by User");
+            tv_message.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        }
 
         tv_bookingId.setText("Order #"+mBooking.getBookingId());
         tv_model.setText(mBooking.getModel());

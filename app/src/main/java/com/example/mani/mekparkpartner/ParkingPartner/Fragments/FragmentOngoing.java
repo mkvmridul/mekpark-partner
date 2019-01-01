@@ -47,9 +47,6 @@ public class FragmentOngoing extends Fragment {
         mOngoingList = new ArrayList<>();
 
         mOngoingList = mActivity.fetchBookingFromParent(3);
-        for(int i=0;i<mOngoingList.size();i++)
-            Log.e(TAG, "booking Id = "+ mOngoingList.get(i).getBookingId());
-
 
         RecyclerView recyclerView = mRootView.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);

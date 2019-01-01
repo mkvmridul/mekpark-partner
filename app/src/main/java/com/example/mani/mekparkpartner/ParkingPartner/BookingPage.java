@@ -98,7 +98,7 @@ public class BookingPage extends AppCompatActivity  {
 
     }
 
-    private void fetchBookingsFromDb() {
+    public void fetchBookingsFromDb() {
 
         mProgressDialog.show();
         Log.e(TAG,"called : fetchBookingsFromDb");
@@ -133,7 +133,7 @@ public class BookingPage extends AppCompatActivity  {
 
                         String bookingTime =  jsonObject.getString("time_booking");
                         String parkingTime =  jsonObject.getString("park_in");
-                        String parkOut =  jsonObject.getString("park_out");
+                        String parkOut     =  jsonObject.getString("park_out");
                         String duration    =  jsonObject.getString("duration");
                         String payCon      =  jsonObject.getString("payment_confirmed");
 
@@ -143,17 +143,17 @@ public class BookingPage extends AppCompatActivity  {
                         else
                             pc = false;
 
-                        String fare        = jsonObject.getString("fare");
-                        int status         = Integer.parseInt(jsonObject.getString("status"));
-                        int pin            = Integer.parseInt(jsonObject.getString("pin"));
+                        String fare       = jsonObject.getString("fare");
+                        int status        = Integer.parseInt(jsonObject.getString("status"));
+                        int pin           = Integer.parseInt(jsonObject.getString("pin"));
 
-                        String brand       = jsonObject.getString("brand");
-                        String model       = jsonObject.getString("model");
-                        String plateNo     = jsonObject.getString("plate_no");
-                        String image       = jsonObject.getString("image");
+                        String brand      = jsonObject.getString("brand");
+                        String model      = jsonObject.getString("model");
+                        String plateNo    = jsonObject.getString("plate_no");
+                        String image      = jsonObject.getString("image");
 
-                        String cusName     = jsonObject.getString("name");
-                        String cusMobile   = jsonObject.getString("mobile");
+                        String cusName    = jsonObject.getString("name");
+                        String cusMobile  = jsonObject.getString("mobile");
 
                         mBookingList.add(new Booking(bookingId,cusId,bookingTime,parkingTime,parkOut,duration,pc,fare,
                                 status,pin,brand,model,plateNo,image,cusName,cusMobile));

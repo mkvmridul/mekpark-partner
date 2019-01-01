@@ -1,22 +1,47 @@
 package com.example.mani.mekparkpartner.ParkingPartner.ShowDetails;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.example.mani.mekparkpartner.CommanPart.MySingleton;
+import com.example.mani.mekparkpartner.ParkingPartner.Adapter.NewBookingAdapter;
 import com.example.mani.mekparkpartner.ParkingPartner.Booking;
 import com.example.mani.mekparkpartner.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_URL;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_RETRY;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.RETRY_SECONDS;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedDate2;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedTime;
 
 
 public class NewBookingDetails extends AppCompatActivity {
+
+
 
     private Booking mBooking;
     final String TAG = this.getClass().getSimpleName();
@@ -71,11 +96,6 @@ public class NewBookingDetails extends AppCompatActivity {
         tv_from.setText("from: " + mBooking.getParkInTime());
         tv_to.setText("to: "+mBooking.getParkOutTime());
 
-
-
-
-
-
         ll_Call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +105,24 @@ public class NewBookingDetails extends AppCompatActivity {
 
             }
         });
+
+        btn_accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateStatus(mBooking.getBookingId(),2,"Order Accepted and moved to upcoming");
+            }
+        });
+
+        btn_reject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //sent to complete(rejected by partner)
+                setRejectDialog(mBooking.getBookingId(), 4,"Order Rejected by partner");
+            }
+        });
+
+
+
 
 
 
@@ -101,5 +139,84 @@ public class NewBookingDetails extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    private void setRejectDialog(final int bookingId, final int status, final String message) {
+
+        final AlertDialog.Builder builder;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(NewBookingDetails.this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(NewBookingDetails.this);
+        }
+        builder.setTitle("Reject order")
+                .setMessage("Are you sure you want to reject this order?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        updateStatus(bookingId,status,message);
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    private void updateStatus(final int bookingId, final int status, final String message) {
+
+        Log.e(TAG,"called : updateStatus");
+
+        String SEND_URL = BASE_URL + "update_status_of_parking_booking.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e(TAG,response);
+
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    int rc = jsonArray.getJSONObject(0).getInt("rc");
+                    String mess = jsonArray.getJSONObject(0).getString("mess");
+
+                    if(rc<=0){
+                        Log.e(TAG,mess);
+                        Toast.makeText(NewBookingDetails.this,mess,Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    Log.e(TAG,mess);
+                    Toast.makeText(NewBookingDetails.this,message,Toast.LENGTH_SHORT).show();
+
+                    mBooking.setStatus(status);
+                    onBackPressed();
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG,error.toString());
+                Toast.makeText(NewBookingDetails.this,error.toString(),Toast.LENGTH_SHORT).show();
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> params = new HashMap<>();
+                params.put("booking_id",String.valueOf(bookingId));
+                params.put("status",String.valueOf(status));
+                return params;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(RETRY_SECONDS*1000,NO_OF_RETRY,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        MySingleton.getInstance(NewBookingDetails.this).addToRequestQueue(stringRequest);
+
     }
 }

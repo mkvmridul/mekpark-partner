@@ -50,8 +50,7 @@ public class FragmentHistory extends Fragment {
         // Parking with status 1- complted, 4-rejected by partner, 5 cancled by user
         mHistoryList = mActivity.fetchCompletedParking();
 
-        for(int i=0;i<mHistoryList.size();i++)
-            Log.e(TAG, "booking Id = "+ mHistoryList.get(i).getBookingId());
+
 
         RecyclerView recyclerView = mRootView.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);

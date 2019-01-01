@@ -47,8 +47,7 @@ public class FragmentUpcoming extends Fragment {
 
         mUpcomingList = mActivity.fetchBookingFromParent(2);
 
-        for(int i=0;i<mUpcomingList.size();i++)
-            Log.e(TAG, "booking Id = "+ mUpcomingList.get(i).getBookingId());
+
 
 
         RecyclerView recyclerView = mRootView.findViewById(R.id.recycler_view);

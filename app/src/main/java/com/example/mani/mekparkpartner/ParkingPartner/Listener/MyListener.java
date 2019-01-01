@@ -6,6 +6,5 @@ import java.util.List;
 
 public interface MyListener {
 
-    void setData();
-    List<Booking> fetchData(int status);
+    void refresh();
 }

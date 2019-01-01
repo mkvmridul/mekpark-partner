@@ -53,7 +53,24 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         holder.tv_licence_plate.setText(booking.getLicencePlateNo());
 
         String bookingTime =  getFormattedTime(TAG, booking.getBookingTime());
+
         holder.tv_time.setText(bookingTime);
+
+        if(booking.getStatus() == 1){
+            holder.tv_message.setText("Parking Complete");
+            holder.tv_message.setTextColor(mCtx.getResources().getColor(R.color.green));
+        }
+        else if(booking.getStatus() == 4){
+            holder.tv_message.setText("Rejected by Partner");
+            holder.tv_message.setTextColor(mCtx.getResources().getColor(R.color.colorPrimary));
+        }
+
+        else if(booking.getStatus() == 5){
+            holder.tv_message.setText("Canceled by User");
+            holder.tv_message.setTextColor(mCtx.getResources().getColor(R.color.colorPrimary));
+        }
+
+
 
         holder.ll_call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +114,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         TextView tv_needHelp;
         ImageView iv_logo;
         LinearLayout ll_call;
+        TextView tv_message;
+
 
         public HistoryViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -111,6 +130,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
             tv_licence_plate = itemView.findViewById(R.id.licence_plate);
             ll_call          = itemView.findViewById(R.id.call_layout);
             tv_needHelp      = itemView.findViewById(R.id.need_help);
+            tv_message       = itemView.findViewById(R.id.message);
         }
 
 
