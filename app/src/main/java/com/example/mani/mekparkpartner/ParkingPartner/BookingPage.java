@@ -48,7 +48,7 @@ public class BookingPage extends AppCompatActivity  {
     private List<Fragment> mFragmentList;
     private List<Booking> mBookingList;
 
-    private ViewPager mViewPager;
+    private CustomViewPager mViewPager;
     ProgressDialog mProgressDialog;
     BookingFragmentPagerAdapter mAdapter;
 
@@ -56,7 +56,6 @@ public class BookingPage extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_page);
-
 
         mFragmentList = new ArrayList<>();
         mBookingList = new ArrayList<>();
@@ -71,13 +70,17 @@ public class BookingPage extends AppCompatActivity  {
         mFragmentList.add(new FragmentHistory());
 
 
-        mViewPager = findViewById(R.id.viewpager_booking);
+        mViewPager =  findViewById(R.id.viewpager_booking);
+        mViewPager.setOffscreenPageLimit(0);
 
-         mAdapter = new BookingFragmentPagerAdapter(
+        mAdapter = new BookingFragmentPagerAdapter(
                 getSupportFragmentManager(),mFragmentList);
 
-        TabLayout tabLayout = findViewById(R.id.tab_layout_booking);
+        final TabLayout tabLayout = findViewById(R.id.tab_layout_booking);
         tabLayout.setupWithViewPager(mViewPager);
+
+
+
 
 
         findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {

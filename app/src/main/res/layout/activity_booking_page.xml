@@ -56,6 +56,8 @@
         android:layout_height="1dp"
         android:background="@color/background4"/>
 
+
+
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout_booking"
         app:tabIndicatorColor="@color/colorPrimary"
@@ -68,7 +70,9 @@
 
     </android.support.design.widget.TabLayout>
 
-    <android.support.v4.view.ViewPager
+
+
+    <com.example.mani.mekparkpartner.ParkingPartner.CustomViewPager
         android:background="@color/background4"
         android:id="@+id/viewpager_booking"
         android:layout_width="match_parent"

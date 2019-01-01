@@ -21,16 +21,13 @@
         </activity>
         <activity android:name=".LoginRelated.LoginPage"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ParkingPartner.BookingPage"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ParkingPartner.ShowDetails.NewBookingDetails"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ParkingPartner.ShowDetails.OngoingDetail"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ParkingPartner.ShowDetails.UpcomingDetail"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ParkingPartner.ShowDetails.HistoryDetail"
-            android:screenOrientation="portrait"></activity>
+        <activity android:name=".ParkingPartner.BookingPage"/>
+        <activity android:name=".ParkingPartner.ShowDetails.NewBookingDetails"/>
+        <activity android:name=".ParkingPartner.ShowDetails.OngoingDetail"/>
+        <activity android:name=".ParkingPartner.ShowDetails.UpcomingDetail"/>
+        <activity android:name=".ParkingPartner.ShowDetails.HistoryDetail">
+
+        </activity>
     </application>
 
 </manifest>
