@@ -47,8 +47,8 @@ public class CoomanVarAndFun {
 
     //Mobile
     //public static final String BASE_URL = "http://192.168.43.153/mekPark/partner/";
-    public static final String BASE_URL = "http://192.168.1.11/mekPark/partner/";
-    //public static final String BASE_URL = "http://mekpark.com/mani14/partner/";
+    //public static final String BASE_URL = "http://192.168.1.11/mekPark/partner/";
+    public static final String BASE_URL = "http://mekpark.com/mani14/partner/";
 
 
 

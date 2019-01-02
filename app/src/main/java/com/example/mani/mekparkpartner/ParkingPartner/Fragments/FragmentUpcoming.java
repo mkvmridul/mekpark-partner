@@ -47,8 +47,12 @@ public class FragmentUpcoming extends Fragment {
 
         mRootView = inflater.inflate(R.layout.fragment_upcoming, container, false);
         mUpcomingList = new ArrayList<>();
-
         mUpcomingList = mActivity.fetchBookingFromParent(2);
+
+        if(mUpcomingList.size() == 0){
+            mRootView.findViewById(R.id.error_layout).setVisibility(View.VISIBLE);
+            return mRootView;
+        }
 
         RecyclerView recyclerView = mRootView.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);

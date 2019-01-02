@@ -47,8 +47,12 @@ public class FragmentOngoing extends Fragment {
 
         mRootView =  inflater.inflate(R.layout.fragment_fragment_ongoing, container, false);
         mOngoingList = new ArrayList<>();
-
         mOngoingList = mActivity.fetchBookingFromParent(3);
+
+        if(mOngoingList.size() == 0){
+            mRootView.findViewById(R.id.error_layout).setVisibility(View.VISIBLE);
+            return mRootView;
+        }
 
         RecyclerView recyclerView = mRootView.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);

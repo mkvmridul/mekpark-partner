@@ -58,6 +58,11 @@ public class FragmentNew extends Fragment implements MyListener {
         mNewBookingList = new ArrayList<>();
         mNewBookingList = mActivity.fetchBookingFromParent(0);
 
+        if(mNewBookingList.size() == 0){
+            mRootView.findViewById(R.id.error_layout).setVisibility(View.VISIBLE);
+            return mRootView;
+        }
+
         RecyclerView recyclerView = mRootView.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

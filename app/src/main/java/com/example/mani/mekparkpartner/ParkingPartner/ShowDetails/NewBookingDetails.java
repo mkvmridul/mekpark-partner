@@ -98,8 +98,7 @@ public class NewBookingDetails extends AppCompatActivity {
 
         tv_from.setText("from: "+parkinTime);
         String parkout =  getFormattedTime(TAG, mBooking.getParkOutTime());
-        tv_to.setText("to: "+parkout
-        +  0);
+        tv_to.setText("to: "+parkout);
 
         ll_Call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,14 +124,6 @@ public class NewBookingDetails extends AppCompatActivity {
                 setRejectDialog(mBooking.getBookingId(), 4,"Order Rejected by partner");
             }
         });
-
-
-
-
-
-
-
-
 
     }
 

@@ -13,4 +13,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <!--error_layout-->
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/error_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="No New Booking"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textStyle="italic"/>
+
+
+
+    </LinearLayout>
+
 </FrameLayout>

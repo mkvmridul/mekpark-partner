@@ -47,8 +47,12 @@ public class FragmentHistory extends Fragment {
         mRootView =  inflater.inflate(R.layout.fragment_history, container, false);
 
         mHistoryList = new ArrayList<>();
-        // Parking with status 1- complted, 4-rejected by partner, 5 cancled by user
         mHistoryList = mActivity.fetchCompletedParking();
+
+        if(mHistoryList.size() == 0){
+            mRootView.findViewById(R.id.error_layout).setVisibility(View.VISIBLE);
+            return mRootView;
+        }
 
 
 
