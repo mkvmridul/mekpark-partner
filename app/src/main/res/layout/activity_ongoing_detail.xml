@@ -93,7 +93,7 @@
                         android:singleLine="true"
                         android:textColor="@color/search_hint"
                         android:fontFamily="@font/montserrat_medium"
-                        android:text="Maruti Suzuki" />
+                        android:text="Brand Name" />
                     <TextView
                         android:id="@+id/model"
                         android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
                         android:layout_marginTop="16dp"
                         android:singleLine="true"
                         android:fontFamily="@font/montserrat_semi_bold"
-                        android:text="WagonR"
+                        android:text="Model"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
@@ -115,7 +115,7 @@
                         android:textSize="10sp"
                         android:singleLine="true"
                         android:fontFamily="@font/montserrat_regular"
-                        android:text="DL1R0ABC" />
+                        android:text="PLMO0000" />
 
                 </LinearLayout>
 
@@ -234,7 +234,7 @@
                         android:singleLine="true"
                         android:textSize="12sp"
                         android:fontFamily="@font/montserrat_semi_bold"
-                        android:text="10th Aug 2018"
+                        android:text="00th Aug 0000"
                         android:textColor="@color/black" />
 
                     <TextView
@@ -245,7 +245,7 @@
                         android:singleLine="true"
                         android:textSize="12sp"
                         android:fontFamily="@font/montserrat_semi_bold"
-                        android:text="10:30 p.m"
+                        android:text="00:00 p.m"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -274,7 +274,7 @@
                         android:singleLine="true"
                         android:textSize="12sp"
                         android:fontFamily="@font/montserrat_semi_bold"
-                        android:text="2 p.m"
+                        android:text="0 p.m"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -303,7 +303,7 @@
                         android:singleLine="true"
                         android:textSize="12sp"
                         android:fontFamily="@font/montserrat_semi_bold"
-                        android:text="3 Hrs"
+                        android:text="0 Hrs"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -317,16 +317,41 @@
                 android:layout_height="44dp"
                 android:layout_gravity="center"
                 android:src="@drawable/time"/>
-            <TextView
-                android:id="@+id/stopwatch"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="00:15 min left"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="16sp"
                 android:layout_marginTop="12dp"
-                android:textColor="@color/colorPrimary"
-                android:fontFamily="@font/gotham_medium_regular"/>
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/countdown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00:00 "
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/gotham_medium_regular"/>
+
+                <TextView
+                    android:id="@+id/min_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="min left"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="8dp"
+                    android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/gotham_medium_regular"/>
+
+
+
+            </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_marginTop="32dp"

@@ -179,13 +179,12 @@ public class UpcomingDetail extends AppCompatActivity {
 
         TextView btn_startBooking = findViewById(R.id.start);
 
-
-
         tv_bookingId.setText("Order #"+mBooking.getBookingId());
         tv_model.setText(mBooking.getModel());
         tv_brand.setText(mBooking.getBrand());
         tv_plate_no.setText(mBooking.getLicencePlateNo());
-        tv_park_time.setText(mBooking.getParkInTime());
+        String parkinTime =  getFormattedTime(TAG, mBooking.getParkInTime());
+        tv_park_time.setText(parkinTime);
         tv_duration.setText(mBooking.getDuration()+" hrs");
 
 

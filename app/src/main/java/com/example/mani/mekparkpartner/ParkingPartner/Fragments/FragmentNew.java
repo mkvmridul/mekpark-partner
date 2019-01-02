@@ -69,7 +69,7 @@ public class FragmentNew extends Fragment implements MyListener {
 
     @Override
     public void refresh() {
-        mActivity.fetchBookingsFromDb();
+        mActivity.fetchBookingsFromDb(0);
     }
 
 
@@ -80,7 +80,7 @@ public class FragmentNew extends Fragment implements MyListener {
 
         if(shouldExecuteOnResume){
             Log.e(TAG,"called : onResume1");
-            mActivity.fetchBookingsFromDb();
+            mActivity.fetchBookingsFromDb(0);
         } else{
             shouldExecuteOnResume = true;
         }

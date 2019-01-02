@@ -26,6 +26,7 @@ public class FragmentUpcoming extends Fragment {
     private View mRootView;
     private List<Booking> mUpcomingList;
     private BookingPage mActivity;
+    private boolean shouldExecuteOnResume;
 
     public FragmentUpcoming() {}
 
@@ -42,13 +43,12 @@ public class FragmentUpcoming extends Fragment {
 
         Log.e(TAG,"called : onCreateView2");
 
+        shouldExecuteOnResume = false;
+
         mRootView = inflater.inflate(R.layout.fragment_upcoming, container, false);
         mUpcomingList = new ArrayList<>();
 
         mUpcomingList = mActivity.fetchBookingFromParent(2);
-
-
-
 
         RecyclerView recyclerView = mRootView.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -57,6 +57,19 @@ public class FragmentUpcoming extends Fragment {
         recyclerView.setAdapter(adapter);
 
         return mRootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(shouldExecuteOnResume){
+            Log.e(TAG,"called : onResume1");
+            mActivity.fetchBookingsFromDb(1);
+        } else{
+            shouldExecuteOnResume = true;
+        }
+
     }
 
 }

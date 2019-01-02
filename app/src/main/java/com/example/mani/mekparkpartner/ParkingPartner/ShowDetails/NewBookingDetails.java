@@ -82,8 +82,11 @@ public class NewBookingDetails extends AppCompatActivity {
         tv_brand.setText(mBooking.getBrand());
         tv_plate_no.setText(mBooking.getLicencePlateNo());
         tv_cus_name.setText(mBooking.getCusName());
-        tv_park_time.setText(mBooking.getParkInTime());
+
         tv_duration.setText(mBooking.getDuration()+" hrs");
+
+        String parkinTime =  getFormattedTime(TAG, mBooking.getParkInTime());
+        tv_park_time.setText(parkinTime);
 
 
         String bookingTime =  getFormattedTime(TAG, mBooking.getBookingTime());
@@ -93,8 +96,10 @@ public class NewBookingDetails extends AppCompatActivity {
         tv_book_date.setText(bookingDate);
         tv_park_date.setText(bookingDate); // Parking Date and booking date are same as long as booking is allowed in same day
 
-        tv_from.setText("from: " + mBooking.getParkInTime());
-        tv_to.setText("to: "+mBooking.getParkOutTime());
+        tv_from.setText("from: "+parkinTime);
+        String parkout =  getFormattedTime(TAG, mBooking.getParkOutTime());
+        tv_to.setText("to: "+parkout
+        +  0);
 
         ll_Call.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -70,12 +70,17 @@
 
     </android.support.design.widget.TabLayout>
 
-
-
-    <com.example.mani.mekparkpartner.ParkingPartner.CustomViewPager
-        android:background="@color/background4"
-        android:id="@+id/viewpager_booking"
+    <FrameLayout
+        android:id="@+id/frame_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
+
+
+
+    <!--<com.example.mani.mekparkpartner.ParkingPartner.CustomViewPager-->
+        <!--android:background="@color/background4"-->
+        <!--android:id="@+id/viewpager_booking"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
 
 </LinearLayout>

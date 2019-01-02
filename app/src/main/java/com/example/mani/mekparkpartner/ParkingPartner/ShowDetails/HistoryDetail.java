@@ -73,8 +73,11 @@ public class HistoryDetail extends AppCompatActivity {
         tv_model.setText(mBooking.getModel());
         tv_brand.setText(mBooking.getBrand());
         tv_plate_no.setText(mBooking.getLicencePlateNo());
-        tv_park_time.setText(mBooking.getParkInTime());
+
         tv_duration.setText(mBooking.getDuration()+" hrs");
+
+        String parkinTime =  getFormattedTime(TAG, mBooking.getParkInTime());
+        tv_park_time.setText(parkinTime);
 
 
         String bookingTime =  getFormattedTime(TAG, mBooking.getBookingTime());

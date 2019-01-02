@@ -76,9 +76,12 @@ public class NewBookingAdapter extends RecyclerView.Adapter<NewBookingAdapter.Ne
 
         holder.tv_model.setText(booking.getModel());
         holder.tv_licence_plate.setText(booking.getLicencePlateNo());
-        holder.tv_parking_start.setText(booking.getParkInTime());
+
         holder.tv_duration.setText(booking.getDuration()+" hrs");
         holder.tv_fare.setText(mCtx.getString(R.string.rupee_symbol)+" " + booking.getFare());
+
+        String parkinTime =  getFormattedTime(TAG, booking.getParkInTime());
+        holder.tv_parking_start.setText(parkinTime);
 
         String bookingTime =  getFormattedTime(TAG, booking.getBookingTime());
         holder.tv_time.setText(bookingTime);

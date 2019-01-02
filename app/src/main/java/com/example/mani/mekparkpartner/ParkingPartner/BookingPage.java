@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,9 +50,8 @@ public class BookingPage extends AppCompatActivity  {
     private List<Fragment> mFragmentList;
     private List<Booking> mBookingList;
 
-    private CustomViewPager mViewPager;
-    ProgressDialog mProgressDialog;
-    BookingFragmentPagerAdapter mAdapter;
+    private ProgressDialog mProgressDialog;
+    private TabLayout mTabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,23 +63,17 @@ public class BookingPage extends AppCompatActivity  {
         mProgressDialog = new ProgressDialog(BookingPage.this);
         mProgressDialog.setMessage("Please wait...");
 
-        fetchBookingsFromDb();
-
         mFragmentList.add(new FragmentNew());
         mFragmentList.add(new FragmentUpcoming());
         mFragmentList.add(new FragmentOngoing());
         mFragmentList.add(new FragmentHistory());
 
+        mTabLayout = findViewById(R.id.tab_layout_booking);
 
-        mViewPager =  findViewById(R.id.viewpager_booking);
-        mViewPager.setOffscreenPageLimit(0);
+        fetchBookingsFromDb(0);
 
-        mAdapter = new BookingFragmentPagerAdapter(
-                getSupportFragmentManager(),mFragmentList);
-
-        final TabLayout tabLayout = findViewById(R.id.tab_layout_booking);
-        tabLayout.setupWithViewPager(mViewPager);
-
+        bindWidgetsWithAnEvent();
+        setupTabLayout();
 
 
 
@@ -86,7 +81,8 @@ public class BookingPage extends AppCompatActivity  {
         findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fetchBookingsFromDb();
+                fetchBookingsFromDb(0);
+
             }
         });
 
@@ -101,7 +97,7 @@ public class BookingPage extends AppCompatActivity  {
 
     }
 
-    public void fetchBookingsFromDb() {
+    public void fetchBookingsFromDb(final int fragNo) {
 
         mProgressDialog.show();
         Log.e(TAG,"called : fetchBookingsFromDb");
@@ -162,8 +158,17 @@ public class BookingPage extends AppCompatActivity  {
                                 status,pin,brand,model,plateNo,image,cusName,cusMobile));
 
                     }
+                    TabLayout.Tab tab =  mTabLayout.getTabAt(fragNo);
+                    tab.select();
 
-                    mViewPager.setAdapter(mAdapter);
+                    if(getSupportFragmentManager() != null){
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .detach(mFragmentList.get(fragNo))
+                                .attach(mFragmentList.get(fragNo))
+                                .commit();
+                    }
+
                     mProgressDialog.dismiss();
 
                 } catch (JSONException e) {
@@ -229,6 +234,72 @@ public class BookingPage extends AppCompatActivity  {
         return tempList;
 
     }
+
+    private void setupTabLayout() {
+
+        Log.e(TAG,"setUpLayout");
+        mTabLayout.addTab(mTabLayout.newTab().setText("New"),false);
+        mTabLayout.addTab(mTabLayout.newTab().setText("Upcomiing"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("Ongoing"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("History"));
+    }
+
+    private void bindWidgetsWithAnEvent()
+    {
+        Log.e(TAG,"bindWidgetsWithEvent");
+
+        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                Log.e(TAG,"onTabSelected");
+                setCurrentTabFragment(tab.getPosition());
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+    }
+    private void setCurrentTabFragment(int tabPosition)
+    {
+        Log.e(TAG,"setCurrenttabFragment");
+        switch (tabPosition)
+        {
+            case 0 :
+                Log.e(TAG,"fragment0");
+                replaceFragment(mFragmentList.get(0));
+
+                break;
+            case 1 :
+                Log.e(TAG,"fragment1");
+                replaceFragment(mFragmentList.get(1));
+                break;
+
+            case 2 :
+                Log.e(TAG,"fragment2");
+                replaceFragment(mFragmentList.get(2));
+
+                break;
+
+            case 3 :
+                Log.e(TAG,"fragment3");
+                replaceFragment(mFragmentList.get(3));
+                break;
+        }
+    }
+
+
+    public void replaceFragment(Fragment fragment) {
+        Log.e(TAG, "replaceFragment");
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.frame_container, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ft.commit();
+    }
+
 
 }
 

@@ -26,6 +26,7 @@ public class FragmentOngoing extends Fragment {
     private View mRootView;
     private List<Booking> mOngoingList;
     private BookingPage mActivity;
+    private boolean shouldExecuteOnResume;
 
     public FragmentOngoing() {}
 
@@ -42,6 +43,7 @@ public class FragmentOngoing extends Fragment {
                              Bundle savedInstanceState) {
 
         Log.e(TAG,"called : onCreateView3");
+        shouldExecuteOnResume = false;
 
         mRootView =  inflater.inflate(R.layout.fragment_fragment_ongoing, container, false);
         mOngoingList = new ArrayList<>();
@@ -55,6 +57,19 @@ public class FragmentOngoing extends Fragment {
         recyclerView.setAdapter(adapter);
 
         return mRootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(shouldExecuteOnResume){
+            Log.e(TAG,"called : onResume1");
+            mActivity.fetchBookingsFromDb(2);
+        } else{
+            shouldExecuteOnResume = true;
+        }
+
     }
 
 }
