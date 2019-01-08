@@ -25,9 +25,22 @@
         <activity android:name=".ParkingPartner.ShowDetails.NewBookingDetails"/>
         <activity android:name=".ParkingPartner.ShowDetails.OngoingDetail"/>
         <activity android:name=".ParkingPartner.ShowDetails.UpcomingDetail"/>
-        <activity android:name=".ParkingPartner.ShowDetails.HistoryDetail">
+        <activity android:name=".ParkingPartner.ShowDetails.HistoryDetail"/>
 
-        </activity>
+        <service
+            android:name=".FCMPackage.MyFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".FCMPackage.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

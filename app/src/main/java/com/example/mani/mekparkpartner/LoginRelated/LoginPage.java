@@ -1,8 +1,10 @@
 package com.example.mani.mekparkpartner.LoginRelated;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.session.MediaSession;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.mani.mekparkpartner.CommanPart.LoginSessionManager;
 import com.example.mani.mekparkpartner.CommanPart.MySingleton;
+import com.example.mani.mekparkpartner.FCMPackage.SharedPrefFcm;
 import com.example.mani.mekparkpartner.HomePage;
 import com.example.mani.mekparkpartner.R;
 
@@ -38,9 +41,9 @@ public class LoginPage extends AppCompatActivity {
 
     private final String TAG = this.getClass().getSimpleName();
     private Context mContext = LoginPage.this;
-
-
     private ProgressDialog mProgressDialog;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class LoginPage extends AppCompatActivity {
         setContentView(R.layout.activity_login_page);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
         mProgressDialog = new ProgressDialog(LoginPage.this);
         mProgressDialog.setMessage("Login...");

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "984514040906",
+    "firebase_url": "https://mekparkpartner.firebaseio.com",
+    "project_id": "mekparkpartner",
+    "storage_bucket": "mekparkpartner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984514040906:android:cba5215f491ab836",
+        "android_client_info": {
+          "package_name": "com.example.mani.mekparkpartner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "984514040906-7oeampnc6a4vfkvu8h2kjsr6cisd23if.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mani.mekparkpartner",
+            "certificate_hash": "49ee445a4ab184f5c2acb415f7881ecf4e2f4808"
+          }
+        },
+        {
+          "client_id": "984514040906-vvclpkvteahd8ca5hde7i594jn06g75b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSB1w5sqw-GQh1onMdmBZdQdCd0xYbFek"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "984514040906-vvclpkvteahd8ca5hde7i594jn06g75b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
