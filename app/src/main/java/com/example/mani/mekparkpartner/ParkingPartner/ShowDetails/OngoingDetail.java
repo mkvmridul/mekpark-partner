@@ -24,6 +24,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
 import com.example.mani.mekparkpartner.CommanPart.MySingleton;
 import com.example.mani.mekparkpartner.ParkingPartner.Booking;
 import com.example.mani.mekparkpartner.R;
@@ -35,11 +36,13 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_IMAGE_PATH;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_URL;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_RETRY;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.RETRY_SECONDS;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedDate;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedTime;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.sentNotificationToUser;
 
 public class OngoingDetail extends AppCompatActivity {
 
@@ -47,12 +50,8 @@ public class OngoingDetail extends AppCompatActivity {
     final String TAG = this.getClass().getSimpleName();
 
     private  long START_TIME_IN_MILLIS;
-
-    private TextView mTextViewCountDown;
-    //private Button mButtonStartPause;
-    //private Button mButtonReset;
-
     private CountDownTimer mCountDownTimer;
+    private TextView mTextViewCountDown;
 
     private boolean mTimerRunning;
 
@@ -111,6 +110,16 @@ public class OngoingDetail extends AppCompatActivity {
 
         String parkInTime = getFormattedTime(TAG,mBooking.getParkInTime());
         tv_park_time.setText(parkInTime);
+
+        String imageName = mBooking.getVehicleImage();
+        if(!imageName.equals("")){
+            Glide.with(OngoingDetail.this).load(BASE_IMAGE_PATH+imageName)
+                    .into(iv_vhicle);
+        }
+        else {
+            //default image
+            iv_vhicle.setImageDrawable(getResources().getDrawable(R.mipmap.dummy));
+        }
 
 
         ll_Call.setOnClickListener(new View.OnClickListener() {
@@ -176,6 +185,7 @@ public class OngoingDetail extends AppCompatActivity {
             public void onFinish() {
                 mTimerRunning = false;
                 mTextViewCountDown.setText("Time Over");
+                updateStatus(mBooking.getBookingId(),1,"Parking Completed Succesfully");
                 findViewById(R.id.min_left).setVisibility(View.GONE);
             }
         }.start();
@@ -221,8 +231,8 @@ public class OngoingDetail extends AppCompatActivity {
 
                     Log.e(TAG,mess);
                     Toast.makeText(OngoingDetail.this,message,Toast.LENGTH_SHORT).show();
-
                     mBooking.setStatus(status);
+                    prepareNotification(mBooking.getCusId(),bookingId);
                     onBackPressed();
 
 
@@ -250,6 +260,13 @@ public class OngoingDetail extends AppCompatActivity {
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(RETRY_SECONDS*1000,NO_OF_RETRY,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MySingleton.getInstance(OngoingDetail.this).addToRequestQueue(stringRequest);
 
+    }
+
+    private void prepareNotification(int cusId, int bookingId) {
+
+        String title = "Parking Complete";
+        String message = "Your parking order for booking id "+bookingId + " is completed.";
+        sentNotificationToUser(OngoingDetail.this,cusId,title,message);
     }
 
 }

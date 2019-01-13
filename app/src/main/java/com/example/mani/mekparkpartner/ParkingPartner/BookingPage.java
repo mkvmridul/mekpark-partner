@@ -137,9 +137,14 @@ public class BookingPage extends AppCompatActivity  {
                         else
                             pc = false;
 
-                        String fare       = jsonObject.getString("fare");
+                        String base_fare    = jsonObject.getString("base_fare");
+                        String tax          = jsonObject.getString("tax");
+                        String add_charges  = jsonObject.getString("add_charges");
+                        String total_fare   = jsonObject.getString("total_fare");
+
+
                         int status        = Integer.parseInt(jsonObject.getString("status"));
-                        int pin           = Integer.parseInt(jsonObject.getString("pin"));
+                        String pin           = jsonObject.getString("pin");
 
                         String brand      = jsonObject.getString("brand");
                         String model      = jsonObject.getString("model");
@@ -149,7 +154,8 @@ public class BookingPage extends AppCompatActivity  {
                         String cusName    = jsonObject.getString("name");
                         String cusMobile  = jsonObject.getString("mobile");
 
-                        mBookingList.add(new Booking(bookingId,cusId,bookingTime,parkingTime,parkOut,duration,pc,fare,
+                        mBookingList.add(new Booking(bookingId,cusId,bookingTime,parkingTime,parkOut,duration,pc,
+                                base_fare,tax,add_charges,total_fare,
                                 status,pin,brand,model,plateNo,image,cusName,cusMobile));
 
                     }

@@ -21,6 +21,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.mani.mekparkpartner.CommanPart.MySingleton;
 import com.example.mani.mekparkpartner.ParkingPartner.Adapter.NewBookingAdapter;
 import com.example.mani.mekparkpartner.ParkingPartner.Booking;
@@ -29,18 +32,21 @@ import com.example.mani.mekparkpartner.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.lang.annotation.Target;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_IMAGE_PATH;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_URL;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.KEY_CAR;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_RETRY;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.RETRY_SECONDS;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedDate2;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedTime;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.sentNotificationToUser;
 
 
 public class NewBookingDetails extends AppCompatActivity {
-
 
 
     private Booking mBooking;
@@ -99,6 +105,16 @@ public class NewBookingDetails extends AppCompatActivity {
         tv_from.setText("from: "+parkinTime);
         String parkout =  getFormattedTime(TAG, mBooking.getParkOutTime());
         tv_to.setText("to: "+parkout);
+
+        String imageName = mBooking.getVehicleImage();
+        if(!imageName.equals("")){
+            Glide.with(NewBookingDetails.this).load(BASE_IMAGE_PATH+imageName)
+                    .into(iv_vhicle);
+        }
+        else {
+            //default image
+            iv_vhicle.setImageDrawable(getResources().getDrawable(R.mipmap.dummy));
+        }
 
         ll_Call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,6 +203,7 @@ public class NewBookingDetails extends AppCompatActivity {
                     Toast.makeText(NewBookingDetails.this,message,Toast.LENGTH_SHORT).show();
 
                     mBooking.setStatus(status);
+                    prepareNotification(status,mBooking.getCusId(),bookingId);
                     onBackPressed();
 
 
@@ -214,5 +231,22 @@ public class NewBookingDetails extends AppCompatActivity {
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(RETRY_SECONDS*1000,NO_OF_RETRY,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MySingleton.getInstance(NewBookingDetails.this).addToRequestQueue(stringRequest);
 
+    }
+
+    private void prepareNotification(int status, int cusId, int bookingId) {
+
+        String title = "";
+        String message = "";
+
+        if(status == 2){
+            title = "Accepted";
+            message = "Your parking order for booking id "+bookingId + " is accepted.";
+        }
+        else if(status == 4){
+            title = "Rejected";
+            message = "Your parking order for booking id "+bookingId + " is rejected.";
+        }
+
+        sentNotificationToUser(NewBookingDetails.this,cusId,title,message);
     }
 }

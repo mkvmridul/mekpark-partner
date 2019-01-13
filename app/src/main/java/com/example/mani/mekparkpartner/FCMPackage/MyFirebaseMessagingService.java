@@ -21,14 +21,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             Log.e(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
 
-        notifyUser(remoteMessage.getFrom(),remoteMessage.getNotification().getBody());
+
+        notifyUser(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
 
     }
 
-    public void notifyUser(String from ,String notification){
+    public void notifyUser(String title ,String notification){
 
         MyFcmNotificationManager myFcmNotificationManager = new MyFcmNotificationManager(getApplicationContext());
-        myFcmNotificationManager.showNotification(from,notification,new Intent(getApplicationContext(),HomePage.class));
+        myFcmNotificationManager.createNotification(title,notification);
     }
 
 

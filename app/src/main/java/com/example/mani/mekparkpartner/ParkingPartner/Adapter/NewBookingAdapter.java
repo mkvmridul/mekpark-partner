@@ -44,6 +44,7 @@ import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_UR
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_RETRY;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.RETRY_SECONDS;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedTime;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.sentNotificationToUser;
 import static javax.net.ssl.SSLEngineResult.Status.OK;
 
 
@@ -78,7 +79,7 @@ public class NewBookingAdapter extends RecyclerView.Adapter<NewBookingAdapter.Ne
         holder.tv_licence_plate.setText(booking.getLicencePlateNo());
 
         holder.tv_duration.setText(booking.getDuration()+" hrs");
-        holder.tv_fare.setText(mCtx.getString(R.string.rupee_symbol)+" " + booking.getFare());
+        holder.tv_fare.setText(mCtx.getString(R.string.rupee_symbol)+" " + booking.getTotalFare());
 
         String parkinTime =  getFormattedTime(TAG, booking.getParkInTime());
         holder.tv_parking_start.setText(parkinTime);
@@ -100,7 +101,7 @@ public class NewBookingAdapter extends RecyclerView.Adapter<NewBookingAdapter.Ne
             @Override
             public void onClick(View v) {
                 //sent to upcoming
-                updateStatus(booking.getBookingId(),2,"Order Accepted and moved to upcoming");
+                updateStatus(booking.getCusId(),booking.getBookingId(),2,"Order Accepted and moved to upcoming");
             }
         });
 
@@ -108,7 +109,7 @@ public class NewBookingAdapter extends RecyclerView.Adapter<NewBookingAdapter.Ne
             @Override
             public void onClick(View v) {
                 //sent to complete(rejected by partner)
-                setRejectDialog(booking.getBookingId(), 4,"Order Rejected by partner");
+                setRejectDialog(booking.getCusId(),booking.getBookingId(), 4,"Order Rejected by partner");
             }
         });
 
@@ -126,7 +127,7 @@ public class NewBookingAdapter extends RecyclerView.Adapter<NewBookingAdapter.Ne
 
     }
 
-    private void setRejectDialog(final int bookingId, final int status, final String message) {
+    private void setRejectDialog(final int cusId, final int bookingId, final int status, final String message) {
 
         final AlertDialog.Builder builder;
 
@@ -139,7 +140,7 @@ public class NewBookingAdapter extends RecyclerView.Adapter<NewBookingAdapter.Ne
                 .setMessage("Are you sure you want to reject this order?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        updateStatus(bookingId,status,message);
+                        updateStatus(cusId,bookingId,status,message);
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -150,7 +151,6 @@ public class NewBookingAdapter extends RecyclerView.Adapter<NewBookingAdapter.Ne
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
-
 
     @Override
     public int getItemCount() {
@@ -187,7 +187,7 @@ public class NewBookingAdapter extends RecyclerView.Adapter<NewBookingAdapter.Ne
         }
     }
 
-    private void updateStatus(final int bookingId, final int status, final String message) {
+    private void updateStatus(final int cusId, final int bookingId, final int status, final String message) {
 
         Log.e(TAG,"called : updateStatus");
 
@@ -210,6 +210,8 @@ public class NewBookingAdapter extends RecyclerView.Adapter<NewBookingAdapter.Ne
 
                     Log.e(TAG,mess);
                     Toast.makeText(mCtx,message,Toast.LENGTH_SHORT).show();
+
+                    prepareNotification(status,cusId,bookingId);
                     listener.refresh();
 
 
@@ -237,6 +239,22 @@ public class NewBookingAdapter extends RecyclerView.Adapter<NewBookingAdapter.Ne
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(RETRY_SECONDS*1000,NO_OF_RETRY,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MySingleton.getInstance(mCtx).addToRequestQueue(stringRequest);
 
+    }
+
+    private void prepareNotification(int status, int cusId, int bookingId) {
+        String title = "";
+        String message = "";
+
+        if(status == 2){
+            title = "Accepted";
+            message = "Your parking order for booking id "+bookingId + " is accepted.";
+        }
+        else if(status == 4){
+            title = "Rejected";
+            message = "Your parking order for booking id "+bookingId + " is rejected.";
+        }
+
+        sentNotificationToUser(mCtx,cusId,title,message);
     }
 
 }

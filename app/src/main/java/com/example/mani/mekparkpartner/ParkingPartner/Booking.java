@@ -13,9 +13,14 @@ public class Booking implements Serializable {
     private String duration;
     private boolean payCon;
 
-    private String fare;
+    private String baseFare;
+    private String tax;
+    private String addCharges;
+    private String totalFare;
+
+
     private int status;
-    private int pin;
+    private String pin;
 
     private String brand;
     private String model;
@@ -26,7 +31,7 @@ public class Booking implements Serializable {
     private String cusPhone;
 
     public Booking(int bookingId, int cusId, String bookingTime, String parkInTime, String parkOut, String duration, boolean payCon,
-                   String fare, int status, int pin, String brand, String model, String licencePlateNo,
+                   String baseFare, String tax, String addCharges, String totalFare, int status, String pin, String brand, String model, String licencePlateNo,
                    String vehicleImage, String cusName, String cusPhone) {
         this.bookingId = bookingId;
         this.cusId = cusId;
@@ -35,7 +40,12 @@ public class Booking implements Serializable {
         this.parkOutTime = parkOut;
         this.duration = duration;
         this.payCon = payCon;
-        this.fare = fare;
+
+        this.baseFare = baseFare;
+        this.tax =  tax;
+        this.addCharges = addCharges;
+        this.totalFare = totalFare;
+
         this.status = status;
         this.pin = pin;
         this.brand = brand;
@@ -83,10 +93,21 @@ public class Booking implements Serializable {
         return payCon;
     }
 
-    public String getFare() {
-        return fare;
+    public String getBaseFare() {
+        return baseFare;
     }
 
+    public String getTax() {
+        return tax;
+    }
+
+    public String getAddCharges() {
+        return addCharges;
+    }
+
+    public String getTotalFare() {
+        return totalFare;
+    }
 
     public int getStatus() {
         return status;
@@ -96,7 +117,7 @@ public class Booking implements Serializable {
         this.status = status;
     }
 
-    public int getPin() {
+    public String getPin() {
         return pin;
     }
 

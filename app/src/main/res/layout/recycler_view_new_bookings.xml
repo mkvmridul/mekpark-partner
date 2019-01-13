@@ -213,7 +213,7 @@
                                 android:singleLine="true"
                                 android:textSize="12sp"
                                 android:fontFamily="@font/montserrat_semi_bold"
-                                android:text="Fair                     :"
+                                android:text="Fare                     :"
                                 android:textColor="@color/black2" />
 
                             <TextView

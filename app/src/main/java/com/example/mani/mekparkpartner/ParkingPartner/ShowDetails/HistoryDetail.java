@@ -4,15 +4,18 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.mani.mekparkpartner.ParkingPartner.Booking;
 import com.example.mani.mekparkpartner.R;
 
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_IMAGE_PATH;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedDate;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedTime;
 
@@ -27,6 +30,9 @@ public class HistoryDetail extends AppCompatActivity {
         setContentView(R.layout.activity_history_detail);
 
         mBooking = (Booking) getIntent().getSerializableExtra("booking");
+
+
+
         setData();
         clickListener();
     }
@@ -34,7 +40,7 @@ public class HistoryDetail extends AppCompatActivity {
     private void setData() {
 
         TextView tv_bookingId   = findViewById(R.id.booking_id);
-        TextView  tv_message  = findViewById(R.id.message);
+        TextView  tv_message    = findViewById(R.id.message);
         TextView tv_model       = findViewById(R.id.model);
         TextView tv_brand       = findViewById(R.id.brand);
         TextView tv_plate_no    = findViewById(R.id.plate_no);
@@ -74,6 +80,11 @@ public class HistoryDetail extends AppCompatActivity {
         tv_brand.setText(mBooking.getBrand());
         tv_plate_no.setText(mBooking.getLicencePlateNo());
 
+        tv_parkingFare.setText("\u20B9 "+mBooking.getBaseFare());
+        tv_taxAmount.setText("\u20B9 "+mBooking.getTax());
+        tv_additional.setText("\u20B9 "+mBooking.getAddCharges());
+        tv_totalFare.setText("\u20B9 "+mBooking.getTotalFare());
+
         tv_duration.setText(mBooking.getDuration()+" hrs");
 
         String parkinTime =  getFormattedTime(TAG, mBooking.getParkInTime());
@@ -85,6 +96,16 @@ public class HistoryDetail extends AppCompatActivity {
 
         String bookingDate = getFormattedDate(TAG,mBooking.getBookingTime());
         tv_book_date.setText(bookingDate);
+
+        String imageName = mBooking.getVehicleImage();
+        if(!imageName.equals("")){
+            Glide.with(HistoryDetail.this).load(BASE_IMAGE_PATH+imageName)
+                    .into(iv_vhicle);
+        }
+        else {
+            //default image
+            iv_vhicle.setImageDrawable(getResources().getDrawable(R.mipmap.dummy));
+        }
 
 
 

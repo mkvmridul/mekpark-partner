@@ -94,8 +94,8 @@
                 android:paddingTop="40dp">
 
                 <LinearLayout
-                    android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
@@ -134,11 +134,11 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_marginRight="44dp"
+                    android:layout_marginRight="32dp"
                     android:id="@+id/vehicle_image"
                     android:layout_width="120dp"
                     android:layout_height="100dp"
-                    android:src="@mipmap/dummy" />
+                    android:src="@mipmap/dummy"/>
 
             </LinearLayout>
 

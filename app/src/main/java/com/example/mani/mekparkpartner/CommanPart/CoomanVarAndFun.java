@@ -18,18 +18,27 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CoomanVarAndFun {
+
+
+    private static final String TAG = "CoomanVarAndFun";
 
     // Keys
     public static final String KEY_BIKE = "bike";
@@ -48,7 +57,9 @@ public class CoomanVarAndFun {
     //Mobile
     //public static final String BASE_URL = "http://192.168.43.153/mekPark/partner/";
     //public static final String BASE_URL = "http://192.168.1.11/mekPark/partner/";
+    //public static final String BASE_URL = "http://192.168.100.112/mekPark/partner/";
     public static final String BASE_URL = "http://mekpark.com/mani14/partner/";
+    public static final String BASE_IMAGE_PATH = "http://192.168.1.11/mani14/user/vehicles_images/";
 
 
 
@@ -221,6 +232,38 @@ public class CoomanVarAndFun {
         return formatedstring;
 
 
+
+    }
+
+    public static void sentNotificationToUser(Context context, final int cusId, final String title, final String message){
+
+        Log.e(TAG,"called: sendNotificationToUser");
+
+        final String URL_NOTI = BASE_URL + "send_notification_to_user.php";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_NOTI, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e(TAG,response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG,error.toString());
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> params = new HashMap<>();
+                params.put("cus_id", String.valueOf(cusId));
+                params.put("n_title",title);
+                params.put("n_message",message);
+                return params;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(RETRY_SECONDS*1000,NO_OF_RETRY,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        MySingleton.getInstance(context).addToRequestQueue(stringRequest);
 
     }
 

@@ -22,6 +22,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
 import com.example.mani.mekparkpartner.CommanPart.MySingleton;
 import com.example.mani.mekparkpartner.ParkingPartner.Booking;
 import com.example.mani.mekparkpartner.R;
@@ -32,12 +33,14 @@ import org.json.JSONException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_IMAGE_PATH;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_URL;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_RETRY;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.RETRY_SECONDS;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedDate;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedDate2;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedTime;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.sentNotificationToUser;
 
 public class UpcomingDetail extends AppCompatActivity {
 
@@ -80,6 +83,16 @@ public class UpcomingDetail extends AppCompatActivity {
         et2 = findViewById(R.id.et2);
         et3 = findViewById(R.id.et3);
         et4 = findViewById(R.id.et4);
+
+        String imageName = mBooking.getVehicleImage();
+        if(!imageName.equals("")){
+            Glide.with(UpcomingDetail.this).load(BASE_IMAGE_PATH+imageName)
+                    .into(iv_vhicle);
+        }
+        else {
+            //default image
+            iv_vhicle.setImageDrawable(getResources().getDrawable(R.mipmap.dummy));
+        }
 
 
         vehiCleArrived.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -227,7 +240,7 @@ public class UpcomingDetail extends AppCompatActivity {
 
                 String inputedOtp = s1+s2+s3+s4;
 
-                if(!inputedOtp.equals(String.valueOf(mBooking.getPin())) )  {
+                if(!inputedOtp.equals(mBooking.getPin()) )  {
                     Toast.makeText(UpcomingDetail.this,"wrong pin", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -278,8 +291,9 @@ public class UpcomingDetail extends AppCompatActivity {
 
                     Log.e(TAG,mess);
                     Toast.makeText(UpcomingDetail.this,message,Toast.LENGTH_SHORT).show();
-
                     mBooking.setStatus(status);
+
+                    prepareNotification(mBooking.getCusId(),bookingId);
                     onBackPressed();
 
 
@@ -307,5 +321,12 @@ public class UpcomingDetail extends AppCompatActivity {
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(RETRY_SECONDS*1000,NO_OF_RETRY,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MySingleton.getInstance(UpcomingDetail.this).addToRequestQueue(stringRequest);
 
+    }
+
+    private void prepareNotification(int cusId, int bookingId) {
+
+        String title = "Parking started";
+        String message = "Your parking order for booking id "+bookingId + " is started.";
+        sentNotificationToUser(UpcomingDetail.this,cusId,title,message);
     }
 }
