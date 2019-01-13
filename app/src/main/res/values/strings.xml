@@ -9,4 +9,20 @@
     <string name="booking_date_amp_time"><![CDATA[Booking date & time]]></string>
     <string name="parking_date_amp_time"><![CDATA[Parking date & time]]></string>
     <string name="rupee_symbol">₹</string>
+
+    <string name="i_have_">I have a referral code</string>
+    <string name="by_creating_">By creating an account,</string>
+    <string name="signup">Signup</string>
+    <string name="smartest_way_">Smartest way of Parkig</string>
+    <string name="emanated_in_">Emanated in India</string>
+    <string name="park_with_">Park with Perfection</string>
+    <string name="next">Next</string>
+    <string name="skip">skip</string>
+    <string name="profile">Profile</string>
+    <string name="longtext1">Contrary to popular belief, Lorem Ipsum is not simply random text.
+        It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</string>
+    <string name="hand_free_access_text">Mekvahan offers a diverse range of services and features to make its customer’s life easy. Hence, if you want to avail all such services and benefits and want to utilize the variety of features, then please fill and provide the required informations below.</string>
+    <string name="to_activate">To activate this functionality, we need the following information:</string>
+    <string name="short_desc">Lorem Ipsum is simply dummy text of the printing
+        and typesetting industry.</string>
 </resources>

@@ -11,39 +11,45 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".HomePage"
-            android:screenOrientation="portrait">
+
+        <activity
+            android:name=".LoginRelated.OnBoarding">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".LoginRelated.LoginPage"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ParkingPartner.BookingPage"/>
-        <activity android:name=".ParkingPartner.ShowDetails.NewBookingDetails"/>
-        <activity android:name=".ParkingPartner.ShowDetails.OngoingDetail"/>
-        <activity android:name=".ParkingPartner.ShowDetails.UpcomingDetail"/>
-        <activity android:name=".ParkingPartner.ShowDetails.HistoryDetail"/>
 
-        <service
-            android:name=".FCMPackage.MyFirebaseInstanceIdService">
+        </activity>
+
+        <activity
+            android:name=".HomePage"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".LoginRelated.LoginPage"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ParkingPartner.BookingPage" />
+        <activity android:name=".ParkingPartner.ShowDetails.NewBookingDetails" />
+        <activity android:name=".ParkingPartner.ShowDetails.OngoingDetail" />
+        <activity android:name=".ParkingPartner.ShowDetails.UpcomingDetail" />
+        <activity android:name=".ParkingPartner.ShowDetails.HistoryDetail" />
+
+        <service android:name=".FCMPackage.MyFirebaseInstanceIdService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
-        <service
-            android:name=".FCMPackage.MyFirebaseMessagingService">
+        <service android:name=".FCMPackage.MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="b46bc56239b28668cdcea45e91a54a8d26221673" />
+
+        <activity android:name=".LoginRelated.SplashScreen"></activity>
     </application>
 
 </manifest>
