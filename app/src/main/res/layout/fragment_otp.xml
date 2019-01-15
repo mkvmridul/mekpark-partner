@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginRelated.OnBoardingPages.FragmentOTP">
+
+    <ImageView
+        android:id="@+id/back_btn"
+        android:layout_marginTop="16dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
+        android:paddingLeft="-8dp"
+        android:src="@drawable/arrow_back_red"/>
+
+    <LinearLayout
+        android:layout_marginTop="104dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Verify OTP"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:fontFamily="@font/gotham_book_regular"
+                android:text="OTP sent to" />
+
+            <TextView
+                android:id="@+id/mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="13sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="8dp"
+                android:fontFamily="@font/gotham_book_regular"/>
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            android:textSize="8sp"
+            android:fontFamily="@font/gotham_book_regular"
+            android:text="Enter OTP" />
+
+        <!--Otp field-->
+        <LinearLayout
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/et1"
+                android:maxLength="1"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:inputType="number"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="4dp"
+                android:layout_height="0dp" />
+
+            <EditText
+                android:id="@+id/et2"
+                android:maxLength="1"
+                android:textAlignment="center"
+                android:inputType="number"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"  />
+
+            <android.support.v4.widget.Space
+                android:layout_width="4dp"
+                android:layout_height="0dp" />
+
+            <EditText
+                android:id="@+id/et3"
+                android:maxLength="1"
+                android:textAlignment="center"
+                android:inputType="number"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="4dp"
+                android:layout_height="0dp" />
+
+            <EditText
+                android:id="@+id/et4"
+                android:maxLength="1"
+                android:textAlignment="center"
+                android:inputType="number"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="4dp"
+                android:layout_height="0dp" />
+
+            <EditText
+                android:id="@+id/et5"
+                android:maxLength="1"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:inputType="number"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="4dp"
+                android:layout_height="0dp" />
+
+            <EditText
+                android:id="@+id/et6"
+                android:maxLength="1"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:inputType="number"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            style="@style/button_style_1"
+            android:text="Veify"/>
+
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,4 +1,4 @@
-package com.example.mani.mekparkpartner.LoginRelated;
+package com.example.mani.mekparkpartner.LoginRelated.OnBoardingPages;
 
 
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import com.example.mani.mekparkpartner.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SCPage2 extends Fragment {
+public class SCPage1 extends Fragment {
 
 
-    public SCPage2() {
+    public SCPage1() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class SCPage2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_scpage2, container, false);
+        return inflater.inflate(R.layout.fragment_scpage1, container, false);
     }
 
 }

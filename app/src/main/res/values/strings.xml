@@ -23,6 +23,66 @@
         It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</string>
     <string name="hand_free_access_text">Mekvahan offers a diverse range of services and features to make its customer’s life easy. Hence, if you want to avail all such services and benefits and want to utilize the variety of features, then please fill and provide the required informations below.</string>
     <string name="to_activate">To activate this functionality, we need the following information:</string>
+    <string name="best_service_happy_customers">Better Service\nHappy Customers</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="how_it_works">How it Works</string>
+    <string name="smart_parking_featured">Smart Parking Featured</string>
+    <string name="featured_venues">Featured Venues</string>
+    <string name="where_to_park">Where to Park?</string>
+    <string name="everywhere_you_want_to_park">Everywhere you want to Park</string>
+    <string name="for_more_automobile_related_problem_visit">For more automobile related problem, visit</string>
+    <string name="are_you_a">Are you a</string>
+    <string name="parking_provider">Parking Provider?</string>
     <string name="short_desc">Lorem Ipsum is simply dummy text of the printing
         and typesetting industry.</string>
+
+    <string name="find_desc">Find your favourite parking spot at any location.</string>
+    <string name="locate_on_map_desc">Locate the place of your choice on the map.</string>
+    <string name="navigate_desc">MekPark will navigate your selected location.</string>
+    <string name="advance_book_desc">After you have navigated your parking spot, you can now book it in advance to avoid it getting reserved by other.</string>
+    <string name="park_desc">Just Park. Congratulations!</string>
+
+    <string name="free_parking_desc">Are you having difficulty finding free parking? We will help you get free parking locations here. </string>
+    <string name="paid_parking_desc">With paid parking, you get a chance of security. Navigate your nearest parking spot and park your vehicle. </string>
+    <string name="garage_parking_desc">The safest, cheapest and best parking spot ever provided to you, only by MekPark. </string>
+    <string name="college_parking_desc">Now, no more late class sessions due to the parking problem. Get your parking spot ready with just one tap.</string>
+    <string name="airport_parking_desc">We have got you covered at the airport too. Now, get your car parked at the lowest price ever with the highest security. </string>
+    <string name="perfect_spot_to_park">Find your perfect\nspot to park.</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="nearby_parking_area">Nearby Parking\narea available</string>
+    <string name="vacant_slots">Vacant\nslots</string>
+    <string name="title_activity_single_marker_map">Map</string>
+    <string name="book_now">Book Now</string>
+    <string name="navigate">Navigate</string>
+    <string name="title_activity_book_now">BookNow</string>
+    <string name="title_activity_park_me_map">Map</string>
+    <string name="add_vehicle_location">Add vehicle location</string>
+    <string name="best_service_nhappy_customers">Best Service\nHappy Customers</string>
+    <string name="login_to_enjoy_">Login to enjoy hastle-free and full access of our service</string>
+    <string name="account">Account</string>
+    <string name="login">Login</string>
+    <string name="enter_phone_">Enter phone number to continue</string>
+
+
+    <string name="my_vehicle">My Vehicle</string>
+    <string name="please_allocate_">Please allocate your vehicle and insert following details</string>
+    <string name="choose_your_">choose your default vehicle</string>
+    <string name="car">Car</string>
+    <string name="add_vehicle">Add Vehicle</string>
+    <string name="remove">remove</string>
+    <string name="manilal_kasera">Manilal Kasera!</string>
+    <string name="value_of_">Value of 1 coin = ₹ 1</string>
+    <string name="title_activity_proceed_to_pay_map">Map</string>
+    <string name="new_bookings">New Bookings</string>
+    <string name="scan_licence">Scan Licence Plate no.</string>
+    <string name="a_message_">A Message has been send to the owner of the vehicle.</string>
+    <string name="message_to_vehicle_owner">Bhai apna gaddi hatao, kisi durse ki gaadi phasi hai.</string>
+    <string name="rupee">₹ </string>
 </resources>

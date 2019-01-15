@@ -11,28 +11,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-
         <activity
-            android:name=".LoginRelated.OnBoarding">
+            android:name=".LoginRelated.OnBoardingPages.OnBoarding"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
+        <activity
+            android:name=".LoginRelated.OnBoardingPages.SplashScreen"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".HomePage"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".LoginRelated.LoginPage"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".ParkingPartner.BookingPage" />
-        <activity android:name=".ParkingPartner.ShowDetails.NewBookingDetails" />
-        <activity android:name=".ParkingPartner.ShowDetails.OngoingDetail" />
-        <activity android:name=".ParkingPartner.ShowDetails.UpcomingDetail" />
-        <activity android:name=".ParkingPartner.ShowDetails.HistoryDetail" />
+        <activity
+            android:name=".ParkingPartner.ShowDetails.NewBookingDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ParkingPartner.ShowDetails.OngoingDetail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ParkingPartner.ShowDetails.UpcomingDetail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ParkingPartner.ShowDetails.HistoryDetail"
+            android:screenOrientation="portrait" />
 
         <service android:name=".FCMPackage.MyFirebaseInstanceIdService">
             <intent-filter>
@@ -49,7 +55,7 @@
             android:name="io.fabric.ApiKey"
             android:value="b46bc56239b28668cdcea45e91a54a8d26221673" />
 
-        <activity android:name=".LoginRelated.SplashScreen"></activity>
+        <activity android:name=".LoginRelated.OnBoardingPages.LoginHomePage"></activity>
     </application>
 
 </manifest>

@@ -37,7 +37,7 @@ import java.util.Map;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_URL;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_RETRY;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.RETRY_SECONDS;
-import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_EMP_ID;
+import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_ID;
 
 public class BookingPage extends AppCompatActivity  {
 
@@ -54,6 +54,7 @@ public class BookingPage extends AppCompatActivity  {
         setContentView(R.layout.activity_booking_page);
 
         mFragmentList = new ArrayList<>();
+
         mBookingList = new ArrayList<>();
         mProgressDialog = new ProgressDialog(BookingPage.this);
         mProgressDialog.setMessage("Please wait...");
@@ -69,9 +70,6 @@ public class BookingPage extends AppCompatActivity  {
 
         bindWidgetsWithAnEvent();
         setupTabLayout();
-
-
-
 
         findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,7 +188,7 @@ public class BookingPage extends AppCompatActivity  {
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> params = new HashMap<>();
 
-                String empId =new LoginSessionManager(BookingPage.this).getEmpDetailsFromSP().get(KEY_EMP_ID);
+                String empId =new LoginSessionManager(BookingPage.this).getEmpDetailsFromSP().get(KEY_PARTNER_ID);
                 params.put("emp_id",empId);
 
                 return params;

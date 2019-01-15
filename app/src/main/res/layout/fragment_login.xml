@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginRelated.OnBoardingPages.FragmentLogin">
+
+    <!--Logo-->
+    <TextView
+        android:layout_marginTop="16dp"
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/mekpark_logo_red"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:gravity="center"
+        android:text="mekPark"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="18sp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_marginTop="160dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:textStyle="bold"
+                android:text="@string/best_service_happy_customers"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="12sp"
+                android:fontFamily="@font/gotham_book_regular"
+                android:text="@string/short_desc"
+                android:textColor="@color/black" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:text="Account"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/gotham_book_regular"
+                    android:textSize="12sp"
+                    android:text="@string/login_to_enjoy_" />
+
+                <TextView
+                    android:id="@+id/login_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Login"
+                    style="@style/button_style_1" />
+
+                <!--FAQ-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="64dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/faq"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:drawableLeft="@drawable/faq"
+                        android:drawablePadding="16dp"
+                        android:drawableRight="@drawable/ic_arrow_right"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp"
+                        android:text="FAQ's"
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
+
+                    <View
+                        android:layout_marginTop="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/background4" />
+
+                    <TextView
+                        android:id="@+id/send_feedback"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="8dp"
+                        android:drawableLeft="@drawable/feedback"
+                        android:drawablePadding="16dp"
+                        android:drawableRight="@drawable/ic_arrow_right"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:paddingTop="8dp"
+                        android:textSize="14sp"
+                        android:text="Send Feedback"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+</FrameLayout>

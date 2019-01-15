@@ -1,4 +1,4 @@
-package com.example.mani.mekparkpartner.LoginRelated;
+package com.example.mani.mekparkpartner.LoginRelated.OnBoardingPages;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -10,9 +10,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.example.mani.mekparkpartner.CommanPart.LoginSessionManager;
 import com.example.mani.mekparkpartner.R;
 
+import io.fabric.sdk.android.Fabric;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +30,7 @@ public class OnBoarding extends AppCompatActivity implements ViewPager.OnPageCha
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
 
         // Next two lines help in getting rid off status bar
         requestWindowFeature(Window.FEATURE_NO_TITLE);

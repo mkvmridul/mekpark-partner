@@ -105,4 +105,10 @@
         <item name="android:singleLine">true</item>
     </style>
 
+    <style name="TextLabel" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/black2</item>
+        <item name="android:fontFamily">@font/gotham_book_regular</item>
+    </style>
+
 </resources>

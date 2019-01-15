@@ -17,7 +17,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.crashlytics.android.Crashlytics;
 import com.example.mani.mekparkpartner.CommanPart.MySingleton;
 import com.example.mani.mekparkpartner.FCMPackage.SharedPrefFcm;
-import com.example.mani.mekparkpartner.LoginRelated.LoginPage;
 import com.example.mani.mekparkpartner.ParkingPartner.BookingPage;
 import com.example.mani.mekparkpartner.CommanPart.LoginSessionManager;
 
@@ -31,7 +30,7 @@ import java.util.Map;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_URL;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_RETRY;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.RETRY_SECONDS;
-import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_EMP_ID;
+import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_ID;
 
 public class HomePage extends AppCompatActivity {
 
@@ -41,9 +40,6 @@ public class HomePage extends AppCompatActivity {
 
     private LoginSessionManager mLoginSession;
     private BroadcastReceiver mBroadcastReceiver;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +93,7 @@ public class HomePage extends AppCompatActivity {
 
     private void storeTokenToDb(final String refreshedToken) {
 
-        final String empId = mLoginSession.getEmpDetailsFromSP().get(KEY_EMP_ID);
+        final String empId = mLoginSession.getEmpDetailsFromSP().get(KEY_PARTNER_ID);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_TOKEN, new Response.Listener<String>() {
             @Override

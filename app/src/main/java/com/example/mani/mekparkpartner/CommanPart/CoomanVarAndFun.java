@@ -37,7 +37,6 @@ import java.util.Map;
 
 public class CoomanVarAndFun {
 
-
     private static final String TAG = "CoomanVarAndFun";
 
     // Keys
@@ -56,23 +55,23 @@ public class CoomanVarAndFun {
 
     //Mobile
     //public static final String BASE_URL = "http://192.168.43.153/mekPark/partner/";
-    //public static final String BASE_URL = "http://192.168.1.11/mekPark/partner/";
+    public static final String BASE_URL = "http://192.168.1.11/mekPark/partner/";
     //public static final String BASE_URL = "http://192.168.100.112/mekPark/partner/";
-    public static final String BASE_URL = "http://mekpark.com/mani14/partner/";
-    public static final String BASE_IMAGE_PATH = "http://192.168.1.11/mani14/user/vehicles_images/";
+    //public static final String BASE_URL = "http://mekpark.com/mani14/partner/";
+    public static final String BASE_IMAGE_PATH = "http://mekpark.com/mani14/user/vehicles_images/";
 
 
 
     public static final int RETRY_SECONDS = 5 ;
     public static final int NO_OF_RETRY = 0 ;
 
-    public static final String TIME_FORMAT  = "hh:mm a";
+    public static final String TIME_FORMAT  = "hh:mm white_watermarks";
 
 
     @SuppressLint("ResourceAsColor")
     public static void setStatusBarColor(Window window, int a){
 
-        // if a=0 => primarydark color else light black
+        // if white_watermarks=0 => primarydark color else light black
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);

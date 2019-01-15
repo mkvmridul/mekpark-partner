@@ -98,16 +98,19 @@ public class HistoryDetail extends AppCompatActivity {
         tv_book_date.setText(bookingDate);
 
         String imageName = mBooking.getVehicleImage();
+
+        Log.e(TAG,"imgName1 "+imageName);
+
         if(!imageName.equals("")){
             Glide.with(HistoryDetail.this).load(BASE_IMAGE_PATH+imageName)
                     .into(iv_vhicle);
+
+            Log.e(TAG,"imgName2 "+BASE_IMAGE_PATH+imageName);
         }
         else {
             //default image
             iv_vhicle.setImageDrawable(getResources().getDrawable(R.mipmap.dummy));
         }
-
-
 
         btn_needHelp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,20 +120,13 @@ public class HistoryDetail extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
         ll_Call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String phone = mBooking.getCusPhone();
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
                 startActivity(intent);
-
-            }
+                }
         });
 
 

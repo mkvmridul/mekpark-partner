@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
-import com.example.mani.mekparkpartner.LoginRelated.LoginPage;
+import com.example.mani.mekparkpartner.LoginRelated.OnBoardingPages.LoginHomePage;
 
 import java.util.HashMap;
 
@@ -21,11 +21,12 @@ public class LoginSessionManager {
     private static final String IS_LOGIN    = "IsLoggedIn";
     private static final String ON_BOARDING_SHOWN    = "onBoardingShown";
 
-    public static final String KEY_EMP_ID   = "emp_id";
-    public static final String KEY_PASSWORD = "password";
-    public static final String KEY_NAME     = "name";
-    public static final String KEY_MOBILE   = "mobile";
-    public static final String KEY_EMAIL    = "email";
+    public static final String KEY_PARTNER_ID     = "partner_id";
+    public static final String KEY_PARTNER_TYPE   = "partner_type";
+    public static final String KEY_PASSWORD       = "password";
+    public static final String KEY_NAME           = "name";
+    public static final String KEY_PHONE         = "mobile";
+    public static final String KEY_EMAIL          = "email";
 
 
     public LoginSessionManager(Context context) {
@@ -34,21 +35,22 @@ public class LoginSessionManager {
         editor = pref.edit();
     }
 
-    public void createLoginSession(String empId, String password, String name, String mobile, String email){
+    public void createLoginSession(String partnerId, String partnerType, String name, String phone,
+                                   String pass, String email ){
 
         editor.putBoolean(IS_LOGIN, true);
 
-        editor.putString(KEY_EMP_ID,empId);
-        editor.putString(KEY_PASSWORD, password);
+        editor.putString(KEY_PARTNER_ID,partnerId);
+        editor.putString(KEY_PARTNER_TYPE, partnerType);
         editor.putString(KEY_NAME,name);
-        editor.putString(KEY_MOBILE,mobile);
+        editor.putString(KEY_PHONE,phone);
+        editor.putString(KEY_PASSWORD,pass);
         editor.putString(KEY_EMAIL,email);
 
         editor.commit();
     }
 
     public void updatePreference(String password){
-
         editor.putString(KEY_PASSWORD, password);
         editor.commit();
 
@@ -58,7 +60,7 @@ public class LoginSessionManager {
 
         if (!this.isLoggedIn()) {
 
-            Intent i = new Intent(context, LoginPage.class);
+            Intent i = new Intent(context, LoginHomePage.class);
 
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -76,12 +78,12 @@ public class LoginSessionManager {
 
         HashMap<String, String> user = new HashMap<String, String>();
 
-        user.put(KEY_EMP_ID, pref.getString(KEY_EMP_ID, null));
+        user.put(KEY_PARTNER_ID, pref.getString(KEY_PARTNER_ID, null));
+        user.put(KEY_PARTNER_TYPE, pref.getString(KEY_PARTNER_TYPE, null));
         user.put(KEY_PASSWORD, pref.getString(KEY_PASSWORD, null));
         user.put(KEY_NAME, pref.getString(KEY_NAME, "You are Awesome"));
-        user.put(KEY_MOBILE, pref.getString(KEY_MOBILE, null));
+        user.put(KEY_PHONE, pref.getString(KEY_PHONE, null));
         user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, "someoneawesom@gmail.com"));
-
 
         return user;
     }
@@ -92,7 +94,7 @@ public class LoginSessionManager {
         setOnBoardingShown();
         editor.commit();
 
-        Intent i = new Intent(context, LoginPage.class);
+        Intent i = new Intent(context, LoginHomePage.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
