@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LoginRelated.Pages.AccountDetails">
+
+    <!--Toolbaar-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="8dp"
+            android:src="@drawable/arrow_back_red" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Account Details"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <View
+        android:layout_marginTop="66dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/background4"/>
+
+    <LinearLayout
+        android:layout_marginTop="88dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical">
+
+        <!--Pan number-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PAN Number"
+            android:fontFamily="@font/gotham_book_regular"
+            android:textSize="8sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/pan_number"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="36dp"
+                android:background="@null"
+                android:maxLength="10"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:layout_marginRight="16dp"
+                android:textSize="14sp"/>
+
+            <ImageView
+                android:id="@+id/pan_imageview"
+                android:layout_gravity="center"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:padding="8dp"
+                android:src="@drawable/attach"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/background4" />
+
+
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Account Number"
+            android:fontFamily="@font/gotham_book_regular"
+            android:textSize="8sp" />
+        <EditText
+            android:id="@+id/account_number"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="36dp"
+            android:background="@null"
+            android:inputType="number"
+            android:maxLength="18"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:layout_marginRight="16dp"
+            android:textSize="14sp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/background4" />
+
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="IFSE code"
+            android:fontFamily="@font/gotham_book_regular"
+            android:textSize="8sp" />
+        <EditText
+            android:id="@+id/ifse_code"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="36dp"
+            android:maxLength="11"
+            android:background="@null"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:layout_marginRight="16dp"
+            android:textSize="14sp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/background4" />
+
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancelled check"
+            android:fontFamily="@font/gotham_book_regular"
+            android:textSize="8sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/cancelled_check"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="36dp"
+                android:background="@null"
+                android:singleLine="true"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:layout_marginRight="16dp"
+                android:textSize="14sp"/>
+
+            <ImageView
+                android:id="@+id/cancelled_check_imageview"
+                android:layout_gravity="center"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:padding="8dp"
+                android:src="@drawable/attach"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/background4" />
+
+
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/background4" />
+
+        <TextView
+            android:id="@+id/save_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Save Details"
+            android:layout_marginBottom="8dp"
+            style="@style/button_style_1"/>
+
+    </FrameLayout>
+
+
+
+
+
+
+
+
+
+</FrameLayout>

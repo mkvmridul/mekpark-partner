@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginRelated.OnBoardingPages.FragmentOTP">
+    tools:context=".LoginRelated.Pages.Login.FragmentOTP">
 
     <ImageView
         android:id="@+id/back_btn"
@@ -160,7 +160,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             style="@style/button_style_1"
-            android:text="Veify"/>
+            android:text="Verify"/>
 
 
     </LinearLayout>

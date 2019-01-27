@@ -2,15 +2,15 @@ package com.example.mani.mekparkpartner.FCMPackage;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
+
 import android.content.Context;
-import android.content.Intent;
+
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 
-import com.example.mani.mekparkpartner.HomePage;
+
 import com.example.mani.mekparkpartner.R;
 
 import java.util.Date;
@@ -32,12 +32,13 @@ public class MyFcmNotificationManager {
     public void createNotification(String title, String message)
     {
         /**Creates an explicit intent for an Activity in your app**/
-        Intent resultIntent = new Intent(mContext , HomePage.class);
-        resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        PendingIntent resultPendingIntent = PendingIntent.getActivity(mContext,
-                0 /* Request code */, resultIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+//        Intent resultIntent = new Intent(mContext , HomePage.class);
+//        resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//
+//        PendingIntent resultPendingIntent = PendingIntent.getActivity(mContext,
+//                0 /* Request code */, resultIntent,
+//                PendingIntent.FLAG_UPDATE_CURRENT);
 
         mBuilder = new NotificationCompat.Builder(mContext);
         mBuilder.setSmallIcon(R.mipmap.ic_launcher);
@@ -45,8 +46,8 @@ public class MyFcmNotificationManager {
                 .setContentText(message)
                 .setAutoCancel(false)
                 .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(),R.mipmap.ic_launcher))
-                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                .setContentIntent(resultPendingIntent);
+                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+                //.setContentIntent(resultPendingIntent);
 
         mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 

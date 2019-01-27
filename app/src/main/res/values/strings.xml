@@ -85,4 +85,9 @@
     <string name="a_message_">A Message has been send to the owner of the vehicle.</string>
     <string name="message_to_vehicle_owner">Bhai apna gaddi hatao, kisi durse ki gaadi phasi hai.</string>
     <string name="rupee">₹ </string>
+    <string name="title_activity_parking_home_page">ParkingHomePage</string>
+    <string name="capacity_and_vacancy_">Capacity and vacancy are availble to the subject of availablity of space</string>
+    <string name="title_activity_account_not_verified_page">AccountNotVerifiedPage</string>
+    <string name="your_profile_">Your Profile is submitted for quality verification.</string>
+    <string name="our_team_">Our team will through your profile and get back to you in case of any queries.\nThankyou for your patience.</string>
 </resources>

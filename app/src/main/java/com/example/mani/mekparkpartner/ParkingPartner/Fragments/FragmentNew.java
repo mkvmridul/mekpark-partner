@@ -15,6 +15,7 @@ import com.example.mani.mekparkpartner.ParkingPartner.Adapter.NewBookingAdapter;
 import com.example.mani.mekparkpartner.ParkingPartner.Booking;
 import com.example.mani.mekparkpartner.ParkingPartner.BookingPage;
 import com.example.mani.mekparkpartner.ParkingPartner.Listener.MyListener;
+import com.example.mani.mekparkpartner.ParkingPartner.ParkingHomePage;
 import com.example.mani.mekparkpartner.R;
 
 
@@ -28,7 +29,7 @@ public class FragmentNew extends Fragment implements MyListener {
     private View mRootView;
 
     private List<Booking> mNewBookingList;
-    private BookingPage mActivity;
+    private ParkingHomePage mActivity;
 
     private boolean shouldExecuteOnResume;
 
@@ -43,7 +44,7 @@ public class FragmentNew extends Fragment implements MyListener {
         shouldExecuteOnResume = false;
 
         Log.e(TAG,"called : onCreate1");
-        mActivity = (BookingPage) getActivity();
+        mActivity = (ParkingHomePage) getActivity();
     }
 
     @Override

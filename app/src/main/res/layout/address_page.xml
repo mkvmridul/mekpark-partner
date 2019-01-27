@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--Toolbaar-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:paddingLeft="8dp"
+            android:paddingTop="16dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            android:src="@drawable/arrow_back_red" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Add new Address"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/background4" />
+
+    <!--map-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="210dp">
+
+        <fragment
+            android:id="@+id/map"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/marker"
+            android:layout_marginBottom="24dp"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:id="@+id/gps"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end|bottom"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/white"
+            android:elevation="8dp"
+            android:padding="8dp"
+            android:src="@drawable/gps" />
+
+
+
+
+    </FrameLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_horizontal"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:indeterminate="true"
+        android:layout_marginTop="-2dp"
+        style="?android:attr/progressBarStyleHorizontal" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:paddingTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="match_parent"
+            android:paddingBottom="8dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/use_marker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Use Current Location"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:textColor="@color/green"
+                android:paddingLeft="16dp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:drawableLeft="@drawable/gps_green"
+                android:drawablePadding="8dp"
+                android:gravity="center|start"
+                android:background="@drawable/border_light_black"/>
+
+            <TextView
+                android:layout_marginTop="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Details"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:textSize="14sp"
+                android:textColor="@color/black"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:hintTextAppearance="@style/TextLabel">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/complete_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gotham_book_regular"
+                    android:hint="Complete Address"
+                    android:inputType="textEmailAddress|textAutoComplete|textAutoCorrect|textFilter"
+                    android:paddingTop="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:hintTextAppearance="@style/TextLabel">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/landmark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gotham_book_regular"
+                    android:hint="Landmark"
+                    android:inputType="text|textAutoComplete|textAutoCorrect|textFilter"
+                    android:paddingTop="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp">
+
+                </android.support.design.widget.TextInputEditText>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:hintTextAppearance="@style/TextLabel">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/locality"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gotham_book_regular"
+                    android:hint="Localty"
+                    android:inputType="text|textAutoComplete|textAutoCorrect|textFilter"
+                    android:paddingTop="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp">
+
+                </android.support.design.widget.TextInputEditText>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:hintTextAppearance="@style/TextLabel">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gotham_book_regular"
+                    android:hint="City"
+                    android:inputType="text|textAutoComplete|textAutoCorrect|textFilter"
+                    android:paddingTop="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp">
+
+                </android.support.design.widget.TextInputEditText>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/done"
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Done"
+                style="@style/button_style_1"/>
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+
+
+
+
+
+
+</LinearLayout>

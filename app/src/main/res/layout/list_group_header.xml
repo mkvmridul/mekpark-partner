@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/lblListHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="MenuHeading"
+        android:paddingTop="8dp"
+        android:fontFamily="@font/gotham_book_regular"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:paddingBottom="8dp"
+        android:drawablePadding="16dp"
+        android:paddingLeft="16dp"
+        android:layout_marginBottom="8dp"
+        android:paddingRight="16dp"
+        android:drawableRight="@drawable/arrow_right"
+        android:drawableLeft="@drawable/my_account"
+        android:textSize="14sp" />
+</LinearLayout>

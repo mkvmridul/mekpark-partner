@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".LoginRelated.OnBoardingPages.FragmentSignUp">
+    tools:context=".LoginRelated.Pages.Login.FragmentSignUp">
 
     <ImageView
         android:id="@+id/back_btn"

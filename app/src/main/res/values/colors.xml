@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#da1f26</color>
-    <color name="colorPrimaryDark">#B71C1C</color>
+    <color name="colorPrimary">#FF3B3B</color>
+    <color name="colorPrimaryDark">#DB0A16</color>
     <color name="colorAccent">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="home_background">#f8f9f9</color>
@@ -15,11 +15,13 @@
     <color name="black4">#d5dbdb</color>
     <color name="light_background">#f8f9f9</color>
     <color name="background4">#eef0f0</color>
-    <color name="yellow">#f6b005</color>
-    <color name="green">#1ace21</color>
+    <color name="yellow">#FFB133</color>
+    <color name="green">#16A007</color>
     <color name="background_spinner">#fdfefe</color>
     <color name="menu_selected_background">#eef0f0</color>
     <color name="green2">#64a23a</color>
     <color name="yellow2">#fa9e26</color>
     <color name="red_dark">#990000</color>
+    <color name="white_2">#D8D8D8</color>
+    <color name="lignt_pink">#80F08080</color>
 </resources>

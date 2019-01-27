@@ -1,9 +1,7 @@
 package com.example.mani.mekparkpartner.FCMPackage;
 
-import android.content.Intent;
 import android.util.Log;
 
-import com.example.mani.mekparkpartner.HomePage;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 

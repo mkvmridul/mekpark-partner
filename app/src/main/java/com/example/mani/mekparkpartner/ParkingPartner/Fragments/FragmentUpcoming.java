@@ -15,6 +15,7 @@ import com.example.mani.mekparkpartner.ParkingPartner.Adapter.NewBookingAdapter;
 import com.example.mani.mekparkpartner.ParkingPartner.Adapter.UpcomingAdapter;
 import com.example.mani.mekparkpartner.ParkingPartner.Booking;
 import com.example.mani.mekparkpartner.ParkingPartner.BookingPage;
+import com.example.mani.mekparkpartner.ParkingPartner.ParkingHomePage;
 import com.example.mani.mekparkpartner.R;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class FragmentUpcoming extends Fragment {
     private String TAG = "FragmentUpcoming";
     private View mRootView;
     private List<Booking> mUpcomingList;
-    private BookingPage mActivity;
+    private ParkingHomePage mActivity;
     private boolean shouldExecuteOnResume;
 
     public FragmentUpcoming() {}
@@ -34,7 +35,7 @@ public class FragmentUpcoming extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.e(TAG,"onCreate2");
-        mActivity = (BookingPage) getActivity();
+        mActivity = (ParkingHomePage) getActivity();
     }
 
     @Override

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="124dp"
+    android:gravity="center|start">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="@color/colorPrimaryDark"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginTop="44dp"
+        android:id="@+id/profile_pic"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@mipmap/female"
+        android:padding="0dp"
+        android:layout_marginLeft="16dp"/>
+
+    <LinearLayout
+        android:layout_marginTop="44dp"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="vertical"
+        android:gravity="center|start"
+        android:layout_toRightOf="@id/profile_pic"
+        android:layout_marginLeft="16dp">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:textSize="15sp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:text="Manilal Kasera"/>
+
+        <TextView
+            android:id="@+id/mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="7907977701"
+            android:fontFamily="@font/gotham_book_regular"
+            android:layout_below="@id/name"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/background4"
+        android:layout_below="@id/profile_pic"
+        android:layout_marginTop="24dp"/>
+
+
+</RelativeLayout>

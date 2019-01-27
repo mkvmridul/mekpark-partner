@@ -33,8 +33,12 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="refresh" />
-                            <entry key="sourceFile" value="$USER_HOME$/Downloads/Asset 12.svg" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="height" value="35" />
+                            <entry key="outputName" value="sm" />
+                            <entry key="overrideSize" value="true" />
+                            <entry key="sourceFile" value="$USER_HOME$/Downloads/Asset 10(1).svg" />
+                            <entry key="width" value="48" />
                           </map>
                         </option>
                       </PersistentState>

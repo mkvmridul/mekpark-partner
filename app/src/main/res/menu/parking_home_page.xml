@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/technical_support"
+        android:orderInCategory="100"
+        android:icon="@drawable/sos2"
+        app:showAsAction="always"
+        android:title="tech" />
+
+    <item
+        android:id="@+id/refresh"
+        android:orderInCategory="100"
+        android:icon="@drawable/refresh"
+        android:title="refresh"
+        app:showAsAction="always"/>
+
+</menu>

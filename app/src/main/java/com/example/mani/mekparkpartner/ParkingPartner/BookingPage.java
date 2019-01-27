@@ -78,16 +78,6 @@ public class BookingPage extends AppCompatActivity  {
 
             }
         });
-
-        ImageView btnBack = findViewById(R.id.back_btn);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
-
     }
 
     public void fetchBookingsFromDb(final int fragNo) {
@@ -288,7 +278,6 @@ public class BookingPage extends AppCompatActivity  {
                 break;
         }
     }
-
 
     public void replaceFragment(Fragment fragment) {
         Log.e(TAG, "replaceFragment");

@@ -28,6 +28,8 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -51,21 +53,33 @@ public class CoomanVarAndFun {
     public static final String SUV       = "suv";
     public static final String PREMIUM   = "premium";
 
+    public static  final String LOCATION_NOT_FOUND      = "can't find the location";
+
+    public static  final String PAID_PARKING_PROVIDER   = "Paid Parking Provider";
+    public static  final String GARAGE_PARKING_PROVIDER = "Garage Parking Provider";
+    public static  final String FREE_PARKING_PROVIDER   = "Free Parking Provider";
+    public static  final String DRIVER_ON_DEMAND        = "Driver On Demand";
+    public static  final String TOWING_PARTNER          = "Towing partner";
+
 
 
     //Mobile
     //public static final String BASE_URL = "http://192.168.43.153/mekPark/partner/";
-    public static final String BASE_URL = "http://192.168.1.11/mekPark/partner/";
+    //public static final String BASE_URL = "http://192.168.1.11/mekPark/partner/";
     //public static final String BASE_URL = "http://192.168.100.112/mekPark/partner/";
-    //public static final String BASE_URL = "http://mekpark.com/mani14/partner/";
+    public static final String BASE_URL = "http://mekpark.com/mani14/partner/";
     public static final String BASE_IMAGE_PATH = "http://mekpark.com/mani14/user/vehicles_images/";
+
+    public static final String LICENCE_IMAGE_PATH = "http://mekpark.com/mani14/partner/licence/";
+    public static final String CANCLE_CHEQUE_IMAGE_PATH = "http://mekpark.com/mani14/partner/cheque/";
+    public static final String PAN_IMAGE_PATH = "http://mekpark.com/mani14/partner/pan/";
 
 
 
     public static final int RETRY_SECONDS = 5 ;
     public static final int NO_OF_RETRY = 0 ;
 
-    public static final String TIME_FORMAT  = "hh:mm white_watermarks";
+    public static final String TIME_FORMAT  = "hh:mma";
 
 
     @SuppressLint("ResourceAsColor")
@@ -91,6 +105,22 @@ public class CoomanVarAndFun {
         mapIntent.setPackage("com.google.android.apps.maps");
         context.startActivity(mapIntent);
 
+    }
+
+    public static LatLng getDeviceLocation(Context context) throws Exception {
+
+        LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(10 * 1000)
+                .setFastestInterval(1 * 1000);
+
+        GPSTracker tracker = new GPSTracker(context);
+
+        if (!tracker.canGetLocation()) {
+            tracker.showSettingsAlert();
+        }
+
+        return new LatLng(tracker.getLatitude(), tracker.getLongitude());
     }
 
     public void sendEmailIntent(Context context){
