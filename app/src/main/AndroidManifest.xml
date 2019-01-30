@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".LoginRelated.Pages.OnBoardingPages.OnBoarding"
+            android:name=".LoginRelated.OnBoardingPages.OnBoarding"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginRelated.Pages.OnBoardingPages.SplashScreen"
+            android:name=".LoginRelated.OnBoardingPages.SplashScreen"
             android:screenOrientation="portrait" />
         <activity android:name=".ParkingPartner.BookingPage" />
         <activity
@@ -58,15 +58,16 @@
             android:name="io.fabric.ApiKey"
             android:value="b46bc56239b28668cdcea45e91a54a8d26221673" />
 
-        <activity android:name=".LoginRelated.Pages.Login.LoginHomePage" />
+        <activity android:name=".LoginRelated.SingupAndLoginFragments.LoginHomePage" />
         <activity
             android:name=".ParkingPartner.ParkingHomePage"
             android:label="@string/title_activity_parking_home_page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ParkingPartner.TransactionPage" />
-        <activity android:name=".ParkingPartner.ProfilePage"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".LoginRelated.Pages.AccountDetails" />
+        <activity
+            android:name=".CommonForAllPartner.ProfilePage"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".CommonForAllPartner.AddAccountDetails" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
@@ -84,7 +85,7 @@
         </provider>
 
         <activity
-            android:name=".LoginRelated.Pages.ParkingSlotDetail"
+            android:name=".CommonForAllPartner.TakeInitialParkingDetails"
             android:windowSoftInputMode="adjustPan" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -102,12 +103,15 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".LoginRelated.Pages.InitialProfilePage"
+            android:name=".CommonForAllPartner.InitialProfilePage"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".LoginRelated.Pages.PartnerNotVerifiedPage"
+            android:name=".CommonForAllPartner.PartnerNotVerifiedPage"
             android:label="@string/title_activity_account_not_verified_page"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CommonForAllPartner.ShowAccountDetails" />
+        <activity android:name=".CommonForAllPartner.ShowParkingDetail"
+            android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
 </manifest>

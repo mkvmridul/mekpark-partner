@@ -1,4 +1,4 @@
-package com.example.mani.mekparkpartner.LoginRelated.Pages.Login;
+package com.example.mani.mekparkpartner.LoginRelated.SingupAndLoginFragments;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

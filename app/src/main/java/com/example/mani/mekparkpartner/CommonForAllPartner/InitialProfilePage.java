@@ -1,4 +1,4 @@
-package com.example.mani.mekparkpartner.LoginRelated.Pages;
+package com.example.mani.mekparkpartner.CommonForAllPartner;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -30,7 +30,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.mani.mekparkpartner.CommanPart.LoginSessionManager;
 import com.example.mani.mekparkpartner.CommanPart.MySingleton;
 import com.example.mani.mekparkpartner.FCMPackage.SharedPrefFcm;
-import com.example.mani.mekparkpartner.ParkingPartner.ParkingHomePage;
 import com.example.mani.mekparkpartner.R;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -50,10 +49,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_URL;
-import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.FREE_PARKING_PROVIDER;
-import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.GARAGE_PARKING_PROVIDER;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_RETRY;
-import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.PAID_PARKING_PROVIDER;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.RETRY_SECONDS;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_EMAIL;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_NAME;
@@ -157,6 +153,13 @@ public class InitialProfilePage extends AppCompatActivity {
         mIv_id = findViewById(R.id.id_imageview);
 
 
+        findViewById(R.id.back_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              onBackPressed();
+            }
+        });
+
         findViewById(R.id.change_password).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,7 +175,7 @@ public class InitialProfilePage extends AppCompatActivity {
                     return;
                 }
 
-                startActivity(new Intent(InitialProfilePage.this,ParkingSlotDetail.class));
+                startActivity(new Intent(InitialProfilePage.this,TakeInitialParkingDetails.class));
 
             }
         });
@@ -185,7 +188,7 @@ public class InitialProfilePage extends AppCompatActivity {
                     return;
                 }
 
-                startActivity(new Intent(InitialProfilePage.this,AccountDetails.class));
+                startActivity(new Intent(InitialProfilePage.this,AddAccountDetails.class));
             }
         });
 

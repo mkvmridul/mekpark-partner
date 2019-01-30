@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ParkingPartner.ProfilePage">
+    tools:context=".CommonForAllPartner.ProfilePage">
 
     <!--Toolbaar-->
     <LinearLayout
@@ -43,7 +43,8 @@
     <ScrollView
         android:layout_marginTop="57dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -110,10 +111,10 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:background="@color/green2"
+                    android:background="@color/yellow"
                     android:fontFamily="@font/montserrat_semi_bold"
                     android:gravity="center"
-                    android:text="Available to accept booking"
+                    android:text="Verification is on the way"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
 
@@ -127,8 +128,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:theme="@style/SwitchCompatTheme"
-                        />
+                        android:enabled="false"
+                        android:theme="@style/SwitchCompatTheme"/>
 
                 </LinearLayout>
 
@@ -404,6 +405,7 @@
                         android:text="Change Password" />
 
                     <TextView
+                        android:id="@+id/service_manage"
                         style="@style/button_style_1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -430,6 +432,7 @@
                         android:text="Executive Id No : " />
 
                     <TextView
+                        android:id="@+id/exe_id"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
@@ -502,37 +505,42 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
                         android:textSize="10sp"
-                        android:text="Parking places picture" />
+                        android:text="Uploaded Image" />
                 </LinearLayout>
                 <android.support.v7.widget.RecyclerView
+
                     android:layout_marginTop="16dp"
                     android:id="@+id/recycler_view_images"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
+
                 <TextView
+                    android:id="@+id/add_image"
                     android:layout_marginTop="16dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:fontFamily="@font/montserrat_regular"
-                    android:text="Add Images"
-                    android:textSize="12sp"/>
-
+                    android:gravity="end"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Add images"/>
 
 
                 <TextView
+                    android:id="@+id/account_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:drawableRight="@drawable/arrow_right_yellow"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="12dp"
-                    android:text="Add account Details"
-                    android:textColor="@color/yellow" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/background4" />
+                    android:drawableRight="@drawable/arrow_right_green"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:background="@drawable/border_light_black"
+                    android:text="Account Details"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:textColor="@color/green" />
+
                 <TextView
                     android:id="@+id/done"
                     style="@style/button_style_1"

@@ -1,4 +1,4 @@
-package com.example.mani.mekparkpartner.LoginRelated.Pages;
+package com.example.mani.mekparkpartner.CommonForAllPartner;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -7,27 +7,17 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.location.Address;
-import android.location.Geocoder;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.GridLayout;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -35,9 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mani.mekparkpartner.AddressDialog;
-import com.example.mani.mekparkpartner.CommanPart.GPSTracker;
 import com.example.mani.mekparkpartner.CommanPart.LoginSessionManager;
-import com.example.mani.mekparkpartner.MapsActivity;
 import com.example.mani.mekparkpartner.R;
 import com.google.android.gms.maps.model.LatLng;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -54,26 +42,22 @@ import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_URL;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.FREE_PARKING_PROVIDER;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.GARAGE_PARKING_PROVIDER;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.LOCATION_NOT_FOUND;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.OPEN_24_HRS;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.PAID_PARKING_PROVIDER;
-import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getDeviceLocation;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_ID;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_TYPE;
 
-public class ParkingSlotDetail extends AppCompatActivity implements AddressDialog.AddressDialogListenr {
+public class TakeInitialParkingDetails extends AppCompatActivity implements AddressDialog.AddressDialogListenr {
 
     private final String TAG = this.getClass().getSimpleName();
 
     private static final int GALLARY_REQUEST = 1;
     private LoginSessionManager mLoginSession;
-
-    private final String OPEN_24_HRS = "24 hrs Open";
 
     //Time widget
     TextView t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12;
@@ -115,20 +99,16 @@ public class ParkingSlotDetail extends AppCompatActivity implements AddressDialo
 
     private String mOpeningHrs = OPEN_24_HRS;
 
-    private static final String FINE_LOCATION   = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-
     ProgressDialog mProgressDialog;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_parking_slot_detail);
+        setContentView(R.layout.activity_take_initial_parking_slot_detail);
 
-        mLoginSession = new LoginSessionManager(ParkingSlotDetail.this);
-        mProgressDialog = new ProgressDialog(ParkingSlotDetail.this);
+        mLoginSession = new LoginSessionManager(TakeInitialParkingDetails.this);
+        mProgressDialog = new ProgressDialog(TakeInitialParkingDetails.this);
         mProgressDialog.setMessage("Please wait...");
         mProgressDialog.setCancelable(false);
 
@@ -332,13 +312,6 @@ public class ParkingSlotDetail extends AppCompatActivity implements AddressDialo
             }
         });
 
-//        findViewById(R.id.find_me).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                getLocationPermissionAndFindLocation();
-//            }
-//        });
-
         findViewById(R.id.address).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -351,9 +324,9 @@ public class ParkingSlotDetail extends AppCompatActivity implements AddressDialo
             @Override
             public void onClick(View v) {
 
-                if (ContextCompat.checkSelfPermission(ParkingSlotDetail.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                if (ContextCompat.checkSelfPermission(TakeInitialParkingDetails.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(ParkingSlotDetail.this,
+                    ActivityCompat.requestPermissions(TakeInitialParkingDetails.this,
                             new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
                     return;
                 }
@@ -393,21 +366,23 @@ public class ParkingSlotDetail extends AppCompatActivity implements AddressDialo
 
                 mSelectedLocation = et_address.getText().toString().trim();
 
+                Log.e(TAG,"mSelectedLocation 2"+mSelectedLocation);
+
                 if(mSelectedLocation.equals("") || mSelectedLatng == null){
-                    Toast.makeText(ParkingSlotDetail.this,"Enter Address",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TakeInitialParkingDetails.this,"Enter Address",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
 
                 if(mBikeFare.equals("") || mBikeCapacity.equals("") ||mBikeVacancy.equals("") ||
-                        mCarFare.equals("") ||mBikeCapacity.equals("") || mCarVacancy.equals("")){
-                    Toast.makeText(ParkingSlotDetail.this,"Fill the required filled",Toast.LENGTH_SHORT).show();
+                        mCarFare.equals("") ||mCarCapacity.equals("") || mCarVacancy.equals("")){
+                    Toast.makeText(TakeInitialParkingDetails.this,"Fill the required filled",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(mBikeCapacity.equals("0") ||mBikeVacancy.equals("0") ||
                         mCarCapacity.equals("0") ||mCarVacancy.equals("0") ){
-                    Toast.makeText(ParkingSlotDetail.this,"Capcity or Vacancy can't be zero",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TakeInitialParkingDetails.this,"Capcity or Vacancy can't be zero",Toast.LENGTH_SHORT).show();
                     return;
 
                 }
@@ -415,12 +390,12 @@ public class ParkingSlotDetail extends AppCompatActivity implements AddressDialo
 
 
                 if(mSelectedLocation.equals(LOCATION_NOT_FOUND)){
-                    Toast.makeText(ParkingSlotDetail.this,"Location can't be found",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TakeInitialParkingDetails.this,"Location can't be found",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(mParkingBitmap == null || mParkingImageRealPath.equals("")){
-                    Toast.makeText(ParkingSlotDetail.this,"Add a parking Image",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TakeInitialParkingDetails.this,"Add a parking Image",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -438,7 +413,6 @@ public class ParkingSlotDetail extends AppCompatActivity implements AddressDialo
         Log.e(TAG,"called : sendParkingtDetails");
 
         String partner_id   = mLoginSession.getEmpDetailsFromSP().get(KEY_PARTNER_ID);
-
         String partner_type = mLoginSession.getEmpDetailsFromSP().get(KEY_PARTNER_TYPE);
 
         if(partner_type.equals(PAID_PARKING_PROVIDER))
@@ -448,13 +422,30 @@ public class ParkingSlotDetail extends AppCompatActivity implements AddressDialo
         else if (partner_type.equals(FREE_PARKING_PROVIDER))
             partner_type = "3";
 
+        Log.e(TAG, "image path - "+mParkingImageRealPath);
+
+        Log.e(TAG, "owned by - "+partner_id);
+        Log.e(TAG, "locality - "+mLocality);
+        Log.e(TAG, "des - "+mSelectedLocation);
+        Log.e(TAG, "landmark - "+mLandmark);
+        Log.e(TAG, "opening hrs - "+mOpeningHrs);
+        Log.e(TAG, "latitude - "+String.valueOf(mSelectedLatng.latitude));
+
+        Log.e(TAG, "longitude - "+String.valueOf(mSelectedLatng.longitude));
+        Log.e(TAG, "partner type - "+partner_type);
+        Log.e(TAG, "b capacity - "+mBikeCapacity);
+        Log.e(TAG, "c capacity - "+mCarCapacity);
+        Log.e(TAG, "b fare- "+mBikeFare);
+        Log.e(TAG, "c fare- "+mCarFare);
+        Log.e(TAG, "b vacancy - "+mBikeVacancy);
+        Log.e(TAG, "c vacancy - "+mCarVacancy);
 
 
         final  String UPLOAD_URL = BASE_URL+"upload_parking_slot_details.php";
 
         try {
             mProgressDialog.show();
-            new MultipartUploadRequest(ParkingSlotDetail.this,UPLOAD_URL)
+            new MultipartUploadRequest(TakeInitialParkingDetails.this,UPLOAD_URL)
 
                     .addFileToUpload(mParkingImageRealPath, "image")
 
@@ -489,14 +480,14 @@ public class ParkingSlotDetail extends AppCompatActivity implements AddressDialo
                                 Log.e("asd",serverResponse.getBodyAsString());
                             if(exception!=null)
                                 Log.e("asd",exception.getMessage());
-                            Toast.makeText(ParkingSlotDetail.this,"Parking slot is not inserted in db",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(TakeInitialParkingDetails.this,"Parking slot is not inserted in db",Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onCompleted(Context context, UploadInfo uploadInfo, ServerResponse serverResponse) {
                             mProgressDialog.dismiss();
                             Log.e(TAG,serverResponse.getBodyAsString());
-                            Toast.makeText(ParkingSlotDetail.this, "done", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(TakeInitialParkingDetails.this, "done", Toast.LENGTH_SHORT).show();
 
                             try {
                                 JSONArray jsonArray = new JSONArray(serverResponse.getBodyAsString());
@@ -528,7 +519,7 @@ public class ParkingSlotDetail extends AppCompatActivity implements AddressDialo
             mProgressDialog.dismiss();
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             Log.e(TAG, e.toString());
-            Toast.makeText(ParkingSlotDetail.this,"Error uploading",Toast.LENGTH_SHORT).show();
+            Toast.makeText(TakeInitialParkingDetails.this,"Error uploading",Toast.LENGTH_SHORT).show();
             finish();
         }
 
@@ -570,7 +561,7 @@ public class ParkingSlotDetail extends AppCompatActivity implements AddressDialo
             }
             else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
-                Toast.makeText(ParkingSlotDetail.this,error.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(TakeInitialParkingDetails.this,error.toString(),Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -635,7 +626,7 @@ public class ParkingSlotDetail extends AppCompatActivity implements AddressDialo
 
         ll.setBackground(getApplication().getResources().getDrawable(R.drawable.red_background));
         iv.setImageDrawable(getApplication().getDrawable(R.drawable.time_white));
-        tv.setTextColor(ParkingSlotDetail.this.getColor(R.color.white));
+        tv.setTextColor(TakeInitialParkingDetails.this.getColor(R.color.white));
         
     }
 
@@ -643,11 +634,11 @@ public class ParkingSlotDetail extends AppCompatActivity implements AddressDialo
 
         ll_from.setBackground(getApplication().getResources().getDrawable(R.drawable.border_light_black));
         c1.setImageDrawable(getApplication().getDrawable(R.drawable.time_4));
-        textFrom.setTextColor(ParkingSlotDetail.this.getColor(R.color.white_2));
+        textFrom.setTextColor(TakeInitialParkingDetails.this.getColor(R.color.white_2));
 
         ll_to.setBackground(getApplication().getResources().getDrawable(R.drawable.border_light_black));
         c2.setImageDrawable(getApplication().getDrawable(R.drawable.time_4));
-        textTo.setTextColor(ParkingSlotDetail.this.getColor(R.color.white_2));
+        textTo.setTextColor(TakeInitialParkingDetails.this.getColor(R.color.white_2));
 
     }
 
@@ -706,76 +697,7 @@ public class ParkingSlotDetail extends AppCompatActivity implements AddressDialo
         t12.setTextColor(getApplication().getResources().getColor(R.color.black));
     }
 
-    private void getLocationPermissionAndFindLocation() {
 
-        Log.e(TAG, "getLocationPermission");
-
-        String[] permissions = {android.Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION};
-
-        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-
-                try {
-                    mSelectedLatng = getDeviceLocation(ParkingSlotDetail.this);
-                    getAddress();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                Log.e(TAG,"current Location "+mSelectedLatng);
-
-
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        permissions,
-                        LOCATION_PERMISSION_REQUEST_CODE);
-            }
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    permissions,
-                    LOCATION_PERMISSION_REQUEST_CODE);
-        }
-    }
-
-    private void getAddress() {
-
-        Geocoder geocoder;
-        List<Address> addresses = null;
-        geocoder = new Geocoder(this, Locale.getDefault());
-
-        try {
-            addresses = geocoder.getFromLocation(mSelectedLatng.latitude, mSelectedLatng.longitude, 1);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if(addresses==null){
-            Log.e(TAG, "Address is null");
-            et_address.setText(LOCATION_NOT_FOUND);
-            return;
-        }
-
-        if(addresses.size() == 0){
-            Log.e(TAG, "Address size is 0");
-            et_address.setText(LOCATION_NOT_FOUND);
-            return;
-        }
-
-        String address = addresses.get(0).getAddressLine(0);
-        String city = addresses.get(0).getLocality();
-        String state = addresses.get(0).getAdminArea();
-        String country = addresses.get(0).getCountryName();
-        String postalCode = addresses.get(0).getPostalCode();
-        String knownName = addresses.get(0).getFeatureName();
-
-        mSelectedLocation = address;
-        et_address.setText(mSelectedLocation);
-
-    }
 
     @Override
     public void onBackPressed() {
@@ -789,7 +711,7 @@ public class ParkingSlotDetail extends AppCompatActivity implements AddressDialo
 
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(ParkingSlotDetail.this.getContentResolver(), inImage, title, null);
+        String path = MediaStore.Images.Media.insertImage(TakeInitialParkingDetails.this.getContentResolver(), inImage, title, null);
         return Uri.parse(path);
     }
 
@@ -808,6 +730,8 @@ public class ParkingSlotDetail extends AppCompatActivity implements AddressDialo
         mLandmark         = landmark;
         mLocality         = locality;
         mCity             = city;
+
+        Log.e(TAG,"Selected Location "+mSelectedLocation);
 
         et_address.setText(completeAddress);
     }

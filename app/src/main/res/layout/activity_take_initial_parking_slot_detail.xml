@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginRelated.Pages.ParkingSlotDetail">
+    tools:context=".CommonForAllPartner.TakeInitialParkingDetails">
 
     <!--Toolbaar-->
     <LinearLayout
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/montserrat_semi_bold"
-                    android:text="24 hrs open"
+                    android:text="@string/_24_hrs_open"
                     android:textSize="12sp" />
 
                 <LinearLayout
@@ -455,33 +455,10 @@
                     android:focusable="false"
                     android:longClickable="false"
                     android:ellipsize="end"
+                    android:hint="Click to add address"
                     android:fontFamily="@font/gotham_book_regular"
                     android:inputType="text"
-                    android:maxLength="60"
                     android:textSize="14sp" />
-
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/find_me"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="vertical">-->
-
-                    <!--<ImageView-->
-                        <!--android:layout_width="24dp"-->
-                        <!--android:layout_height="24dp"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:src="@drawable/gps" />-->
-
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="4dp"-->
-                        <!--android:fontFamily="@font/montserrat_regular"-->
-                        <!--android:text="Find me"-->
-                        <!--android:textSize="8sp" />-->
-
-
-                <!--</LinearLayout>-->
 
 
             </LinearLayout>
@@ -595,7 +572,7 @@
                         android:layout_weight="1.1"
                         android:fontFamily="@font/montserrat_regular"
                         android:gravity="center"
-                        android:text="0"
+                        android:text="15"
                         android:maxLength="3"
                         android:inputType="number"
                         android:background="@null"
@@ -617,7 +594,7 @@
                         android:layout_weight="1.1"
                         android:fontFamily="@font/montserrat_regular"
                         android:gravity="center"
-                        android:text="0"
+                        android:text="15"
                         android:inputType="number"
                         android:maxLength="3"
                         android:background="@null"
@@ -683,7 +660,7 @@
                         android:layout_weight="1.1"
                         android:fontFamily="@font/montserrat_regular"
                         android:gravity="center"
-                        android:text="0"
+                        android:text="10"
                         android:inputType="number"
                         android:maxLength="3"
                         android:background="@null"
@@ -705,7 +682,7 @@
                         android:layout_weight="1.1"
                         android:fontFamily="@font/montserrat_regular"
                         android:gravity="center"
-                        android:text="0"
+                        android:text="10"
                         android:inputType="number"
                         android:maxLength="3"
                         android:background="@null"

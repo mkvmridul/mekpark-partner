@@ -1,4 +1,4 @@
-package com.example.mani.mekparkpartner.LoginRelated.Pages.Login;
+package com.example.mani.mekparkpartner.LoginRelated.SingupAndLoginFragments;
 
 
 import android.app.ProgressDialog;
@@ -24,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.mani.mekparkpartner.CommanPart.MySingleton;
+import com.example.mani.mekparkpartner.LoginRelated.SingupAndLoginFragments.FragmentOTP;
 import com.example.mani.mekparkpartner.R;
 
 import org.json.JSONArray;

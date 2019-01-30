@@ -1,4 +1,4 @@
-package com.example.mani.mekparkpartner.LoginRelated.Pages.OnBoardingPages;
+package com.example.mani.mekparkpartner.LoginRelated.OnBoardingPages;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

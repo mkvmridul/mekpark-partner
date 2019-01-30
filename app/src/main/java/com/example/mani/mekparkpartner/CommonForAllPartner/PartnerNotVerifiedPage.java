@@ -1,4 +1,4 @@
-package com.example.mani.mekparkpartner.LoginRelated.Pages;
+package com.example.mani.mekparkpartner.CommonForAllPartner;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 
 import android.support.v4.content.res.ResourcesCompat;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,17 +23,32 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.mani.mekparkpartner.CommanPart.LoginSessionManager;
+import com.example.mani.mekparkpartner.CommanPart.MySingleton;
 import com.example.mani.mekparkpartner.ParkingPartner.MenuModel;
-import com.example.mani.mekparkpartner.ParkingPartner.ProfilePage;
 
 import com.example.mani.mekparkpartner.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_URL;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_RETRY;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.RETRY_SECONDS;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_NAME;
+import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_ID;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PHONE;
 
 public class PartnerNotVerifiedPage extends AppCompatActivity {
@@ -61,11 +77,84 @@ public class PartnerNotVerifiedPage extends AppCompatActivity {
 
     }
 
+
+    private void fetchParkingInfoAndSaveToSP() {
+
+        String SEND_URL = BASE_URL + "get_partner_parking_details.php";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e(TAG,response);
+
+                try {
+
+                    JSONArray jsonArray = new JSONArray(response);
+                    int rc = jsonArray.getJSONObject(0).getInt("rc");
+
+                    if(rc<=0){
+                        String mess = jsonArray.getJSONObject(0).getString("mess");
+                        Log.e(TAG,mess);
+                        Toast.makeText(PartnerNotVerifiedPage.this,mess,Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    JSONObject jsonObject = jsonArray.getJSONObject(1);
+
+                    String address        = jsonObject.getString("address");
+                    String openingHrs     = jsonObject.getString("opening_hrs");
+                    String parkingType    = jsonObject.getString("parking_type");
+
+                    String bikeCapacity   = jsonObject.getString("bike_capacity");
+                    String carCapacity    = jsonObject.getString("car_capacity");
+                    String bikeVacancy    = jsonObject.getString("bike_vacancy");
+                    String carVacancy     = jsonObject.getString("car_vacancy");
+                    String bikeFare       = jsonObject.getString("bike_fare");
+                    String carFare        = jsonObject.getString("car_fare");
+
+                    mLoginSession.insertServiceDetailsinSP(address,openingHrs,bikeCapacity,carCapacity,bikeVacancy,
+                            carVacancy,bikeFare,carFare);
+
+                    Log.e(TAG, "service details saved to shared preference");
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                    Log.e(TAG,e.toString());
+                    Toast.makeText(PartnerNotVerifiedPage.this,e.toString(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG,error.toString());
+                Toast.makeText(PartnerNotVerifiedPage.this,error.toString(),Toast.LENGTH_SHORT).show();
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> params = new HashMap<>();
+
+                String empId = mLoginSession.getEmpDetailsFromSP().get(KEY_PARTNER_ID);
+                params.put("partner_id",empId);
+
+                return params;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(RETRY_SECONDS*1000,NO_OF_RETRY,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        MySingleton.getInstance(this).addToRequestQueue(stringRequest);
+
+    }
+
+
     @Override
     protected void onResume() {
         super.onResume();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
+        fetchParkingInfoAndSaveToSP();
     }
 
     private void setupBottonNavigation() {
@@ -79,8 +168,10 @@ public class PartnerNotVerifiedPage extends AppCompatActivity {
 
                 switch (menuItem.getItemId()){
                     case R.id.nav_home: return true;
+                    case R.id.nav_2:
                     case R.id.nav_transaction:
-                        return true;
+                        Toast.makeText(PartnerNotVerifiedPage.this,"Wait till Verification...",Toast.LENGTH_SHORT).show();
+                        return false;
                     case R.id.nav_profile:
                         startActivity(new Intent(PartnerNotVerifiedPage.this,ProfilePage.class));
                         return true;
@@ -93,7 +184,7 @@ public class PartnerNotVerifiedPage extends AppCompatActivity {
         findViewById(R.id.fab_sm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Toast.makeText(PartnerNotVerifiedPage.this,"SM",Toast.LENGTH_SHORT).show();
+               startActivity(new Intent(PartnerNotVerifiedPage.this, ShowParkingDetail.class));
             }
         });
 
@@ -190,13 +281,12 @@ public class PartnerNotVerifiedPage extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.technical_support) {
-            return true;
+            Toast.makeText(PartnerNotVerifiedPage.this,"Technical Support",Toast.LENGTH_SHORT).show();
+
         }
 
         return super.onOptionsItemSelected(item);
     }
-
-
 
     private void prepareMenuData() {
 

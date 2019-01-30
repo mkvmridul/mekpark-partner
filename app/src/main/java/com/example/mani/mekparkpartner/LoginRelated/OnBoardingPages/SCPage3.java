@@ -1,4 +1,4 @@
-package com.example.mani.mekparkpartner.LoginRelated.Pages.OnBoardingPages;
+package com.example.mani.mekparkpartner.LoginRelated.OnBoardingPages;
 
 
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.example.mani.mekparkpartner.LoginRelated.Pages.OnBoardingPages;
+package com.example.mani.mekparkpartner.LoginRelated.OnBoardingPages;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +8,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.mani.mekparkpartner.CommanPart.LoginSessionManager;
-import com.example.mani.mekparkpartner.LoginRelated.Pages.PartnerNotVerifiedPage;
-import com.example.mani.mekparkpartner.LoginRelated.Pages.InitialProfilePage;
+import com.example.mani.mekparkpartner.CommonForAllPartner.PartnerNotVerifiedPage;
+import com.example.mani.mekparkpartner.CommonForAllPartner.InitialProfilePage;
 import com.example.mani.mekparkpartner.ParkingPartner.ParkingHomePage;
 import com.example.mani.mekparkpartner.R;
 

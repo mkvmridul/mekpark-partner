@@ -90,4 +90,5 @@
     <string name="title_activity_account_not_verified_page">AccountNotVerifiedPage</string>
     <string name="your_profile_">Your Profile is submitted for quality verification.</string>
     <string name="our_team_">Our team will through your profile and get back to you in case of any queries.\nThankyou for your patience.</string>
+    <string name="_24_hrs_open">24 hrs open</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.mani.mekparkpartner.LoginRelated.Pages;
+package com.example.mani.mekparkpartner.CommonForAllPartner;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -7,12 +7,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mani.mekparkpartner.CommanPart.LoginSessionManager;
-import com.example.mani.mekparkpartner.ParkingPartner.ProfilePage;
 import com.example.mani.mekparkpartner.R;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -38,7 +35,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,7 +42,7 @@ import java.util.regex.Pattern;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_URL;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_ID;
 
-public class AccountDetails extends AppCompatActivity {
+public class AddAccountDetails extends AppCompatActivity {
 
     private final String TAG = this.getClass().getSimpleName();
     private static final int GALLARY_REQUEST = 1;
@@ -61,8 +57,8 @@ public class AccountDetails extends AppCompatActivity {
     private Uri mPanUri;
     private Uri mChequeUri;
 
-    private File mPanFile;
-    private File mChequeFile;
+//    private File mPanFile;
+//    private File mChequeFile;
 
     private String mPanRealPath;
     private String mChequeRealPath;
@@ -74,13 +70,13 @@ public class AccountDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_details);
+        setContentView(R.layout.activity_add_account_details);
 
-        mProgressDialog = new ProgressDialog(AccountDetails.this);
+        mProgressDialog = new ProgressDialog(AddAccountDetails.this);
         mProgressDialog.setMessage("Please Wait...");
         mProgressDialog.setCancelable(false);
 
-        mSession = new LoginSessionManager(AccountDetails.this);
+        mSession = new LoginSessionManager(AddAccountDetails.this);
 
         clickListener();
     }
@@ -100,9 +96,9 @@ public class AccountDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (ContextCompat.checkSelfPermission(AccountDetails.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                if (ContextCompat.checkSelfPermission(AddAccountDetails.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(AccountDetails.this,
+                    ActivityCompat.requestPermissions(AddAccountDetails.this,
                             new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
                     return;
                 }
@@ -120,10 +116,10 @@ public class AccountDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (ContextCompat.checkSelfPermission(AccountDetails.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                if (ContextCompat.checkSelfPermission(AddAccountDetails.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
 
-                    ActivityCompat.requestPermissions(AccountDetails.this,
+                    ActivityCompat.requestPermissions(AddAccountDetails.this,
                             new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
                     return;
                 }
@@ -146,42 +142,42 @@ public class AccountDetails extends AppCompatActivity {
                 String accPattern = "[0-9]{9,18}";
                 String ifsePattern = "^[A-Za-z]{4}[a-zA-Z0-9]{7}$";
 
-                String pan    = tv_pan.getText().toString().trim();
+                String pan    = tv_pan.getText().toString().trim().toUpperCase();
                 String acc    = tv_acc.getText().toString().trim();
-                String ifse   = tv_ifse.getText().toString().trim();
-                String cCheque = tv_cCheck.getText().toString().trim();
+                String ifse   = tv_ifse.getText().toString().trim().toUpperCase();
+                String cCheque = tv_cCheck.getText().toString().trim().toUpperCase();
 
                 boolean panMatched = verifyPan(pan,panPattern);
                 boolean accMatched = verifyPan(acc,accPattern);
                 boolean ifcsMatched = verifyPan(ifse,ifsePattern);
 
                 if(!panMatched){
-                    Toast.makeText(AccountDetails.this,"Check your pan number",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddAccountDetails.this,"Check your pan number",Toast.LENGTH_SHORT).show();
                     tv_pan.setText("");
                     return;
                 }
 
                 if(!accMatched){
-                    Toast.makeText(AccountDetails.this,"Check your bank account number",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddAccountDetails.this,"Check your bank account number",Toast.LENGTH_SHORT).show();
                     tv_acc.setText("");
                     return;
                 }
 
 
                 if(!ifcsMatched){
-                    Toast.makeText(AccountDetails.this,"Check your ifse number",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddAccountDetails.this,"Check your ifse number",Toast.LENGTH_SHORT).show();
                     tv_ifse.setText("");
                     return;
                 }
 
                 if(cCheque.equals("")){
-                    Toast.makeText(AccountDetails.this,"Check your Cheque number number",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddAccountDetails.this,"Check your Cheque number number",Toast.LENGTH_SHORT).show();
                     tv_cCheck.setText("");
                     return;
                 }
 
                 if(mPanBitmap==null || mCcheckBitmap==null){
-                    Toast.makeText(AccountDetails.this,"Pan and Cancelled Checque image is required",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddAccountDetails.this,"Pan and Cancelled Checque image is required",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -202,7 +198,7 @@ public class AccountDetails extends AppCompatActivity {
 
         try {
             mProgressDialog.show();
-            new MultipartUploadRequest(AccountDetails.this,UPLOAD_URL)
+            new MultipartUploadRequest(AddAccountDetails.this,UPLOAD_URL)
 
                     .addFileToUpload(mPanRealPath, "imagePan")
                     .addFileToUpload(mChequeRealPath, "imageCheque")
@@ -228,14 +224,14 @@ public class AccountDetails extends AppCompatActivity {
                                 Log.e("asd",serverResponse.toString());
                             if(exception!=null)
                                 Log.e("asd",exception.toString());
-                            Toast.makeText(AccountDetails.this,"Issue is not reported",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddAccountDetails.this,"Issue is not reported",Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onCompleted(Context context, UploadInfo uploadInfo, ServerResponse serverResponse) {
                             mProgressDialog.dismiss();
                             Log.e(TAG,serverResponse.getBodyAsString());
-                            Toast.makeText(AccountDetails.this, "done", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddAccountDetails.this, "done", Toast.LENGTH_SHORT).show();
 
                             try {
                                 JSONArray jsonArray = new JSONArray(serverResponse.getBodyAsString());
@@ -268,7 +264,7 @@ public class AccountDetails extends AppCompatActivity {
             mProgressDialog.dismiss();
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             Log.e(TAG, e.toString());
-            Toast.makeText(AccountDetails.this,"Error uploading",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddAccountDetails.this,"Error uploading",Toast.LENGTH_SHORT).show();
             finish();
 
 
@@ -309,8 +305,8 @@ public class AccountDetails extends AppCompatActivity {
 
                         String imageName = "1245pan"+".jpg";
 
-//                        File file = new File(AccountDetails.this.getExternalCacheDir(),imageName);
-//                        mFilePanUri = FileProvider.getUriForFile(AccountDetails.this,"com.example.mani.mekparkpartner.provider",file);
+//                        File file = new File(AddAccountDetails.this.getExternalCacheDir(),imageName);
+//                        mFilePanUri = FileProvider.getUriForFile(AddAccountDetails.this,"com.example.mani.mekparkpartner.provider",file);
 //                        Log.e(TAG,mFilePanUri.toString());
 
                         mPanUri = getImageUri(mPanBitmap,imageName);
@@ -324,8 +320,8 @@ public class AccountDetails extends AppCompatActivity {
 
                         String imageName = "1245cheque"+".jpg";
 
-//                        File file = new File(AccountDetails.this.getExternalCacheDir(),imageName);
-//                        mFileChequeUri = FileProvider.getUriForFile(AccountDetails.this,"com.example.mani.mekparkpartner.provider",file);
+//                        File file = new File(AddAccountDetails.this.getExternalCacheDir(),imageName);
+//                        mFileChequeUri = FileProvider.getUriForFile(AddAccountDetails.this,"com.example.mani.mekparkpartner.provider",file);
 //                        Log.e(TAG,mFileChequeUri.toString());
 
                         mChequeUri = getImageUri(mCcheckBitmap,imageName);
@@ -339,7 +335,7 @@ public class AccountDetails extends AppCompatActivity {
             }
             else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
-                Toast.makeText(AccountDetails.this,error.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddAccountDetails.this,error.toString(),Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -349,7 +345,7 @@ public class AccountDetails extends AppCompatActivity {
 
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(AccountDetails.this.getContentResolver(), inImage, title, null);
+        String path = MediaStore.Images.Media.insertImage(AddAccountDetails.this.getContentResolver(), inImage, title, null);
         return Uri.parse(path);
     }
 

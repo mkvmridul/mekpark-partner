@@ -61,6 +61,8 @@ public class CoomanVarAndFun {
     public static  final String DRIVER_ON_DEMAND        = "Driver On Demand";
     public static  final String TOWING_PARTNER          = "Towing partner";
 
+    public static  final String OPEN_24_HRS             = "24 hrs open";
+
 
 
     //Mobile
@@ -69,6 +71,8 @@ public class CoomanVarAndFun {
     //public static final String BASE_URL = "http://192.168.100.112/mekPark/partner/";
     public static final String BASE_URL = "http://mekpark.com/mani14/partner/";
     public static final String BASE_IMAGE_PATH = "http://mekpark.com/mani14/user/vehicles_images/";
+
+    public static final String SERVICE_IMAGE_PATH = "http://mekpark.com/mani14/user/parking_images/";
 
     public static final String LICENCE_IMAGE_PATH = "http://mekpark.com/mani14/partner/licence/";
     public static final String CANCLE_CHEQUE_IMAGE_PATH = "http://mekpark.com/mani14/partner/cheque/";

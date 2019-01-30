@@ -1,4 +1,4 @@
-package com.example.mani.mekparkpartner.LoginRelated.Pages.Login;
+package com.example.mani.mekparkpartner.LoginRelated.SingupAndLoginFragments;
 
 
 import android.content.Intent;
@@ -23,9 +23,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.mani.mekparkpartner.CommanPart.LoginSessionManager;
 import com.example.mani.mekparkpartner.CommanPart.MySingleton;
 
-import com.example.mani.mekparkpartner.LoginRelated.Pages.AccountDetails;
-import com.example.mani.mekparkpartner.LoginRelated.Pages.InitialProfilePage;
-import com.example.mani.mekparkpartner.ParkingPartner.ProfilePage;
+import com.example.mani.mekparkpartner.CommonForAllPartner.InitialProfilePage;
 import com.example.mani.mekparkpartner.R;
 
 import org.json.JSONArray;
@@ -262,7 +260,7 @@ public class FragmentOTP extends Fragment {
                             LoginSessionManager session = new LoginSessionManager(getActivity());
 
                             session.createLoginSession(String.valueOf(partnerId), String.valueOf(mPartnerType),
-                                    mName,mPhone,mPass,mEmail,"","");
+                                    mName,mPhone,mPass,mEmail,"","","");
 
                             startActivity(new Intent(getActivity(), InitialProfilePage.class));
                             Toast.makeText(getActivity(),"Registered Successfully",Toast.LENGTH_LONG).show();

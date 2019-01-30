@@ -1,4 +1,4 @@
-package com.example.mani.mekparkpartner.LoginRelated.Pages.OnBoardingPages;
+package com.example.mani.mekparkpartner.LoginRelated.OnBoardingPages;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -40,7 +40,7 @@ public class OnBoarding extends AppCompatActivity implements ViewPager.OnPageCha
         session = new LoginSessionManager(getApplicationContext());
 
         if(session.onBoardingShown()){
-            startActivity(new Intent(OnBoarding.this,SplashScreen.class));
+            startActivity(new Intent(OnBoarding.this, SplashScreen.class));
             finish();
         }
 
@@ -73,7 +73,7 @@ public class OnBoarding extends AppCompatActivity implements ViewPager.OnPageCha
             public void onClick(View v) {
                 int id = viewPager.getCurrentItem();
                 if(id == 2){
-                    startActivity(new Intent(OnBoarding.this,SplashScreen.class));
+                    startActivity(new Intent(OnBoarding.this, SplashScreen.class));
                     finish();
                 }
                 else{
@@ -87,7 +87,7 @@ public class OnBoarding extends AppCompatActivity implements ViewPager.OnPageCha
         tv_skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(OnBoarding.this,SplashScreen.class));
+                startActivity(new Intent(OnBoarding.this, SplashScreen.class));
                 finish();
             }
         });

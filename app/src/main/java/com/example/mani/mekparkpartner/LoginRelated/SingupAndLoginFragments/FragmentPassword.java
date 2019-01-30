@@ -1,4 +1,4 @@
-package com.example.mani.mekparkpartner.LoginRelated.Pages.Login;
+package com.example.mani.mekparkpartner.LoginRelated.SingupAndLoginFragments;
 
 
 import android.app.ProgressDialog;
@@ -21,8 +21,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.mani.mekparkpartner.CommanPart.LoginSessionManager;
 import com.example.mani.mekparkpartner.CommanPart.MySingleton;
 
-import com.example.mani.mekparkpartner.LoginRelated.Pages.PartnerNotVerifiedPage;
-import com.example.mani.mekparkpartner.LoginRelated.Pages.InitialProfilePage;
+import com.example.mani.mekparkpartner.CommonForAllPartner.PartnerNotVerifiedPage;
+import com.example.mani.mekparkpartner.CommonForAllPartner.InitialProfilePage;
 import com.example.mani.mekparkpartner.ParkingPartner.ParkingHomePage;
 import com.example.mani.mekparkpartner.R;
 
@@ -116,10 +116,16 @@ public class FragmentPassword extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         Log.e(TAG,response);
+                        Log.e(TAG,"0");
                         try {
                             JSONArray jsonArray = new JSONArray(response);
+
                             int rc = jsonArray.getJSONObject(0).getInt("rc");
+
                             if(rc<=0){
+
+                                Log.e(TAG,"1");
+
                                 String mess = jsonArray.getJSONObject(0).getString("mess");
                                 mProgressDialog.dismiss();
                                 Toast.makeText(getActivity(),mess,Toast.LENGTH_SHORT).show();
@@ -129,6 +135,8 @@ public class FragmentPassword extends Fragment {
 
                                 return;
                             }
+
+                            Log.e(TAG,"2");
 
                             JSONObject jsonObject = jsonArray.getJSONObject(1);
 
@@ -142,11 +150,13 @@ public class FragmentPassword extends Fragment {
                             int isPartnerVerified         = Integer.parseInt(jsonObject.getString("is_partner_verified"));
 
                             String licenceNumber = jsonObject.getString("licence_number");
-                            String licenceImage        = jsonObject.getString("licence_image");
+                            String licenceImage  = jsonObject.getString("licence_image");
+                            String executive_id  = jsonObject.getString("executive_id");
 
-                            Log.e(TAG,"licenceImage: "+licenceImage);
 
 
+
+                            Log.e(TAG,"3 "+licenceImage);
 
                             if(isAccountVerified == 1)
                                 mLoginSession.setAccountDetailsFilled();
@@ -157,17 +167,23 @@ public class FragmentPassword extends Fragment {
                             if(isPartnerVerified == 1)
                                 mLoginSession.setPartnerActivated();
 
+                            Log.e(TAG,"4");
 
-                            mLoginSession.createLoginSession(partnerId,partnerType,name,phone,pass,email,licenceNumber,licenceImage);
+
+                            mLoginSession.createLoginSession(partnerId,partnerType,name,phone,pass,email,licenceNumber,licenceImage,executive_id);
+
+                            mProgressDialog.dismiss();
 
                             if( !(mLoginSession.isAccountDetailedFIlled() && mLoginSession.isServiceManagemantFilled() )){
                                 startActivity(new Intent(getActivity(),InitialProfilePage.class));
                                 getActivity().finish();
+                                Log.e(TAG,"5");
                                 return;
 
                             }
 
                             if(!mLoginSession.isPartnerActivated()){
+                                Log.e(TAG,"6");
                                 startActivity(new Intent(getActivity(),PartnerNotVerifiedPage.class));
                                 getActivity().finish();
                                 return;
@@ -181,14 +197,17 @@ public class FragmentPassword extends Fragment {
                                 case 2:
                                 case 3: i = new Intent(getActivity(),ParkingHomePage.class); break;
                             }
+                            Log.e(TAG,"7");
                             startActivity(i);
-                            mProgressDialog.dismiss();
                             Toast.makeText(getActivity(),"Welcome "+name,Toast.LENGTH_SHORT).show();
                             getActivity().finish();
 
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            mProgressDialog.dismiss();
+                            Toast.makeText(getActivity(),e.toString(),Toast.LENGTH_SHORT).show();
+                            Log.e(TAG,e.toString());
                         }
 
                     }
