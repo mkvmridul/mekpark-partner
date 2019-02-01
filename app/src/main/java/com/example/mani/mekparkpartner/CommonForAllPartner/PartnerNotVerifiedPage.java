@@ -31,6 +31,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.mani.mekparkpartner.CommanPart.LoginSessionManager;
 import com.example.mani.mekparkpartner.CommanPart.MySingleton;
+import com.example.mani.mekparkpartner.LoginRelated.OnBoardingPages.SplashScreen;
 import com.example.mani.mekparkpartner.ParkingPartner.MenuModel;
 
 import com.example.mani.mekparkpartner.R;
@@ -47,8 +48,10 @@ import java.util.Map;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_URL;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_RETRY;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.RETRY_SECONDS;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.launchPartnerAcitvity;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_NAME;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_ID;
+import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_TYPE;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PHONE;
 
 public class PartnerNotVerifiedPage extends AppCompatActivity {
@@ -75,76 +78,24 @@ public class PartnerNotVerifiedPage extends AppCompatActivity {
         setupBottonNavigation();
         setPage();
 
+        clickListener();
+
     }
 
+    private void clickListener() {
 
-    private void fetchParkingInfoAndSaveToSP() {
-
-        String SEND_URL = BASE_URL + "get_partner_parking_details.php";
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL, new Response.Listener<String>() {
+        findViewById(R.id.awesome).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(String response) {
-                Log.e(TAG,response);
+            public void onClick(View v) {
+                if(mLoginSession.isPartnerActivated()){
 
-                try {
+                    String ptye = mLoginSession.getEmpDetailsFromSP().get(KEY_PARTNER_TYPE);
+                    launchPartnerAcitvity(PartnerNotVerifiedPage.this,ptye);
+                    finish();
 
-                    JSONArray jsonArray = new JSONArray(response);
-                    int rc = jsonArray.getJSONObject(0).getInt("rc");
-
-                    if(rc<=0){
-                        String mess = jsonArray.getJSONObject(0).getString("mess");
-                        Log.e(TAG,mess);
-                        Toast.makeText(PartnerNotVerifiedPage.this,mess,Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    JSONObject jsonObject = jsonArray.getJSONObject(1);
-
-                    String address        = jsonObject.getString("address");
-                    String openingHrs     = jsonObject.getString("opening_hrs");
-                    String parkingType    = jsonObject.getString("parking_type");
-
-                    String bikeCapacity   = jsonObject.getString("bike_capacity");
-                    String carCapacity    = jsonObject.getString("car_capacity");
-                    String bikeVacancy    = jsonObject.getString("bike_vacancy");
-                    String carVacancy     = jsonObject.getString("car_vacancy");
-                    String bikeFare       = jsonObject.getString("bike_fare");
-                    String carFare        = jsonObject.getString("car_fare");
-
-                    mLoginSession.insertServiceDetailsinSP(address,openingHrs,bikeCapacity,carCapacity,bikeVacancy,
-                            carVacancy,bikeFare,carFare);
-
-                    Log.e(TAG, "service details saved to shared preference");
-
-                } catch (JSONException e) {
-
-                    e.printStackTrace();
-                    Log.e(TAG,e.toString());
-                    Toast.makeText(PartnerNotVerifiedPage.this,e.toString(),Toast.LENGTH_SHORT).show();
                 }
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG,error.toString());
-                Toast.makeText(PartnerNotVerifiedPage.this,error.toString(),Toast.LENGTH_SHORT).show();
-
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> params = new HashMap<>();
-
-                String empId = mLoginSession.getEmpDetailsFromSP().get(KEY_PARTNER_ID);
-                params.put("partner_id",empId);
-
-                return params;
-            }
-        };
-
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(RETRY_SECONDS*1000,NO_OF_RETRY,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        MySingleton.getInstance(this).addToRequestQueue(stringRequest);
+        });
 
     }
 
@@ -154,8 +105,13 @@ public class PartnerNotVerifiedPage extends AppCompatActivity {
         super.onResume();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
+
         fetchParkingInfoAndSaveToSP();
+        checkIfPartnerActivated();
+
     }
+
+
 
     private void setupBottonNavigation() {
 
@@ -255,6 +211,138 @@ public class PartnerNotVerifiedPage extends AppCompatActivity {
 
         tv_name.setText(mLoginSession.getEmpDetailsFromSP().get(KEY_NAME));
         tv_mobile.setText(mLoginSession.getEmpDetailsFromSP().get(KEY_PHONE));
+
+
+
+    }
+
+
+    private void fetchParkingInfoAndSaveToSP() {
+
+        Log.e(TAG,"called : fetchParkingInfoAndSaveToSP");
+
+        String SEND_URL = BASE_URL + "get_partner_parking_details.php";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e(TAG,response);
+
+                try {
+
+                    JSONArray jsonArray = new JSONArray(response);
+                    int rc = jsonArray.getJSONObject(0).getInt("rc");
+
+                    if(rc<=0){
+                        String mess = jsonArray.getJSONObject(0).getString("mess");
+                        Log.e(TAG,mess);
+                        Toast.makeText(PartnerNotVerifiedPage.this,mess,Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    JSONObject jsonObject = jsonArray.getJSONObject(1);
+
+                    String address        = jsonObject.getString("address");
+                    String openingHrs     = jsonObject.getString("opening_hrs");
+                    String parkingType    = jsonObject.getString("parking_type");
+
+                    String bikeCapacity   = jsonObject.getString("bike_capacity");
+                    String carCapacity    = jsonObject.getString("car_capacity");
+                    String bikeVacancy    = jsonObject.getString("bike_vacancy");
+                    String carVacancy     = jsonObject.getString("car_vacancy");
+                    String bikeFare       = jsonObject.getString("bike_fare");
+                    String carFare        = jsonObject.getString("car_fare");
+
+                    mLoginSession.insertServiceDetailsinSP(address,openingHrs,bikeCapacity,carCapacity,bikeVacancy,
+                            carVacancy,bikeFare,carFare);
+
+                    Log.e(TAG, "service details saved to shared preference");
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                    Log.e(TAG,e.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG,error.toString());
+                Toast.makeText(PartnerNotVerifiedPage.this,error.toString(),Toast.LENGTH_SHORT).show();
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> params = new HashMap<>();
+
+                String empId = mLoginSession.getEmpDetailsFromSP().get(KEY_PARTNER_ID);
+                params.put("partner_id",empId);
+
+                return params;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(RETRY_SECONDS*1000,NO_OF_RETRY,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        MySingleton.getInstance(this).addToRequestQueue(stringRequest);
+
+    }
+
+    private void checkIfPartnerActivated() {
+
+        Log.e(TAG,"called : isPartnerActivated");
+
+        String SEND_URL = BASE_URL + "is_partner_activated.php";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e(TAG,response);
+
+
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+
+                    int rc = Integer.parseInt(jsonArray.getJSONObject(0).getString("isActive"));
+
+                    if(rc == 1){
+                        mLoginSession.setPartnerActivated();
+                        findViewById(R.id.card_not_verified).setVisibility(View.GONE);
+                        findViewById(R.id.card_verified).setVisibility(View.VISIBLE);
+
+                        return;
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e(TAG,e.toString());
+                }
+
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG,error.toString());
+                Toast.makeText(PartnerNotVerifiedPage.this,error.toString(),Toast.LENGTH_SHORT).show();
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> params = new HashMap<>();
+
+                String empId = mLoginSession.getEmpDetailsFromSP().get(KEY_PARTNER_ID);
+                params.put("partner_id",empId);
+
+                return params;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(RETRY_SECONDS*1000,NO_OF_RETRY,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        MySingleton.getInstance(this).addToRequestQueue(stringRequest);
+
 
 
 

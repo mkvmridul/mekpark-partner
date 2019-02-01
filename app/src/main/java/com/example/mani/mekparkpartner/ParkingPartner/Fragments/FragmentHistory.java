@@ -1,7 +1,6 @@
 package com.example.mani.mekparkpartner.ParkingPartner.Fragments;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,10 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mani.mekparkpartner.ParkingPartner.Adapter.HistoryAdapter;
-import com.example.mani.mekparkpartner.ParkingPartner.Adapter.UpcomingAdapter;
 import com.example.mani.mekparkpartner.ParkingPartner.Booking;
-import com.example.mani.mekparkpartner.ParkingPartner.BookingPage;
-import com.example.mani.mekparkpartner.ParkingPartner.ParkingHomePage;
+import com.example.mani.mekparkpartner.ParkingPartner.ParkingPartnerHomePage;
 import com.example.mani.mekparkpartner.R;
 
 import java.util.ArrayList;
@@ -28,7 +25,7 @@ public class FragmentHistory extends Fragment {
     private String TAG = "FragmentHistory";
     private View mRootView;
     private List<Booking> mHistoryList;
-    private ParkingHomePage mActivity;
+    private ParkingPartnerHomePage mActivity;
 
 
     public FragmentHistory() {}
@@ -37,7 +34,7 @@ public class FragmentHistory extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.e(TAG,"called : onCreate4");
-        mActivity = (ParkingHomePage) getActivity();
+        mActivity = (ParkingPartnerHomePage) getActivity();
     }
 
     @Override

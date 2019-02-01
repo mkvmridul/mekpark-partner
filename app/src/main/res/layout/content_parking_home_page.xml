@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ParkingPartner.ParkingHomePage"
+    tools:context=".ParkingPartner.ParkingPartnerHomePage"
     tools:showIn="@layout/app_bar_parking_home_page">
 
     <!--Main Layout-->
@@ -102,7 +102,7 @@
     </android.support.design.widget.BottomNavigationView>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_scan"
+        android:id="@+id/fab_sm"
         android:layout_width="56dp"
         app:elevation="8dp"
         android:layout_height="56dp"

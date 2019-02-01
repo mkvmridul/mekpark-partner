@@ -279,6 +279,13 @@ public class ShowParkingDetail extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         ll_from.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

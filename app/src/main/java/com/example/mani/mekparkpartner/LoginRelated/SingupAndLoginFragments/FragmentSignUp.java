@@ -147,7 +147,7 @@ public class FragmentSignUp extends Fragment {
 
     public void fetchPartnerType() {
 
-        Log.e(TAG,"called : fetchPaetnerType");
+        Log.e(TAG,"called : fetchPartnerType");
         mProgressDialog.show();
 
         String SEND_URL = BASE_URL + "fetch_partner_type.php";
@@ -161,6 +161,7 @@ public class FragmentSignUp extends Fragment {
                     JSONArray jsonArray = new JSONArray(response);
                     int rc = jsonArray.getJSONObject(0).getInt("rc");
                     if(rc<=0){
+
                         String mess = jsonArray.getJSONObject(0).getString("mess");
                         Toast.makeText(getActivity(),mess,Toast.LENGTH_SHORT).show();
                         Log.e(TAG,mess);

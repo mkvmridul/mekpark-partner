@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -238,6 +239,19 @@ public class ProfilePage extends AppCompatActivity {
         });
 
 
+        TextView tv_message = findViewById(R.id.message);
+        if(mLoginSession.isPartnerActivated()){
+
+            tv_message.setText("Ready to accept booking");
+            tv_message.setBackgroundColor(getApplication().getResources().getColor(R.color.green2));
+
+            findViewById(R.id.swith).setEnabled(true);
+
+
+
+        }
+
+
 
 
 
@@ -282,6 +296,26 @@ public class ProfilePage extends AppCompatActivity {
                 gallaryIntent.putExtra("flag",1);
 
                 startActivityForResult(gallaryIntent,GALLARY_REQUEST);
+            }
+        });
+
+        findViewById(R.id.done).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+
+//                EditText et_licenceId = findViewById(R.id.licence_id);
+//                String licenceId      = et_licenceId.getText().toString().trim();
+//
+//                if(licenceId.equals("")) {
+//                    onBackPressed();
+//                    return;
+//                }
+
+
+
+
+
             }
         });
 

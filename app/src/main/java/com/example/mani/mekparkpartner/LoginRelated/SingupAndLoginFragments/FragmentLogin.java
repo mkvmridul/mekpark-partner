@@ -51,7 +51,6 @@ public class FragmentLogin extends Fragment {
                 FragmentTransaction ft = fragmentManager.beginTransaction();
                 ft.replace(R.id.fragment_container, fragment);
                 ft.addToBackStack(null);
-                //ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                 ft.commit();
             }
         });

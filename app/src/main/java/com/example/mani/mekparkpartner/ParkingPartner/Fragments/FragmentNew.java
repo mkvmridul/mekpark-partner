@@ -3,7 +3,6 @@ package com.example.mani.mekparkpartner.ParkingPartner.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,9 +12,8 @@ import android.view.ViewGroup;
 
 import com.example.mani.mekparkpartner.ParkingPartner.Adapter.NewBookingAdapter;
 import com.example.mani.mekparkpartner.ParkingPartner.Booking;
-import com.example.mani.mekparkpartner.ParkingPartner.BookingPage;
 import com.example.mani.mekparkpartner.ParkingPartner.Listener.MyListener;
-import com.example.mani.mekparkpartner.ParkingPartner.ParkingHomePage;
+import com.example.mani.mekparkpartner.ParkingPartner.ParkingPartnerHomePage;
 import com.example.mani.mekparkpartner.R;
 
 
@@ -29,7 +27,7 @@ public class FragmentNew extends Fragment implements MyListener {
     private View mRootView;
 
     private List<Booking> mNewBookingList;
-    private ParkingHomePage mActivity;
+    private ParkingPartnerHomePage mActivity;
 
     private boolean shouldExecuteOnResume;
 
@@ -44,7 +42,7 @@ public class FragmentNew extends Fragment implements MyListener {
         shouldExecuteOnResume = false;
 
         Log.e(TAG,"called : onCreate1");
-        mActivity = (ParkingHomePage) getActivity();
+        mActivity = (ParkingPartnerHomePage) getActivity();
     }
 
     @Override

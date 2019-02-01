@@ -55,7 +55,6 @@ public class AddressDialog extends DialogFragment implements OnMapReadyCallback 
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private static final float DEFAULT_ZOOM = 15f;
     private static final float MARKER_ZOOM = 18f;
 
     private Boolean mLocationPermissionsGranted = false;
@@ -260,32 +259,7 @@ public class AddressDialog extends DialogFragment implements OnMapReadyCallback 
         ft.commit();
     }
 
-    private void dropPinEffect(final Marker marker) {
-        final Handler handler = new Handler();
-        final long start = SystemClock.uptimeMillis();
-        final long duration = 1500;
 
-        final Interpolator interpolator = new BounceInterpolator();
-
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                long elapsed = SystemClock.uptimeMillis() - start;
-                float t = Math.max(
-                        1 - interpolator.getInterpolation((float) elapsed
-                                / duration), 0);
-                marker.setAnchor(0.5f, 1.0f + 14 * t);
-
-                if (t > 0.0) {
-                    // Post again 15ms later.
-                    handler.postDelayed(this, 15);
-                } else {
-                    marker.showInfoWindow();
-
-                }
-            }
-        });
-    }
 
     private void setAddress(LatLng latLng) {
 

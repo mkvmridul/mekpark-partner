@@ -10,14 +10,9 @@ import android.view.WindowManager;
 import com.example.mani.mekparkpartner.CommanPart.LoginSessionManager;
 import com.example.mani.mekparkpartner.CommonForAllPartner.PartnerNotVerifiedPage;
 import com.example.mani.mekparkpartner.CommonForAllPartner.InitialProfilePage;
-import com.example.mani.mekparkpartner.ParkingPartner.ParkingHomePage;
 import com.example.mani.mekparkpartner.R;
 
-import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.DRIVER_ON_DEMAND;
-import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.FREE_PARKING_PROVIDER;
-import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.GARAGE_PARKING_PROVIDER;
-import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.PAID_PARKING_PROVIDER;
-import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.TOWING_PARTNER;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.launchPartnerAcitvity;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_TYPE;
 
 public class SplashScreen extends AppCompatActivity {
@@ -75,26 +70,12 @@ public class SplashScreen extends AppCompatActivity {
                 return;
             }
 
-            String pType = mSession.getEmpDetailsFromSP().get(KEY_PARTNER_TYPE);
-
-            Intent i = null;
-
-            if(pType.equals(PAID_PARKING_PROVIDER) || pType.equals(GARAGE_PARKING_PROVIDER) ||
-                    pType.equals(FREE_PARKING_PROVIDER))
-                i = new Intent(SplashScreen.this,ParkingHomePage.class);
-
-            else if(pType.equals(DRIVER_ON_DEMAND)){
-
-            }
-
-            else if(pType.equals(TOWING_PARTNER)){
-
-            }
-
-
-            startActivity(i);
-            SplashScreen.this.finish();
+            String ptye = mSession.getEmpDetailsFromSP().get(KEY_PARTNER_TYPE);
+            launchPartnerAcitvity(SplashScreen.this,ptye);
+            finish();
         }
 
     }
+
+
 }

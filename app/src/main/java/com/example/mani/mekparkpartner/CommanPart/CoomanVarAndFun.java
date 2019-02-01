@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
@@ -28,6 +26,8 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.mani.mekparkpartner.EmptyActivity;
+import com.example.mani.mekparkpartner.ParkingPartner.ParkingPartnerHomePage;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -58,8 +58,12 @@ public class CoomanVarAndFun {
     public static  final String PAID_PARKING_PROVIDER   = "Paid Parking Provider";
     public static  final String GARAGE_PARKING_PROVIDER = "Garage Parking Provider";
     public static  final String FREE_PARKING_PROVIDER   = "Free Parking Provider";
-    public static  final String DRIVER_ON_DEMAND        = "Driver On Demand";
+
     public static  final String TOWING_PARTNER          = "Towing partner";
+    public static  final String CABS_AND_MORE           = "Cabs and more";
+
+    public static  final String DRIVER_ON_DEMAND        = "Driver On Demand";
+    public static  final String TECHNICAL_SUPPORT        = "Technical Support";
 
     public static  final String OPEN_24_HRS             = "24 hrs open";
 
@@ -298,6 +302,44 @@ public class CoomanVarAndFun {
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(RETRY_SECONDS*1000,NO_OF_RETRY,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MySingleton.getInstance(context).addToRequestQueue(stringRequest);
 
+    }
+
+    public static void launchPartnerAcitvity(Context context, String pType) {
+
+        Intent i = null;
+
+        if(pType.equals(PAID_PARKING_PROVIDER) || pType.equals(GARAGE_PARKING_PROVIDER) ||
+                pType.equals(FREE_PARKING_PROVIDER)) {
+            Log.e(TAG,"Launching Parking Partner");
+            i = new Intent(context, ParkingPartnerHomePage.class);
+        }
+
+        else if(pType.equals(TOWING_PARTNER)){
+            Log.e(TAG,"Launching Towing Partner");
+            i = new Intent(context,EmptyActivity.class);
+        }
+
+        else if(pType.equals(CABS_AND_MORE)){
+            Log.e(TAG,"Launching Cabs and more Partner");
+            i = new Intent(context,EmptyActivity.class);
+        }
+
+        else if(pType.equals(DRIVER_ON_DEMAND)){
+            Log.e(TAG,"Launching Driver on Demand Partner");
+            i = new Intent(context,EmptyActivity.class);
+        }
+
+        else if(pType.equals(TECHNICAL_SUPPORT)){
+            Log.e(TAG,"Launching Technical Support Partner");
+            i = new Intent(context,EmptyActivity.class);
+        }
+
+        else {
+            Log.e(TAG,"Launching Empty Partner");
+            i = new Intent(context,EmptyActivity.class);
+        }
+
+        context.startActivity(i);
     }
 
 }

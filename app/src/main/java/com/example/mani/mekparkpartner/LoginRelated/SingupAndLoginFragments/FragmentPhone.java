@@ -113,6 +113,9 @@ public class FragmentPhone extends Fragment {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    mProgressDialog.dismiss();
+                    Log.e(TAG,e.toString());
+                    Toast.makeText(getActivity(),e.toString(),Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -121,7 +124,7 @@ public class FragmentPhone extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 mProgressDialog.dismiss();
                 Log.e(TAG,"isPhoneRegistered : onErrorResponse :" +error.toString());
-                Toast.makeText(getActivity(),"Something went wrong",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_SHORT).show();
 
             }
         }){

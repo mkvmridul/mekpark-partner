@@ -23,7 +23,7 @@ import com.example.mani.mekparkpartner.CommanPart.MySingleton;
 
 import com.example.mani.mekparkpartner.CommonForAllPartner.PartnerNotVerifiedPage;
 import com.example.mani.mekparkpartner.CommonForAllPartner.InitialProfilePage;
-import com.example.mani.mekparkpartner.ParkingPartner.ParkingHomePage;
+import com.example.mani.mekparkpartner.ParkingPartner.ParkingPartnerHomePage;
 import com.example.mani.mekparkpartner.R;
 
 import org.json.JSONArray;
@@ -36,6 +36,8 @@ import java.util.Map;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_URL;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_RETRY;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.RETRY_SECONDS;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.launchPartnerAcitvity;
+import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_TYPE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -116,15 +118,12 @@ public class FragmentPassword extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         Log.e(TAG,response);
-                        Log.e(TAG,"0");
                         try {
                             JSONArray jsonArray = new JSONArray(response);
 
                             int rc = jsonArray.getJSONObject(0).getInt("rc");
 
                             if(rc<=0){
-
-                                Log.e(TAG,"1");
 
                                 String mess = jsonArray.getJSONObject(0).getString("mess");
                                 mProgressDialog.dismiss();
@@ -135,8 +134,6 @@ public class FragmentPassword extends Fragment {
 
                                 return;
                             }
-
-                            Log.e(TAG,"2");
 
                             JSONObject jsonObject = jsonArray.getJSONObject(1);
 
@@ -155,9 +152,6 @@ public class FragmentPassword extends Fragment {
 
 
 
-
-                            Log.e(TAG,"3 "+licenceImage);
-
                             if(isAccountVerified == 1)
                                 mLoginSession.setAccountDetailsFilled();
 
@@ -167,8 +161,6 @@ public class FragmentPassword extends Fragment {
                             if(isPartnerVerified == 1)
                                 mLoginSession.setPartnerActivated();
 
-                            Log.e(TAG,"4");
-
 
                             mLoginSession.createLoginSession(partnerId,partnerType,name,phone,pass,email,licenceNumber,licenceImage,executive_id);
 
@@ -177,28 +169,18 @@ public class FragmentPassword extends Fragment {
                             if( !(mLoginSession.isAccountDetailedFIlled() && mLoginSession.isServiceManagemantFilled() )){
                                 startActivity(new Intent(getActivity(),InitialProfilePage.class));
                                 getActivity().finish();
-                                Log.e(TAG,"5");
                                 return;
 
                             }
 
                             if(!mLoginSession.isPartnerActivated()){
-                                Log.e(TAG,"6");
                                 startActivity(new Intent(getActivity(),PartnerNotVerifiedPage.class));
                                 getActivity().finish();
                                 return;
                             }
 
+                            launchPartnerAcitvity(getActivity(),mLoginSession.getEmpDetailsFromSP().get(KEY_PARTNER_TYPE));
 
-                            Intent i = null;
-                            int pType = Integer.valueOf(partnerType);
-                            switch (pType){
-                                case 1:
-                                case 2:
-                                case 3: i = new Intent(getActivity(),ParkingHomePage.class); break;
-                            }
-                            Log.e(TAG,"7");
-                            startActivity(i);
                             Toast.makeText(getActivity(),"Welcome "+name,Toast.LENGTH_SHORT).show();
                             getActivity().finish();
 

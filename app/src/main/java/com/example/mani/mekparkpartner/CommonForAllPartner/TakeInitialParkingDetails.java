@@ -56,6 +56,10 @@ public class TakeInitialParkingDetails extends AppCompatActivity implements Addr
 
     private final String TAG = this.getClass().getSimpleName();
 
+    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+
     private static final int GALLARY_REQUEST = 1;
     private LoginSessionManager mLoginSession;
 
@@ -299,6 +303,15 @@ public class TakeInitialParkingDetails extends AppCompatActivity implements Addr
             }
         });
 
+        et_bikeFare.setSelection(et_bikeFare.getText().length());
+        et_bikeCap.setSelection(et_bikeCap.getText().length());
+        et_bikeVacancy.setSelection(et_bikeVacancy.getText().length());
+        et_carFare.setSelection(et_carFare.getText().length());
+        et_carCap.setSelection(et_carCap.getText().length());
+        et_carVacancy.setSelection(et_carVacancy.getText().length());
+
+
+
     }
 
 
@@ -315,7 +328,11 @@ public class TakeInitialParkingDetails extends AppCompatActivity implements Addr
         findViewById(R.id.address).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AddressDialog().show(getSupportFragmentManager(), null);
+
+                getLocationPermissionAndOpenAddressDialog();
+
+
+
             }
         });
 
@@ -415,6 +432,9 @@ public class TakeInitialParkingDetails extends AppCompatActivity implements Addr
         String partner_id   = mLoginSession.getEmpDetailsFromSP().get(KEY_PARTNER_ID);
         String partner_type = mLoginSession.getEmpDetailsFromSP().get(KEY_PARTNER_TYPE);
 
+        EditText et    = findViewById(R.id.address);
+        String address = et.getText().toString().trim();
+
         if(partner_type.equals(PAID_PARKING_PROVIDER))
             partner_type = "1";
         else if (partner_type.equals(GARAGE_PARKING_PROVIDER))
@@ -422,23 +442,8 @@ public class TakeInitialParkingDetails extends AppCompatActivity implements Addr
         else if (partner_type.equals(FREE_PARKING_PROVIDER))
             partner_type = "3";
 
-        Log.e(TAG, "image path - "+mParkingImageRealPath);
+        Log.e(TAG, "des - "+address);
 
-        Log.e(TAG, "owned by - "+partner_id);
-        Log.e(TAG, "locality - "+mLocality);
-        Log.e(TAG, "des - "+mSelectedLocation);
-        Log.e(TAG, "landmark - "+mLandmark);
-        Log.e(TAG, "opening hrs - "+mOpeningHrs);
-        Log.e(TAG, "latitude - "+String.valueOf(mSelectedLatng.latitude));
-
-        Log.e(TAG, "longitude - "+String.valueOf(mSelectedLatng.longitude));
-        Log.e(TAG, "partner type - "+partner_type);
-        Log.e(TAG, "b capacity - "+mBikeCapacity);
-        Log.e(TAG, "c capacity - "+mCarCapacity);
-        Log.e(TAG, "b fare- "+mBikeFare);
-        Log.e(TAG, "c fare- "+mCarFare);
-        Log.e(TAG, "b vacancy - "+mBikeVacancy);
-        Log.e(TAG, "c vacancy - "+mCarVacancy);
 
 
         final  String UPLOAD_URL = BASE_URL+"upload_parking_slot_details.php";
@@ -451,7 +456,7 @@ public class TakeInitialParkingDetails extends AppCompatActivity implements Addr
 
                     .addParameter("owned_by", partner_id)
                     .addParameter("location",mLocality)
-                    .addParameter("des",mSelectedLocation)
+                    .addParameter("des",address)
                     .addParameter("landmark",mLandmark)
                     .addParameter("opening_hrs",mOpeningHrs)
                     .addParameter("latitude", String.valueOf(mSelectedLatng.latitude))
@@ -731,8 +736,34 @@ public class TakeInitialParkingDetails extends AppCompatActivity implements Addr
         mLocality         = locality;
         mCity             = city;
 
-        Log.e(TAG,"Selected Location "+mSelectedLocation);
-
         et_address.setText(completeAddress);
+
+        et_address.setSelection(et_address.getText().length());
+    }
+
+    private void getLocationPermissionAndOpenAddressDialog() {
+
+        Log.e(TAG, "getLocationPermission");
+
+        String[] permissions = {android.Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION};
+
+        if (ContextCompat.checkSelfPermission(TakeInitialParkingDetails.this,
+                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(TakeInitialParkingDetails.this,
+                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+                new AddressDialog().show(getSupportFragmentManager(), null);
+
+            } else {
+                ActivityCompat.requestPermissions(TakeInitialParkingDetails.this,
+                        permissions,
+                        LOCATION_PERMISSION_REQUEST_CODE);
+            }
+        } else {
+            ActivityCompat.requestPermissions(TakeInitialParkingDetails.this,
+                    permissions,
+                    LOCATION_PERMISSION_REQUEST_CODE);
+        }
     }
 }

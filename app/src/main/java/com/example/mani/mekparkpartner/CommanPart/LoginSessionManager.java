@@ -9,11 +9,13 @@ import com.example.mani.mekparkpartner.LoginRelated.SingupAndLoginFragments.*;
 
 import java.util.HashMap;
 
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.CABS_AND_MORE;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.DRIVER_ON_DEMAND;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.FREE_PARKING_PROVIDER;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.GARAGE_PARKING_PROVIDER;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.OPEN_24_HRS;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.PAID_PARKING_PROVIDER;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.TECHNICAL_SUPPORT;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.TOWING_PARTNER;
 
 public class LoginSessionManager {
@@ -81,14 +83,20 @@ public class LoginSessionManager {
 
         if(partnerType.equals("1"))
             partnerType = PAID_PARKING_PROVIDER;
-        if(partnerType.equals("2"))
+        else if(partnerType.equals("2"))
             partnerType = GARAGE_PARKING_PROVIDER;
-        if(partnerType.equals("3"))
+        else if(partnerType.equals("3"))
             partnerType = FREE_PARKING_PROVIDER;
-        if(partnerType.equals("4"))
-            partnerType = DRIVER_ON_DEMAND;
-        if(partnerType.equals("5"))
+        else if(partnerType.equals("4"))
             partnerType = TOWING_PARTNER;
+
+        else if(partnerType.equals("5"))
+            partnerType = CABS_AND_MORE;
+        else if(partnerType.equals("6"))
+            partnerType = DRIVER_ON_DEMAND;
+        else if(partnerType.equals("7"))
+            partnerType = TECHNICAL_SUPPORT;
+
 
         editor.putString(KEY_PARTNER_ID,partnerId);
         editor.putString(KEY_PARTNER_TYPE, partnerType);
@@ -188,7 +196,7 @@ public class LoginSessionManager {
 
         HashMap<String, String> info = new HashMap<String, String>();
 
-        info.put(S_ADDRESS, pref.getString(S_ADDRESS, "addres not available"));
+        info.put(S_ADDRESS, pref.getString(S_ADDRESS, "address not available"));
         info.put(S_OPENING_HRS, pref.getString(S_OPENING_HRS, OPEN_24_HRS));
 
         info.put(S_BIKE_CAPACITY, pref.getString(S_BIKE_CAPACITY, ""));

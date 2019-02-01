@@ -125,6 +125,7 @@
                     android:gravity="center">
 
                     <Switch
+                        android:id="@+id/swith"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -177,7 +178,7 @@
                             android:drawablePadding="22sp"
                             android:fontFamily="@font/montserrat_semi_bold"
                             android:gravity="bottom"
-                            android:text="Manilal Kasera"
+                            android:text="NAME SIRNAME"
                             android:textColor="@color/black" />
 
 
@@ -222,7 +223,7 @@
                             android:drawablePadding="20sp"
                             android:fontFamily="@font/montserrat_semi_bold"
                             android:gravity="bottom"
-                            android:text="+91-7907977801"
+                            android:text="000000000"
                             android:textColor="@color/black" />
 
 
@@ -265,7 +266,7 @@
                             android:drawablePadding="20sp"
                             android:fontFamily="@font/montserrat_semi_bold"
                             android:gravity="bottom"
-                            android:text="someonereallyawesom@gmail.com"
+                            android:text="email@gmail.com"
                             android:textColor="@color/black" />
 
 
@@ -368,7 +369,7 @@
                             android:drawablePadding="20sp"
                             android:fontFamily="@font/montserrat_semi_bold"
                             android:gravity="bottom"
-                            android:text="Cabs and More"
+                            android:text="Partner Type"
                             android:textColor="@color/black" />
 
 
@@ -459,7 +460,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/gotham_book_regular"
-                    android:text="Licence Id number"
+                    android:text="Licence Id no. (optional)"
                     android:textSize="8sp" />
 
                 <LinearLayout
