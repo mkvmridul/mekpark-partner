@@ -133,6 +133,21 @@ public class LoginSessionManager {
 
     }
 
+    public void updateServiceDeailsinSP(String openigHrs, String bikeCapacity, String carCapacity,
+                                         String bikeVacancy, String carVacancy ,String bikeFare, String carFare){
+
+        editor.putString(S_OPENING_HRS, openigHrs);
+        editor.putString(S_BIKE_CAPACITY,bikeCapacity);
+        editor.putString(S_CAR_CAPACITY,carCapacity);
+        editor.putString(S_BIKE_VACANCY,bikeVacancy);
+        editor.putString(S_CAR_VACANCY,carVacancy);
+        editor.putString(S_BIKE_FARE,bikeFare);
+        editor.putString(S_CAR_FARE,carFare);
+
+        editor.commit();
+
+    }
+
     public void updatePassword(String password){
         editor.putString(KEY_PASSWORD, password);
         editor.commit();

@@ -328,11 +328,7 @@ public class TakeInitialParkingDetails extends AppCompatActivity implements Addr
         findViewById(R.id.address).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 getLocationPermissionAndOpenAddressDialog();
-
-
-
             }
         });
 

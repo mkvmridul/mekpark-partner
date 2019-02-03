@@ -206,6 +206,8 @@ public class AddressDialog extends DialogFragment implements OnMapReadyCallback 
         });
 
     }
+
+
     private void animateToCurrentLocation() {
 
         mMap.clear();
@@ -246,8 +248,6 @@ public class AddressDialog extends DialogFragment implements OnMapReadyCallback 
         }
     }
 
-
-
     @Override
     public void onDestroyView() {
         Log.e(TAG,"called : onDestroyView");
@@ -258,8 +258,6 @@ public class AddressDialog extends DialogFragment implements OnMapReadyCallback 
         ft.remove(fragment);
         ft.commit();
     }
-
-
 
     private void setAddress(LatLng latLng) {
 
@@ -316,7 +314,6 @@ public class AddressDialog extends DialogFragment implements OnMapReadyCallback 
         }catch (ClassCastException e){
             Log.e(TAG,"onAttach: ClassCastException: "+e.getMessage());
         }
-
-
     }
+
 }

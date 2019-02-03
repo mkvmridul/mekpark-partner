@@ -274,6 +274,18 @@ public class ParkingPartnerHomePage extends AppCompatActivity {
                                 status,pin,brand,model,plateNo,image,cusName,cusMobile));
                     }
 
+                    if(mBookingList.size() == 0){
+                        Log.e(TAG,"No booking available");
+                        findViewById(R.id.main_layout).setVisibility(View.GONE);
+                        findViewById(R.id.no_booking_layout).setVisibility(View.VISIBLE);
+                    }
+
+                    else {
+                        Log.e(TAG,mBookingList.size() + " Booking Available");
+                        findViewById(R.id.main_layout).setVisibility(View.VISIBLE);
+                        findViewById(R.id.no_booking_layout).setVisibility(View.GONE);
+                    }
+
                     TabLayout.Tab tab =  mTabLayout.getTabAt(fragNo);
                     tab.select();
 
@@ -329,8 +341,6 @@ public class ParkingPartnerHomePage extends AppCompatActivity {
             if(booking.getStatus() == status){
                 bookingList.add(booking);
             }
-
-
         }
 
         return bookingList;
@@ -356,7 +366,7 @@ public class ParkingPartnerHomePage extends AppCompatActivity {
     private void setupTabLayout() {
 
         Log.e(TAG,"setUpLayout");
-        mTabLayout.addTab(mTabLayout.newTab().setText("New"),false);
+        mTabLayout.addTab(mTabLayout.newTab().setText("New"),true);
         mTabLayout.addTab(mTabLayout.newTab().setText("Upcoming"));
         mTabLayout.addTab(mTabLayout.newTab().setText("Ongoing"));
         mTabLayout.addTab(mTabLayout.newTab().setText("History"));

@@ -38,6 +38,7 @@ import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_R
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.OPEN_24_HRS;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.RETRY_SECONDS;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_ID;
+import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_ADDRESS;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_BIKE_CAPACITY;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_BIKE_FARE;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_BIKE_VACANCY;
@@ -81,6 +82,7 @@ public class ShowParkingDetail extends AppCompatActivity {
     boolean isChangesMade = false;
 
     private ProgressDialog mProgressDialog;
+
 
 
     @Override
@@ -545,9 +547,6 @@ public class ShowParkingDetail extends AppCompatActivity {
 
     }
 
-
-
-
     private void setFromToLayout(LinearLayout ll, ImageView iv, TextView tv) {
 
         resetFromToLayout();
@@ -803,8 +802,15 @@ public class ShowParkingDetail extends AppCompatActivity {
                         return;
                     }
 
+
+                    mSession.updateServiceDeailsinSP(mOpeningHrs,bikeCapacity,carCapacity,bikeVacancy,carVacancy,bikeFare,carFare);
+
                     Toast.makeText(ShowParkingDetail.this,"Update successfull",Toast.LENGTH_SHORT).show();
                     finish();
+
+
+
+
 
                 } catch (JSONException e) {
                     mProgressDialog.dismiss();

@@ -90,6 +90,7 @@
 
     </LinearLayout>
 
+    <!--No booking Available-->
     <FrameLayout
         android:id="@+id/no_booking_layout"
         android:layout_marginTop="66dp"
