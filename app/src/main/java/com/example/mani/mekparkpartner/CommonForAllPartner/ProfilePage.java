@@ -66,9 +66,13 @@ import java.util.List;
 import java.util.Map;
 
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_URL;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.FREE_PARKING_PROVIDER;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.GARAGE_PARKING_PROVIDER;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.LICENCE_IMAGE_PATH;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_RETRY;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.PAID_PARKING_PROVIDER;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.RETRY_SECONDS;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.TOWING_PARTNER;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_EMAIL;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_EXECUTIVE_ID;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_LICENCE_IMAGE;
@@ -76,6 +80,7 @@ import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_NAME;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_ID;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_TYPE;
+import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PASSWORD;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PHONE;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_ADDRESS;
 
@@ -88,6 +93,7 @@ public class ProfilePage extends AppCompatActivity {
     private ProgressDialog mProgressDialog;
     List<SimpleImage> mImageList;
 
+    private String mPartnerType;
 
 
     @Override
@@ -103,6 +109,7 @@ public class ProfilePage extends AppCompatActivity {
         mProgressDialog.setCancelable(false);
 
         mImageList = new ArrayList<>();
+        mPartnerType = mLoginSession.getEmpDetailsFromSP().get(KEY_PARTNER_TYPE);
 
         setValues();
         clickListener();
@@ -112,8 +119,6 @@ public class ProfilePage extends AppCompatActivity {
     }
 
     private void fetchPartnerServiceImages() {
-
-       // mProgressDialog.show();
 
         String SEND_URL = BASE_URL + "fetch_partner_service_image.php";
 
@@ -274,7 +279,19 @@ public class ProfilePage extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.service_manage).setOnClickListener(new View.OnClickListener() {
+        TextView tv_serviceManagment = findViewById(R.id.service_manage);
+
+
+        // Hiding service managemnet button in case of emergency towing partner
+        if( mPartnerType.equals(PAID_PARKING_PROVIDER) || mPartnerType.equals(GARAGE_PARKING_PROVIDER)
+                || mPartnerType.equals(FREE_PARKING_PROVIDER)){
+            tv_serviceManagment.setVisibility(View.VISIBLE);
+        }
+
+        else {
+            tv_serviceManagment.setVisibility(View.GONE);
+        }
+        tv_serviceManagment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ProfilePage.this,ShowParkingDetail.class));
@@ -303,19 +320,6 @@ public class ProfilePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
-
-//                EditText et_licenceId = findViewById(R.id.licence_id);
-//                String licenceId      = et_licenceId.getText().toString().trim();
-//
-//                if(licenceId.equals("")) {
-//                    onBackPressed();
-//                    return;
-//                }
-
-
-
-
-
             }
         });
 

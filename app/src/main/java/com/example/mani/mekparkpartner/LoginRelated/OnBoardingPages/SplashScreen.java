@@ -6,12 +6,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.mani.mekparkpartner.CommanPart.LoginSessionManager;
 import com.example.mani.mekparkpartner.CommonForAllPartner.PartnerNotVerifiedPage;
 import com.example.mani.mekparkpartner.CommonForAllPartner.InitialProfilePage;
 import com.example.mani.mekparkpartner.R;
 
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.FREE_PARKING_PROVIDER;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.GARAGE_PARKING_PROVIDER;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.PAID_PARKING_PROVIDER;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.launchPartnerAcitvity;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_TYPE;
 
@@ -35,8 +39,6 @@ public class SplashScreen extends AppCompatActivity {
         mSession.setOnBoardingShown();
         Log.e(TAG,"setOnboarding");
 
-
-
         SplashScreenLauncher launcher = new SplashScreenLauncher();
         launcher.start();
     }
@@ -58,11 +60,23 @@ public class SplashScreen extends AppCompatActivity {
                 return;
             }
 
-            if(! (mSession.isAccountDetailedFIlled() && mSession.isServiceManagemantFilled())  ){
+            String partnerType =  mSession.getEmpDetailsFromSP().get(KEY_PARTNER_TYPE);
+
+            if(((partnerType.equals(PAID_PARKING_PROVIDER) || partnerType.equals(FREE_PARKING_PROVIDER) ||
+                    partnerType.equals(GARAGE_PARKING_PROVIDER))
+                    && ( mSession.isServiceManagemantFilled())) ){
+
                 startActivity(new Intent(SplashScreen.this,InitialProfilePage.class));
                 finish();
                 return;
             }
+            if(! (mSession.isAccountDetailedFIlled() )  ){
+                startActivity(new Intent(SplashScreen.this,InitialProfilePage.class));
+                finish();
+                return;
+            }
+
+
 
             if(! (mSession.isPartnerActivated())  ){
                 startActivity(new Intent(SplashScreen.this,PartnerNotVerifiedPage.class));

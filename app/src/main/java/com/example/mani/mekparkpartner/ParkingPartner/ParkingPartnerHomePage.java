@@ -48,6 +48,8 @@ import com.example.mani.mekparkpartner.ParkingPartner.Fragments.FragmentNew;
 import com.example.mani.mekparkpartner.ParkingPartner.Fragments.FragmentOngoing;
 import com.example.mani.mekparkpartner.ParkingPartner.Fragments.FragmentUpcoming;
 import com.example.mani.mekparkpartner.R;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,6 +59,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_URL;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_RETRY;
@@ -88,6 +91,8 @@ public class ParkingPartnerHomePage extends AppCompatActivity {
     private final String URL_TOKEN = BASE_URL + "storePartnerToken.php";
     private BroadcastReceiver mBroadcastReceiver;
 
+    private IntentIntegrator mQrScan;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,7 +107,7 @@ public class ParkingPartnerHomePage extends AppCompatActivity {
             return;
         }
 
-        Log.e(TAG,"logged in");
+        Log.e(TAG,"logged in Parking Partner");
 
         String token = SharedPrefFcm.getmInstance(ParkingPartnerHomePage.this).getToken();
         if(token!=null){
@@ -124,18 +129,25 @@ public class ParkingPartnerHomePage extends AppCompatActivity {
         mProgressDialog = new ProgressDialog(ParkingPartnerHomePage.this);
         mProgressDialog.setMessage("Please wait...");
 
+        mQrScan = new IntentIntegrator(ParkingPartnerHomePage.this);
+        mQrScan.setPrompt("");
+        mQrScan.setOrientationLocked(true);
+
+
         mFragmentList.add(new FragmentNew());
         mFragmentList.add(new FragmentUpcoming());
         mFragmentList.add(new FragmentOngoing());
         mFragmentList.add(new FragmentHistory());
 
         mTabLayout = findViewById(R.id.tab_layout_booking);
+
         mSession = new LoginSessionManager(ParkingPartnerHomePage.this);
 
         settingNavigation();
         setupBottonNavigation();
 
         fetchBookingsFromDb(0);
+
         bindWidgetsWithAnEvent();
         setupTabLayout();
 
@@ -383,11 +395,9 @@ public class ParkingPartnerHomePage extends AppCompatActivity {
                 setCurrentTabFragment(tab.getPosition());
             }
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
+            public void onTabUnselected(TabLayout.Tab tab) {}
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
+            public void onTabReselected(TabLayout.Tab tab){}
         });
     }
     private void setCurrentTabFragment(int tabPosition)
@@ -637,6 +647,7 @@ public class ParkingPartnerHomePage extends AppCompatActivity {
         int id = item.getItemId();
 
         switch (id){
+            case R.id.scanner:  mQrScan.initiateScan(); return true;
             case R.id.refresh: fetchBookingsFromDb(0); return true;
             case R.id.technical_support: Toast.makeText(ParkingPartnerHomePage.this,"Tech Support",Toast.LENGTH_SHORT).show(); return true;
         }
@@ -750,6 +761,31 @@ public class ParkingPartnerHomePage extends AppCompatActivity {
 
 
 
+    }
+
+
+    //For Scanner result
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+
+            if (result.getContents() == null) {
+                Toast.makeText(this, "Result Not Found", Toast.LENGTH_LONG).show();
+            } else {
+                try {
+
+                    JSONObject obj = new JSONObject(result.getContents());
+                    Toast.makeText(this, obj.toString(), Toast.LENGTH_LONG).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+                }
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }
 

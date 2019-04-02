@@ -46,6 +46,7 @@ public class FragmentLogin extends Fragment {
         mRootView.findViewById(R.id.login_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Fragment fragment = new FragmentPhone();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction ft = fragmentManager.beginTransaction();

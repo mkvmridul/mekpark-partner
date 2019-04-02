@@ -23,6 +23,7 @@ import com.example.mani.mekparkpartner.CommanPart.MySingleton;
 
 import com.example.mani.mekparkpartner.CommonForAllPartner.PartnerNotVerifiedPage;
 import com.example.mani.mekparkpartner.CommonForAllPartner.InitialProfilePage;
+import com.example.mani.mekparkpartner.LoginRelated.OnBoardingPages.SplashScreen;
 import com.example.mani.mekparkpartner.ParkingPartner.ParkingPartnerHomePage;
 import com.example.mani.mekparkpartner.R;
 
@@ -34,14 +35,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_URL;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.FREE_PARKING_PROVIDER;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.GARAGE_PARKING_PROVIDER;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_RETRY;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.PAID_PARKING_PROVIDER;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.RETRY_SECONDS;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.launchPartnerAcitvity;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_TYPE;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class FragmentPassword extends Fragment {
 
     private final String TAG = "FragmentPassword";
@@ -151,12 +153,11 @@ public class FragmentPassword extends Fragment {
                             String executive_id  = jsonObject.getString("executive_id");
 
 
-
                             if(isAccountVerified == 1)
                                 mLoginSession.setAccountDetailsFilled();
 
                             if(isServiceMangementFilled == 1)
-                                mLoginSession.setServiceManFilled();
+                                    mLoginSession.setServiceManFilled();
 
                             if(isPartnerVerified == 1)
                                 mLoginSession.setPartnerActivated();
@@ -166,7 +167,17 @@ public class FragmentPassword extends Fragment {
 
                             mProgressDialog.dismiss();
 
-                            if( !(mLoginSession.isAccountDetailedFIlled() && mLoginSession.isServiceManagemantFilled() )){
+                            if(((partnerType.equals(PAID_PARKING_PROVIDER) || partnerType.equals(FREE_PARKING_PROVIDER) ||
+                                    partnerType.equals(GARAGE_PARKING_PROVIDER))
+                                    && ( mLoginSession.isServiceManagemantFilled())) ){
+
+                                startActivity(new Intent(getActivity(),InitialProfilePage.class));
+                                getActivity().finish();
+                                return;
+                            }
+
+
+                            if( !(mLoginSession.isAccountDetailedFIlled())){
                                 startActivity(new Intent(getActivity(),InitialProfilePage.class));
                                 getActivity().finish();
                                 return;

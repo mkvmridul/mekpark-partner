@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/spash_screen">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:padding="8dp"
+            android:src="@drawable/arrow_back_white" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gotham_medium_regular"
+                android:text="Parking Ended"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <!--line-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="72dp"
+                    android:layout_height="2dp"
+                    android:background="@color/white" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@color/white" />
+
+
+                <View
+                    android:layout_width="56dp"
+                    android:layout_height="2dp"
+                    android:background="@color/white" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gotham_medium_regular"
+                android:text="Amount Due"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/gotham_medium_regular"
+                    android:text="@string/rupee"
+                    android:textColor="@color/black"
+                    android:textSize="44dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/total_extra_fare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:fontFamily="@font/gotham_book_regular"
+                    android:text="000"
+                    android:textColor="@color/white"
+                    android:textSize="44dp" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/need_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rectangular_background2"
+                android:fontFamily="@font/gotham_book_regular"
+                android:paddingLeft="24dp"
+                android:paddingTop="12dp"
+                android:paddingRight="24dp"
+                android:paddingBottom="12dp"
+                android:text="Need Help?"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@color/white" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:fontFamily="@font/gotham_book_regular"
+                    android:text="Details"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="12dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@color/white" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="12dp"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/gotham_book_regular"
+                        android:text="Parking Duration"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/total_extra_duration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/gotham_medium_regular"
+                        android:text="0 Hrs"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/gotham_book_regular"
+                        android:text="Parking Fare"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/gotham_medium_regular"
+                        android:text="@string/rupee"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/extra_base_fare"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:fontFamily="@font/gotham_medium_regular"
+                        android:text="000"
+                        android:textColor="@color/white" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/gotham_book_regular"
+                        android:text="DISCOUNT (if any)"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/gotham_medium_regular"
+                        android:text="@string/rupee"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/discount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:fontFamily="@font/gotham_medium_regular"
+                        android:text="00"
+                        android:textColor="@color/white" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/gotham_book_regular"
+                        android:text="Cxtra charges"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/gotham_medium_regular"
+                        android:text="@string/rupee"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/extra_additinal_charges"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:fontFamily="@font/gotham_medium_regular"
+                        android:text="00"
+                        android:textColor="@color/white" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/gotham_book_regular"
+                        android:text="Total Fare"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/gotham_medium_regular"
+                        android:text="@string/rupee"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/total_extra_fare2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:fontFamily="@font/gotham_medium_regular"
+                        android:text="00"
+                        android:textColor="@color/white" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/cash_collected"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:fontFamily="@font/gotham_medium_regular"
+                android:gravity="center"
+                android:padding="16dp"
+                android:paddingTop="16dp"
+                android:text="Cash Collected"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

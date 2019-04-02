@@ -214,9 +214,6 @@ public class ShowAccountDetails extends AppCompatActivity {
                 , null);
         dialog.setView(view);
 
-
-
-
         ImageView imageView        = view.findViewById(R.id.imageView);
         final ProgressBar imageProgressBar = view.findViewById(R.id.image_progress_bar);
 

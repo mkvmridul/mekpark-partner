@@ -155,6 +155,10 @@ public class PartnerNotVerifiedPage extends AppCompatActivity {
         TextView tv_name = findViewById(R.id.name);
         tv_name.setText(mLoginSession.getEmpDetailsFromSP().get(KEY_NAME)+"!");
 
+        TextView tv_name2 = findViewById(R.id.name2);
+        tv_name2.setText(mLoginSession.getEmpDetailsFromSP().get(KEY_NAME)+"!");
+
+
     }
 
     private void settingNavigation() {

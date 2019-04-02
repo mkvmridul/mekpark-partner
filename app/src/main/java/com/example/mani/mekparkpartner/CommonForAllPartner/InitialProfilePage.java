@@ -49,8 +49,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_URL;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.FREE_PARKING_PROVIDER;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.GARAGE_PARKING_PROVIDER;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_RETRY;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.PAID_PARKING_PROVIDER;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.RETRY_SECONDS;
+import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.TOWING_PARTNER;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_EMAIL;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_NAME;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_ID;
@@ -73,6 +77,8 @@ public class InitialProfilePage extends AppCompatActivity {
     private String mIdRealPath;
 
     private ProgressDialog mProgressDialog;
+
+    private String mPartnerType;
 
 
 
@@ -101,6 +107,8 @@ public class InitialProfilePage extends AppCompatActivity {
                 }
             }
         };
+
+        mPartnerType = mLoginSession.getEmpDetailsFromSP().get(KEY_PARTNER_TYPE);
 
         setDetails();
         clickListener();
@@ -167,7 +175,21 @@ public class InitialProfilePage extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.service_manage).setOnClickListener(new View.OnClickListener() {
+
+        TextView tv_serviceManagment = findViewById(R.id.service_manage);
+
+
+        // Hiding service managemnet button in case of emergency towing partner
+        if( mPartnerType.equals(PAID_PARKING_PROVIDER) || mPartnerType.equals(GARAGE_PARKING_PROVIDER)
+                || mPartnerType.equals(FREE_PARKING_PROVIDER)){
+            tv_serviceManagment.setVisibility(View.VISIBLE);
+        }
+
+        else {
+            tv_serviceManagment.setVisibility(View.GONE);
+        }
+
+        tv_serviceManagment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(mLoginSession.isServiceManagemantFilled()) {
@@ -217,28 +239,39 @@ public class InitialProfilePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(mLoginSession.isServiceManagemantFilled() && mLoginSession.isAccountDetailedFIlled()){
+                String errorMessage = "Fill Service management Details";
+                String errorMessage2 = "Fill Account Details";
 
-                    String licenceId = mTv_id.getText().toString().trim();
-
-                    if(!licenceId.equals("")){
-                        if(mIdBitmap == null){
-                            Toast.makeText(InitialProfilePage.this,"Attach your id",Toast.LENGTH_SHORT).show();
-                            mTv_id.setText("");
-                            return;
-                        }
-                        uploadLicence(licenceId);
-                    
-                    }
-                    else {
-                        intentToPageNotVerified();
-                    }
-
+                if(!mLoginSession.isAccountDetailedFIlled()){
+                    Toast.makeText(InitialProfilePage.this, errorMessage2, Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
-                else{
-                    Toast.makeText(InitialProfilePage.this, "Fill Service management and Account Details first", Toast.LENGTH_SHORT).show();
+                if(((mPartnerType.equals(PAID_PARKING_PROVIDER) || mPartnerType.equals(FREE_PARKING_PROVIDER) ||
+                        mPartnerType.equals(GARAGE_PARKING_PROVIDER)) && mLoginSession.isServiceManagemantFilled()) ){
+
+                    Toast.makeText(InitialProfilePage.this, errorMessage, Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
+                String licenceId = mTv_id.getText().toString().trim();
+
+                if(!licenceId.equals("")){
+                    if(mIdBitmap == null){
+                        Toast.makeText(InitialProfilePage.this,"Attach your id",Toast.LENGTH_SHORT).show();
+                        mTv_id.setText("");
+                        return;
+                    }
+                    uploadLicence(licenceId);
+
+                }
+                else {
+                    intentToPageNotVerified();
+                }
+
+
+
+
             }
         });
 
@@ -247,7 +280,6 @@ public class InitialProfilePage extends AppCompatActivity {
 
 
     }
-
 
     private void uploadLicence(String licenceId) {
 
@@ -323,7 +355,6 @@ public class InitialProfilePage extends AppCompatActivity {
         }
 
     }
-
 
     private void storeTokenToDb(final String refreshedToken) {
 

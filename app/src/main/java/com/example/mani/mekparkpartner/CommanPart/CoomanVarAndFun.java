@@ -2,17 +2,23 @@ package com.example.mani.mekparkpartner.CommanPart;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -28,6 +34,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.mani.mekparkpartner.EmptyActivity;
 import com.example.mani.mekparkpartner.ParkingPartner.ParkingPartnerHomePage;
+import com.example.mani.mekparkpartner.R;
+import com.example.mani.mekparkpartner.TowingPartner.TowingPartnerHome;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -35,6 +43,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class CoomanVarAndFun {
@@ -316,7 +325,7 @@ public class CoomanVarAndFun {
 
         else if(pType.equals(TOWING_PARTNER)){
             Log.e(TAG,"Launching Towing Partner");
-            i = new Intent(context,EmptyActivity.class);
+            i = new Intent(context,TowingPartnerHome.class);
         }
 
         else if(pType.equals(CABS_AND_MORE)){
@@ -341,5 +350,35 @@ public class CoomanVarAndFun {
 
         context.startActivity(i);
     }
+
+    public static String formatTimeForBill(long timeinMilli) {
+
+        int hrs     = (int) (timeinMilli / 1000) / 3600;
+        int minutes = (int) ( ((timeinMilli / 1000) / 60 ) - ( hrs * 60) );
+        int seconds = (int) (timeinMilli / 1000) % 60;
+
+        Log.e("hrs:min:time",hrs+":"+minutes+":"+seconds);
+
+        String formattedTime = String.format(Locale.getDefault(), "%2d:%02d:%02d", hrs,minutes, seconds);
+
+        if(hrs == 0){
+
+            if(minutes == 0)
+                formattedTime = seconds + " Sec";
+            else
+                formattedTime = minutes + " Min";
+        }
+        else {
+            formattedTime = String.format(Locale.getDefault(), "%02d:%02d", hrs,minutes);
+            formattedTime = formattedTime + " Hrs";
+        }
+
+        return formattedTime;
+
+    }
+
+
+
+
 
 }

@@ -3,6 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+
+    <item
+        android:id="@+id/scanner"
+        android:orderInCategory="100"
+        android:title="Scanner"
+        app:showAsAction="always"/>
+
+
     <item
         android:id="@+id/technical_support"
         android:orderInCategory="100"
@@ -16,5 +24,7 @@
         android:icon="@drawable/refresh"
         android:title="refresh"
         app:showAsAction="always"/>
+
+
 
 </menu>

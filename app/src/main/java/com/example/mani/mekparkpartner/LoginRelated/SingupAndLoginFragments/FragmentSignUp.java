@@ -85,6 +85,8 @@ public class FragmentSignUp extends Fragment {
         return mRootView;
     }
 
+
+
     private void clickListener() {
 
         mRootView.findViewById(R.id.back_btn).setOnClickListener(new View.OnClickListener() {
@@ -142,9 +144,6 @@ public class FragmentSignUp extends Fragment {
         });
 
     }
-
-
-
     public void fetchPartnerType() {
 
         Log.e(TAG,"called : fetchPartnerType");

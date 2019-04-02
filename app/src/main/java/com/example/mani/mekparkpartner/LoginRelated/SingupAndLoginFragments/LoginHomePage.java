@@ -18,8 +18,6 @@ public class LoginHomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_home_page);
 
-
-
         replaceFragment(new FragmentLogin());
 
     }
