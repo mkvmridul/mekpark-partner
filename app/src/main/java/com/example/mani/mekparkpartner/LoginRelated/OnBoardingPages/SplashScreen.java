@@ -60,17 +60,23 @@ public class SplashScreen extends AppCompatActivity {
                 return;
             }
 
+            Log.e(TAG,"iSesionFilled "+mSession.isServiceManagemantFilled());
+
             String partnerType =  mSession.getEmpDetailsFromSP().get(KEY_PARTNER_TYPE);
+
+
 
             if(((partnerType.equals(PAID_PARKING_PROVIDER) || partnerType.equals(FREE_PARKING_PROVIDER) ||
                     partnerType.equals(GARAGE_PARKING_PROVIDER))
-                    && ( mSession.isServiceManagemantFilled())) ){
-
+                    && ( !mSession.isServiceManagemantFilled())) ){
+                Log.e(TAG, "opening initialProfilePage");
                 startActivity(new Intent(SplashScreen.this,InitialProfilePage.class));
+
                 finish();
                 return;
             }
             if(! (mSession.isAccountDetailedFIlled() )  ){
+                Log.e(TAG, "opening initialProfilePage");
                 startActivity(new Intent(SplashScreen.this,InitialProfilePage.class));
                 finish();
                 return;
@@ -79,12 +85,14 @@ public class SplashScreen extends AppCompatActivity {
 
 
             if(! (mSession.isPartnerActivated())  ){
+                Log.e(TAG, "opening PartnerNotVerifiedPage");
                 startActivity(new Intent(SplashScreen.this,PartnerNotVerifiedPage.class));
                 finish();
                 return;
             }
 
             String ptye = mSession.getEmpDetailsFromSP().get(KEY_PARTNER_TYPE);
+            Log.e(TAG, "opening respective page");
             launchPartnerAcitvity(SplashScreen.this,ptye);
             finish();
         }

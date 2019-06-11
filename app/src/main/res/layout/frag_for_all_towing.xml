@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sheet_light_background"
+    tools:context=".TowingPartner.Fragments.FragNewTowing">
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="8dp"
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!--error_layout-->
+    <FrameLayout
+        android:id="@+id/error_layout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/error_message"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="No New Booking"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textStyle="italic"/>
+
+
+
+    </FrameLayout>
+
+</FrameLayout>

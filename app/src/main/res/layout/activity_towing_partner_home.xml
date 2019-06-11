@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
-    tools:context=".TowingPartner.TowingPartnerHome">
+    tools:context=".TowingPartner.TowingPartnerHomePage">
 
     <include
         layout="@layout/app_bar_towing_home_page"

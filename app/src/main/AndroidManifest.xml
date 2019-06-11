@@ -126,7 +126,7 @@
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"
             tools:replace="screenOrientation" />
-        <activity android:name=".TowingPartner.TowingPartnerHome"></activity>
+        <activity android:name=".TowingPartner.TowingPartnerHomePage"></activity>
     </application>
 
 </manifest>

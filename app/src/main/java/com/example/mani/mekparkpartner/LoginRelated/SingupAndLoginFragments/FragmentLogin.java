@@ -13,17 +13,12 @@ import android.widget.TextView;
 
 import com.example.mani.mekparkpartner.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class FragmentLogin extends Fragment {
 
     private View mRootView;
 
 
-    public FragmentLogin() {
-        // Required empty public constructor
-    }
+    public FragmentLogin() {}
 
 
     @Override

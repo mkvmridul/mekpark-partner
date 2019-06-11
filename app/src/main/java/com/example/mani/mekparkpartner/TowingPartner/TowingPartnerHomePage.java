@@ -1,12 +1,9 @@
 package com.example.mani.mekparkpartner.TowingPartner;
 
-import android.annotation.SuppressLint;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -20,7 +17,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
@@ -30,21 +26,15 @@ import android.widget.Toast;
 
 import com.example.mani.mekparkpartner.CommanPart.LoginSessionManager;
 import com.example.mani.mekparkpartner.CommonForAllPartner.ProfilePage;
-import com.example.mani.mekparkpartner.CommonForAllPartner.ShowParkingDetail;
 import com.example.mani.mekparkpartner.ParkingPartner.Booking;
-import com.example.mani.mekparkpartner.ParkingPartner.Fragments.FragmentHistory;
-import com.example.mani.mekparkpartner.ParkingPartner.Fragments.FragmentNew;
-import com.example.mani.mekparkpartner.ParkingPartner.Fragments.FragmentOngoing;
-import com.example.mani.mekparkpartner.ParkingPartner.Fragments.FragmentUpcoming;
+import com.example.mani.mekparkpartner.ParkingPartner.ExpandableListAdapter;
 import com.example.mani.mekparkpartner.ParkingPartner.MenuModel;
-import com.example.mani.mekparkpartner.ParkingPartner.ParkingPartnerHomePage;
+import com.example.mani.mekparkpartner.R;
 import com.example.mani.mekparkpartner.TowingPartner.Fragments.FragHistoryTowing;
 import com.example.mani.mekparkpartner.TowingPartner.Fragments.FragNewTowing;
 import com.example.mani.mekparkpartner.TowingPartner.Fragments.FragOngoingTowing;
 import com.example.mani.mekparkpartner.TowingPartner.Fragments.FragUpcomingTowing;
-import com.example.mani.mekparkpartner.TowingPartner.TowingPartnerHome;
-import com.example.mani.mekparkpartner.R;
-import com.google.zxing.integration.android.IntentIntegrator;
+import com.example.mani.mekparkpartner.TowingPartner.Model.TowingBooking;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,14 +44,14 @@ import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_TYPE;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PHONE;
 
-public class TowingPartnerHome extends AppCompatActivity {
+public class TowingPartnerHomePage extends AppCompatActivity {
 
     private final String TAG = this.getClass().getSimpleName();
     private List<Fragment> mFragmentList;
 
-    //private List<Booking> mBookingList;
+    private List<TowingBooking> mAllTowingBookings;
 
-    private ProgressDialog mProgressDialog;
+    //private ProgressDialog mProgressDialog;
     private TabLayout mTabLayout;
     private LoginSessionManager mSession;
 
@@ -69,7 +59,7 @@ public class TowingPartnerHome extends AppCompatActivity {
     private ExpandableListView mExpandableListView;
     List<MenuModel> headerList = new ArrayList<>();
     HashMap<MenuModel, List<MenuModel>> childList = new HashMap<>();
-    com.example.mani.mekparkpartner.ParkingPartner.ExpandableListAdapter expandableListAdapter;
+    ExpandableListAdapter expandableListAdapter;
 
     private int lastExpandedPosition = -1;
 
@@ -79,7 +69,7 @@ public class TowingPartnerHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_towing_partner_home);
 
-        mSession = new LoginSessionManager(TowingPartnerHome.this);
+        mSession = new LoginSessionManager(TowingPartnerHomePage.this);
 
         if (!mSession.isLoggedIn())
         {
@@ -91,6 +81,8 @@ public class TowingPartnerHome extends AppCompatActivity {
 
         Log.e(TAG,"logged in as Towing Partner");
 
+        mAllTowingBookings = new ArrayList<>();
+
 
         mFragmentList = new ArrayList<>();
 
@@ -101,15 +93,116 @@ public class TowingPartnerHome extends AppCompatActivity {
 
         mTabLayout = findViewById(R.id.tab_layout_towing);
 
+        
+        fetchAllTowingBookings();
 
 
         bindWidgetsWithAnEvent();
         setupTabLayout();
 
-
         settingNavigation();
 
     }
+
+    private void fetchAllTowingBookings() {
+
+        mAllTowingBookings.add(new TowingBooking(1,1,"1554292466","1554294626","2",
+                true,"100","18","3","121",0,"1234","TATA","Safari1",
+                "JH1234","asdf","Manilal Kasera","1234567890","Sahara Hostel For Boys"));
+
+        mAllTowingBookings.add(new TowingBooking(2,1,"1554292466","1554294626","2",
+                true,"100","18","3","121",1,"1234","TATA","Safari2",
+                "JH1234","asdf","Manilal Kasera","1234567890","Sahara Hostel For Boys"));
+        mAllTowingBookings.add(new TowingBooking(3,1,"1554292466","1554294626","2",
+                true,"100","18","3","121",2,"1234","TATA","Safari3",
+                "JH1234","asdf","Manilal Kasera","1234567890","Sahara Hostel For Boys"));
+        mAllTowingBookings.add(new TowingBooking(4,1,"1554292466","1554294626","2",
+                true,"100","18","3","121",3,"1234","TATA","Safari4",
+                "JH1234","asdf","Manilal Kasera","1234567890","Sahara Hostel For Boys"));
+        mAllTowingBookings.add(new TowingBooking(5,1,"1554292466","1554294626","2",
+                true,"100","18","3","121",4,"1234","TATA","Safari5",
+                "JH1234","asdf","Manilal Kasera","1234567890","Sahara Hostel For Boys"));
+        mAllTowingBookings.add(new TowingBooking(6,1,"1554292466","1554294626","2",
+                true,"100","18","3","121",5,"1234","TATA","Safari6",
+                "JH1234","asdf","Manilal Kasera","1234567890","Sahara Hostel For Boys"));
+        mAllTowingBookings.add(new TowingBooking(7,1,"1554292466","1554294626","2",
+                true,"100","18","3","121",1,"1234","TATA","Safari7",
+                "JH1234","asdf","Manilal Kasera","1234567890","Sahara Hostel For Boys"));
+        mAllTowingBookings.add(new TowingBooking(8,1,"1554292466","1554294626","2",
+                true,"100","18","3","121",2,"1234","TATA","Safari8",
+                "JH1234","asdf","Manilal Kasera","1234567890","Sahara Hostel For Boys"));
+
+
+    }
+
+
+    public List<TowingBooking> getBookingFromTowingHomePage (int status) {
+
+        List<TowingBooking> bookingList = new ArrayList<>();
+
+        for(int i=0;i<mAllTowingBookings.size();i++){
+            TowingBooking booking = mAllTowingBookings.get(i);
+            if(booking.getStatus() == status){
+                bookingList.add(booking);
+            }
+        }
+
+        return bookingList;
+    }
+
+    //sending parking booking with status (1,4,5) to history fragments
+    public List<TowingBooking> getAllCompletedParking(){
+
+        List<TowingBooking> tempList = new ArrayList<>();
+
+        for(int i=0;i<mAllTowingBookings.size();i++){
+            TowingBooking booking = mAllTowingBookings.get(i);
+            int s = booking.getStatus();
+            if(s == 1 || s == 4 || s == 5){
+                tempList.add(booking);
+            }
+        }
+
+        return tempList;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -174,7 +267,6 @@ public class TowingPartnerHome extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.frame_container_towing, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.commit();
     }
 
@@ -199,8 +291,9 @@ public class TowingPartnerHome extends AppCompatActivity {
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
 
+        // To change navigation drawer button
         toggle.setDrawerIndicatorEnabled(false);
-        Drawable icon = ResourcesCompat.getDrawable(getResources(), R.drawable.nav1,TowingPartnerHome.this.getTheme());
+        Drawable icon = ResourcesCompat.getDrawable(getResources(), R.drawable.nav1, TowingPartnerHomePage.this.getTheme());
         toggle.setHomeAsUpIndicator(icon);
 
         toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
@@ -226,7 +319,7 @@ public class TowingPartnerHome extends AppCompatActivity {
         iv_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TowingPartnerHome.this, ProfilePage.class));
+                startActivity(new Intent(TowingPartnerHomePage.this, ProfilePage.class));
                 drawer.closeDrawer(GravityCompat.START);
             }
         });
@@ -308,7 +401,7 @@ public class TowingPartnerHome extends AppCompatActivity {
 
     private void populateExpandableList() {
 
-        expandableListAdapter = new com.example.mani.mekparkpartner.ParkingPartner.ExpandableListAdapter(this, headerList, childList);
+        expandableListAdapter = new ExpandableListAdapter(this, headerList, childList);
 
 
         ViewGroup footerView = (ViewGroup) getLayoutInflater().inflate(R.layout.expandableview_footer, mExpandableListView, false);
@@ -336,7 +429,7 @@ public class TowingPartnerHome extends AppCompatActivity {
 
                     if (!menuModel.isHasChildren()) {
                         switch (id_int){
-                            case 0: startActivity(new Intent(TowingPartnerHome.this,ProfilePage.class));break;
+                            case 0: startActivity(new Intent(TowingPartnerHomePage.this,ProfilePage.class));break;
                             case 1: break;
                             case 2: break;
                             case 3: break;
@@ -363,17 +456,17 @@ public class TowingPartnerHome extends AppCompatActivity {
                     switch (groupPosition){
                         case 1:
                             switch (childPosition){
-                                case 0:setCurrentTabFragment(0);break;
-                                case 1: setCurrentTabFragment(1);break;
-                                case 2: setCurrentTabFragment(2);break;
-                                case 3: setCurrentTabFragment(3);break;
+                                case 0: mTabLayout.getTabAt(0).select(); setCurrentTabFragment(0);break;
+                                case 1: mTabLayout.getTabAt(1).select(); setCurrentTabFragment(1);break;
+                                case 2: mTabLayout.getTabAt(2).select(); setCurrentTabFragment(2);break;
+                                case 3: mTabLayout.getTabAt(3).select(); setCurrentTabFragment(3);break;
                             }
                             break;
 
                         case 5:
                             switch (childPosition){
                                 case 0:
-                                    Toast.makeText(TowingPartnerHome.this,"faq and link",Toast.LENGTH_SHORT).show();break;
+                                    Toast.makeText(TowingPartnerHomePage.this,"faq and link",Toast.LENGTH_SHORT).show();break;
 
                             }
 

@@ -78,54 +78,56 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingLeft="24dp"
-                android:paddingBottom="40dp"
-                android:paddingTop="40dp">
+                android:paddingTop="40dp"
+                android:paddingBottom="40dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/brand"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:singleLine="true"
-                        android:textColor="@color/search_hint"
                         android:fontFamily="@font/montserrat_medium"
-                        android:text="Maruti Suzuki" />
+                        android:singleLine="true"
+                        android:text="Maruti Suzuki"
+                        android:textColor="@color/search_hint"
+                        android:textSize="14sp" />
+
                     <TextView
                         android:id="@+id/model"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/brand"
                         android:layout_marginTop="16dp"
-                        android:singleLine="true"
                         android:fontFamily="@font/montserrat_semi_bold"
+                        android:singleLine="true"
                         android:text="WagonR"
-                        android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/plate_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/model"
                         android:layout_marginTop="8dp"
-                        android:textSize="10sp"
-                        android:singleLine="true"
                         android:fontFamily="@font/montserrat_regular"
-                        android:text="DL1R0ABC" />
+                        android:singleLine="true"
+                        android:text="DL1R0ABC"
+                        android:textSize="10sp" />
 
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_marginRight="44dp"
                     android:id="@+id/vehicle_image"
                     android:layout_width="120dp"
                     android:layout_height="100dp"
+                    android:layout_marginRight="44dp"
                     android:src="@mipmap/dummy" />
 
             </LinearLayout>
@@ -172,8 +174,8 @@
                     android:id="@+id/call_layout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -206,9 +208,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingBottom="8dp"
                 android:paddingLeft="32dp"
-                android:paddingTop="24dp">
+                android:paddingTop="24dp"
+                android:paddingBottom="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -219,33 +221,33 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight=".9"
-                        android:singleLine="true"
-                        android:textSize="12sp"
                         android:fontFamily="@font/montserrat_semi_bold"
+                        android:singleLine="true"
                         android:text="Booking Date &amp; Time  :"
-                        android:textColor="@color/black2" />
+                        android:textColor="@color/black2"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/booking_date"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
-                        android:singleLine="true"
-                        android:textSize="12sp"
                         android:fontFamily="@font/montserrat_semi_bold"
+                        android:singleLine="true"
                         android:text="10th Aug 2018"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/booking_time"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:singleLine="true"
-                        android:textSize="12sp"
                         android:fontFamily="@font/montserrat_semi_bold"
+                        android:singleLine="true"
                         android:text="10:30 p.m"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -259,22 +261,22 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight=".9"
-                        android:singleLine="true"
-                        android:textSize="12sp"
                         android:fontFamily="@font/montserrat_semi_bold"
+                        android:singleLine="true"
                         android:text="Parking Time                :"
-                        android:textColor="@color/black2" />
+                        android:textColor="@color/black2"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/parking_time"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:singleLine="true"
-                        android:textSize="12sp"
                         android:fontFamily="@font/montserrat_semi_bold"
+                        android:singleLine="true"
                         android:text="2 p.m"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -288,22 +290,22 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight=".9"
-                        android:singleLine="true"
-                        android:textSize="12sp"
                         android:fontFamily="@font/montserrat_semi_bold"
+                        android:singleLine="true"
                         android:text="Duration                        :"
-                        android:textColor="@color/black2" />
+                        android:textColor="@color/black2"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/duration"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:singleLine="true"
-                        android:textSize="12sp"
                         android:fontFamily="@font/montserrat_semi_bold"
+                        android:singleLine="true"
                         android:text="3 Hrs"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -311,9 +313,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:textSize="12sp"
                     android:fontFamily="@font/montserrat_semi_bold"
-                    android:text="Payment details " />
+                    android:text="Payment details "
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -321,10 +323,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/rectangular_background"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
+                android:background="@drawable/rectangular_background"
+                android:orientation="vertical"
                 android:padding="12dp">
 
                 <LinearLayout
@@ -332,18 +334,18 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
                     android:paddingTop="8dp"
+                    android:paddingRight="16dp"
                     android:paddingBottom="8dp">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="12sp"
-                        android:textColor="@color/search_hint"
                         android:fontFamily="@font/montserrat_semi_bold"
-                        android:text="Sub Total" />
+                        android:text="Sub Total"
+                        android:textColor="@color/search_hint"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/parking_fare"
@@ -352,9 +354,9 @@
                         android:layout_gravity="end"
                         android:fontFamily="@font/montserrat_semi_bold"
                         android:gravity="end"
-                        android:textSize="14sp"
+                        android:text="\u20B9 320"
                         android:textColor="@color/black"
-                        android:text="\u20B9 320" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -364,18 +366,18 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
                     android:paddingTop="8dp"
+                    android:paddingRight="16dp"
                     android:paddingBottom="8dp">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="12sp"
-                        android:textColor="@color/search_hint"
                         android:fontFamily="@font/montserrat_semi_bold"
-                        android:text="Tax" />
+                        android:text="Tax"
+                        android:textColor="@color/search_hint"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tax_amount"
@@ -384,9 +386,9 @@
                         android:layout_gravity="end"
                         android:fontFamily="@font/montserrat_semi_bold"
                         android:gravity="end"
-                        android:textSize="14sp"
+                        android:text="\u20B9 20"
                         android:textColor="@color/black"
-                        android:text="\u20B9 20" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -395,19 +397,19 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
                     android:paddingTop="8dp"
+                    android:paddingRight="16dp"
                     android:paddingBottom="8dp">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:singleLine="true"
-                        android:textSize="12sp"
-                        android:textColor="@color/search_hint"
                         android:fontFamily="@font/montserrat_semi_bold"
-                        android:text="Additional charges*" />
+                        android:singleLine="true"
+                        android:text="Additional charges*"
+                        android:textColor="@color/search_hint"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/additinal_charges"
@@ -416,29 +418,29 @@
                         android:layout_gravity="end"
                         android:fontFamily="@font/montserrat_semi_bold"
                         android:gravity="end"
-                        android:textSize="14sp"
+                        android:text="\u20B9 10"
                         android:textColor="@color/black"
-                        android:text="\u20B9 10"/>
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
                     android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:orientation="horizontal">
+                    android:paddingRight="16dp"
+                    android:paddingBottom="8dp">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="12sp"
-                        android:textColor="@color/search_hint"
                         android:fontFamily="@font/montserrat_semi_bold"
-                        android:text="Total" />
+                        android:text="Total"
+                        android:textColor="@color/search_hint"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/total_fare"
@@ -447,9 +449,9 @@
                         android:layout_gravity="end"
                         android:fontFamily="@font/montserrat_semi_bold"
                         android:gravity="end"
-                        android:textSize="14sp"
+                        android:text="\u20B9 350"
                         android:textColor="@color/black"
-                        android:text="\u20B9 350" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -477,14 +479,14 @@
 
             <TextView
                 android:id="@+id/need_help"
+                style="@style/button_style_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
                 android:layout_marginTop="8dp"
-                android:text="Need Help?"
+                android:layout_marginRight="16dp"
                 android:layout_marginBottom="8dp"
-                style="@style/button_style_1"/>
+                android:text="Need Help?" />
 
 
         </LinearLayout>

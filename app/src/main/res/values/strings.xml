@@ -92,4 +92,6 @@
     <string name="our_team_">Our team will through your profile and get back to you in case of any queries.\nThankyou for your patience.</string>
     <string name="_24_hrs_open">24 hrs open</string>
     <string name="your_profile_is_">Your profile is now live on mekpark.\nYou can start responds to leads.</string>
+    <string name="awaiting_pickup">Awaiting Pickup</string>
+    <string name="to_confirm_"><![CDATA[To confirm Service\nadd Vehicle & confirm OTP]]></string>
 </resources>

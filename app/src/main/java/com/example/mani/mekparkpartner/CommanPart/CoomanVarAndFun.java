@@ -2,23 +2,17 @@ package com.example.mani.mekparkpartner.CommanPart;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -34,8 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.mani.mekparkpartner.EmptyActivity;
 import com.example.mani.mekparkpartner.ParkingPartner.ParkingPartnerHomePage;
-import com.example.mani.mekparkpartner.R;
-import com.example.mani.mekparkpartner.TowingPartner.TowingPartnerHome;
+import com.example.mani.mekparkpartner.TowingPartner.TowingPartnerHomePage;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -249,6 +242,8 @@ public class CoomanVarAndFun {
 
 
     }
+
+
     public static String getFormattedDate2(String TAG, String unix) {
 
         String formatedstring = "NA";
@@ -325,7 +320,7 @@ public class CoomanVarAndFun {
 
         else if(pType.equals(TOWING_PARTNER)){
             Log.e(TAG,"Launching Towing Partner");
-            i = new Intent(context,TowingPartnerHome.class);
+            i = new Intent(context, TowingPartnerHomePage.class);
         }
 
         else if(pType.equals(CABS_AND_MORE)){
