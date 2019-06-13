@@ -82,7 +82,8 @@ import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_TYPE;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PASSWORD;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PHONE;
-import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_ADDRESS;
+import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_LOCATION;
+
 
 public class ProfilePage extends AppCompatActivity {
 
@@ -215,7 +216,7 @@ public class ProfilePage extends AppCompatActivity {
         tv_mobile.setText(mLoginSession.getEmpDetailsFromSP().get(KEY_PHONE));
         tv_email.setText(mLoginSession.getEmpDetailsFromSP().get(KEY_EMAIL));
 
-        tv_address.setText(mLoginSession.getServiceDetailFromSF().get(S_ADDRESS));
+        tv_address.setText(mLoginSession.getServiceDetailFromSF().get(S_LOCATION));
 
         tv_pType.setText(mLoginSession.getEmpDetailsFromSP().get(KEY_PARTNER_TYPE));
 

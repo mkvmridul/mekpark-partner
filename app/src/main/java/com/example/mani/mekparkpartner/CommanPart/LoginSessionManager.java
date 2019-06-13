@@ -57,7 +57,8 @@ public class LoginSessionManager {
 
     // Service info for parking provider
 
-    public static final String S_ADDRESS       = "s_address";
+    public static final String S_LOCATION      = "s_location";
+    public static final String S_DESCRIPTION   = "s_description"; // Will also serve as name of parking location
     public static final String S_OPENING_HRS   = "s_opening_hrs";
     public static final String S_BIKE_CAPACITY = "s_bike_capacity";
     public static final String S_CAR_CAPACITY  = "s_car_capacity";
@@ -116,11 +117,12 @@ public class LoginSessionManager {
 
     }
 
-    public void insertServiceDetailsinSP(String address, String openigHrs, String bikeCapacity, String carCapacity,
+    public void insertServiceDetailsinSP(String location, String description, String openigHrs, String bikeCapacity, String carCapacity,
                                    String bikeVacancy, String carVacancy ,String bikeFare, String carFare){
 
 
-        editor.putString(S_ADDRESS,address);
+        editor.putString(S_LOCATION,location);
+        editor.putString(S_DESCRIPTION,description);
         editor.putString(S_OPENING_HRS, openigHrs);
         editor.putString(S_BIKE_CAPACITY,bikeCapacity);
         editor.putString(S_CAR_CAPACITY,carCapacity);
@@ -211,7 +213,8 @@ public class LoginSessionManager {
 
         HashMap<String, String> info = new HashMap<String, String>();
 
-        info.put(S_ADDRESS, pref.getString(S_ADDRESS, "address not available"));
+        info.put(S_LOCATION, pref.getString(S_LOCATION, "location not available"));
+        info.put(S_DESCRIPTION, pref.getString(S_DESCRIPTION, "des not available"));
         info.put(S_OPENING_HRS, pref.getString(S_OPENING_HRS, OPEN_24_HRS));
 
         info.put(S_BIKE_CAPACITY, pref.getString(S_BIKE_CAPACITY, ""));

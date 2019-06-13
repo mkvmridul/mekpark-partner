@@ -75,21 +75,21 @@ public class CoomanVarAndFun {
     //public static final String BASE_URL = "http://192.168.43.153/mekPark/partner/";
     //public static final String BASE_URL = "http://192.168.1.11/mekPark/partner/";
     //public static final String BASE_URL = "http://192.168.100.112/mekPark/partner/";
-    public static final String BASE_URL = "https://mekpark.com/mani14/partner/";
-    public static final String BASE_IMAGE_PATH = "https://mekpark.com/mani14/user/vehicles_images/";
-
-    public static final String SERVICE_IMAGE_PATH = "https://mekpark.com/mani14/user/parking_images/";
-
-    public static final String LICENCE_IMAGE_PATH = "https://mekpark.com/mani14/partner/licence/";
+    public static final String BASE_URL                 = "https://mekpark.com/mani14/partner/";
+    public static final String BASE_URL_USER            = "https://mekpark.com/mani14/user/";
+    public static final String BASE_IMAGE_PATH          = "https://mekpark.com/mani14/user/vehicles_images/";
+    public static final String SERVICE_IMAGE_PATH       = "https://mekpark.com/mani14/user/parking_images/";
+    public static final String LICENCE_IMAGE_PATH       = "https://mekpark.com/mani14/partner/licence/";
     public static final String CANCLE_CHEQUE_IMAGE_PATH = "https://mekpark.com/mani14/partner/cheque/";
-    public static final String PAN_IMAGE_PATH = "https://mekpark.com/mani14/partner/pan/";
-
-
+    public static final String PAN_IMAGE_PATH           = "https://mekpark.com/mani14/partner/pan/";
 
     public static final int RETRY_SECONDS = 5 ;
     public static final int NO_OF_RETRY = 0 ;
 
-    public static final String TIME_FORMAT  = "hh:mma";
+    public static final String TIME_FORMAT  = "hh:mm a";
+
+    //Need help (Customer care)
+    public static final String CUSTOMER_CARE = "1234567890";
 
 
     @SuppressLint("ResourceAsColor")

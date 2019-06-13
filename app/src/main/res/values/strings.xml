@@ -94,4 +94,5 @@
     <string name="your_profile_is_">Your profile is now live on mekpark.\nYou can start responds to leads.</string>
     <string name="awaiting_pickup">Awaiting Pickup</string>
     <string name="to_confirm_"><![CDATA[To confirm Service\nadd Vehicle & confirm OTP]]></string>
+    <string name="receipt_warning">Parking at owners risk. No responsibility for valuable items like laptop, wallet, cash etc. </string>
 </resources>

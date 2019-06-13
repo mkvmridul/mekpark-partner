@@ -90,8 +90,6 @@ public class OngoingDetail extends AppCompatActivity {
         long curentTimeInMilli = System.currentTimeMillis();
         long timeLast = Long.parseLong(mBooking.getParkOutTime())*1000L;
 
-
-
         START_TIME_IN_MILLIS = timeLast - curentTimeInMilli;
         mTimeLeftInMillis = START_TIME_IN_MILLIS;
 
@@ -203,8 +201,6 @@ public class OngoingDetail extends AppCompatActivity {
     }
 
     private void startTimer() {
-
-
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {

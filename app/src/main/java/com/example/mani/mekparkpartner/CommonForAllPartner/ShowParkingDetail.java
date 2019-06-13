@@ -38,7 +38,6 @@ import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_R
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.OPEN_24_HRS;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.RETRY_SECONDS;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_ID;
-import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_ADDRESS;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_BIKE_CAPACITY;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_BIKE_FARE;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_BIKE_VACANCY;

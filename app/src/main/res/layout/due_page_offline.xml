@@ -254,7 +254,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/gotham_book_regular"
-                        android:text="DISCOUNT (if any)"
+                        android:text="TAX"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
@@ -268,7 +268,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/discount"
+                        android:id="@+id/tax_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="2dp"

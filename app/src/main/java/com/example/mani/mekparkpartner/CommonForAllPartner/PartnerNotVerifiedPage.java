@@ -246,7 +246,8 @@ public class PartnerNotVerifiedPage extends AppCompatActivity {
 
                     JSONObject jsonObject = jsonArray.getJSONObject(1);
 
-                    String address        = jsonObject.getString("address");
+                    String location       = jsonObject.getString("location");
+                    String description    = jsonObject.getString("description");
                     String openingHrs     = jsonObject.getString("opening_hrs");
                     String parkingType    = jsonObject.getString("parking_type");
 
@@ -257,7 +258,7 @@ public class PartnerNotVerifiedPage extends AppCompatActivity {
                     String bikeFare       = jsonObject.getString("bike_fare");
                     String carFare        = jsonObject.getString("car_fare");
 
-                    mLoginSession.insertServiceDetailsinSP(address,openingHrs,bikeCapacity,carCapacity,bikeVacancy,
+                    mLoginSession.insertServiceDetailsinSP(location,description,openingHrs,bikeCapacity,carCapacity,bikeVacancy,
                             carVacancy,bikeFare,carFare);
 
                     Log.e(TAG, "service details saved to shared preference");

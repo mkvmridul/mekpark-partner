@@ -21,6 +21,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".OffileParkingPartner.AddNewBooking"></activity>
+        <activity android:name=".OffileParkingPartner.OfflineHomepage" />
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
@@ -126,7 +129,7 @@
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"
             tools:replace="screenOrientation" />
-        <activity android:name=".TowingPartner.TowingPartnerHomePage"></activity>
+        <activity android:name=".TowingPartner.TowingPartnerHomePage" />
     </application>
 
 </manifest>

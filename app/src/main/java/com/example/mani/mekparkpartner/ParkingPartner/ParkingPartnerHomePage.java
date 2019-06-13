@@ -43,6 +43,7 @@ import com.example.mani.mekparkpartner.CommonForAllPartner.PartnerNotVerifiedPag
 import com.example.mani.mekparkpartner.CommonForAllPartner.ProfilePage;
 import com.example.mani.mekparkpartner.CommonForAllPartner.ShowParkingDetail;
 import com.example.mani.mekparkpartner.FCMPackage.SharedPrefFcm;
+import com.example.mani.mekparkpartner.OffileParkingPartner.OfflineHomepage;
 import com.example.mani.mekparkpartner.ParkingPartner.Fragments.FragmentHistory;
 import com.example.mani.mekparkpartner.ParkingPartner.Fragments.FragmentNew;
 import com.example.mani.mekparkpartner.ParkingPartner.Fragments.FragmentOngoing;
@@ -680,7 +681,8 @@ public class ParkingPartnerHomePage extends AppCompatActivity {
 
                     JSONObject jsonObject = jsonArray.getJSONObject(1);
 
-                    String address        = jsonObject.getString("address");
+                    String location       = jsonObject.getString("location");
+                    String description    = jsonObject.getString("description");
                     String openingHrs     = jsonObject.getString("opening_hrs");
                     String parkingType    = jsonObject.getString("parking_type");
 
@@ -691,7 +693,7 @@ public class ParkingPartnerHomePage extends AppCompatActivity {
                     String bikeFare       = jsonObject.getString("bike_fare");
                     String carFare        = jsonObject.getString("car_fare");
 
-                    mLoginSession.insertServiceDetailsinSP(address,openingHrs,bikeCapacity,carCapacity,bikeVacancy,
+                    mLoginSession.insertServiceDetailsinSP(location,description,openingHrs,bikeCapacity,carCapacity,bikeVacancy,
                             carVacancy,bikeFare,carFare);
 
                     Log.e(TAG, "service details saved to shared preference");
@@ -737,7 +739,7 @@ public class ParkingPartnerHomePage extends AppCompatActivity {
 
                 switch (menuItem.getItemId()){
                     case R.id.nav_home: return true;
-                    case R.id.nav_2:
+                    case R.id.nav_2: startActivity(new Intent(ParkingPartnerHomePage.this, OfflineHomepage.class));return true;
                     case R.id.nav_transaction:
                         Toast.makeText(ParkingPartnerHomePage.this,"Transation",Toast.LENGTH_SHORT).show();
                         return false;
