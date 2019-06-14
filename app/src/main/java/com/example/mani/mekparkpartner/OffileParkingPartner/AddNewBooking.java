@@ -1,14 +1,15 @@
 package com.example.mani.mekparkpartner.OffileParkingPartner;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,7 +42,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.DataTruncation;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -63,10 +63,10 @@ import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_L
 
 public class AddNewBooking extends AppCompatActivity {
 
+    private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private final String TAG = this.getClass().getSimpleName();
 
-
-   // TextView myVehicle;
+    // TextView myVehicle;
     LinearLayout llCar, llBike;
     ImageView imageCar, imageBike;
     TextView tv_car, tv_bike;
@@ -87,13 +87,18 @@ public class AddNewBooking extends AppCompatActivity {
     HashMap<String,String> mServiceDetail;
 
     //Will serve as operator id as well
-    String mOperatorId;
+    private String mOperatorId;
+    private String mVehicleNumber;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_booking);
+
+
+        mVehicleNumber = getIntent().getStringExtra("vehicle_number_from_ocr");
 
         mProgressBar = findViewById(R.id.progress_bar);
 
@@ -103,8 +108,8 @@ public class AddNewBooking extends AppCompatActivity {
         mModelsList = new ArrayList<>();
         mModelsList.add("Choose Model");
 
-        mOperatorId = new LoginSessionManager(AddNewBooking.this).getEmpDetailsFromSP().get(KEY_PARTNER_ID);
 
+        mOperatorId = new LoginSessionManager(AddNewBooking.this).getEmpDetailsFromSP().get(KEY_PARTNER_ID);
         mServiceDetail = new LoginSessionManager(AddNewBooking.this).getServiceDetailFromSF();
 
         setViews();
@@ -175,16 +180,14 @@ public class AddNewBooking extends AppCompatActivity {
 
         mProceed  = findViewById(R.id.proceed);
 
-
-
         imageCar.setImageResource(R.drawable.car_white);
         imageBike.setImageResource(R.drawable.bike_black);
 
+        if(mVehicleNumber!=null)
+            et_vehicleNo.setText(mVehicleNumber);
+
         String carFare      = mServiceDetail.get(S_CAR_FARE);
         String bikeFare     = mServiceDetail.get(S_BIKE_FARE);
-        String parkingName  = mServiceDetail.get(S_DESCRIPTION);
-        String location     = mServiceDetail.get(S_LOCATION);
-
 
         tv_car_parking_fare.setText("[ "+carFare+"/ hr ]");
         tv_bike_parking_fare.setText("[ "+bikeFare+"/ hr ]");
@@ -206,6 +209,16 @@ public class AddNewBooking extends AppCompatActivity {
         findViewById(R.id.scan).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (checkSelfPermission(Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA},
+                            MY_CAMERA_PERMISSION_CODE);
+                } else {
+                    startActivity(new Intent(AddNewBooking.this, OcrPage.class));
+                    finish();
+                }
+
 
             }
         });

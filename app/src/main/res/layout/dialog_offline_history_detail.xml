@@ -188,7 +188,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/montserrat_regular"
-                            android:text="Payment Confirmed "
+                            android:text="Payment Completed "
                             android:textColor="@color/green"
                             android:textSize="12sp" />
 

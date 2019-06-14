@@ -277,6 +277,7 @@ public class AddAccountDetails extends AppCompatActivity {
         Pattern pattern = Pattern.compile(reg,Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(s);
 
+
         return matcher.matches();
     }
 
