@@ -369,6 +369,16 @@ public class DialogOngoingOfflineDetail extends DialogFragment {
             }
             @Override
             public void onFinish() {
+                Log.e(TAG,"hua.........");
+
+                long parkingInUnix     = Long.parseLong( mBooking.getParkInTime());
+                long curentTime        = System.currentTimeMillis()/1000L;
+                long timePastInSec     = curentTime - parkingInUnix;
+
+                int hrsToDisply        = (int) Math.ceil((double) timePastInSec / 3600);
+                TextView tv_duration   = mRootView.findViewById(R.id.duration);
+                tv_duration.setText(hrsToDisply+"hrs");
+
                 setDurationAndTimer();
             }
         }.start();

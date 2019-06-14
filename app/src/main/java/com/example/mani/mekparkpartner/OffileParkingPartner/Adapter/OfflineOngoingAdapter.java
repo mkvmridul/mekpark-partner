@@ -2,7 +2,6 @@ package com.example.mani.mekparkpartner.OffileParkingPartner.Adapter;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -22,27 +21,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.mani.mekparkpartner.CommanPart.LoginSessionManager;
-import com.example.mani.mekparkpartner.OffileParkingPartner.AddNewBooking;
 import com.example.mani.mekparkpartner.OffileParkingPartner.Details.DialogOngoingOfflineDetail;
 import com.example.mani.mekparkpartner.OffileParkingPartner.Model.OfflineParkingBooking;
-import com.example.mani.mekparkpartner.ParkingPartner.Booking;
-import com.example.mani.mekparkpartner.ParkingPartner.ShowDetails.OngoingDetail;
+import com.example.mani.mekparkpartner.OffileParkingPartner.ShareReceipt;
 import com.example.mani.mekparkpartner.R;
-import com.example.mani.mekparkpartner.TowingPartner.details.DialogNewTowingDetail;
 
 import java.util.HashMap;
 import java.util.List;
 
-import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.KEY_CAR;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedDate;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedTime;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_ID;
-import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_BIKE_FARE;
-import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_CAR_FARE;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_DESCRIPTION;
 import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_LOCATION;
+
+
 
 public class OfflineOngoingAdapter extends RecyclerView.Adapter<OfflineOngoingAdapter.OngoingViewHolder> {
 
@@ -92,6 +86,7 @@ public class OfflineOngoingAdapter extends RecyclerView.Adapter<OfflineOngoingAd
         holder.tv_printReceipt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 openReceiptPage(booking);
             }
         });
@@ -147,10 +142,11 @@ public class OfflineOngoingAdapter extends RecyclerView.Adapter<OfflineOngoingAd
         }
     }
 
-    private void openReceiptPage(OfflineParkingBooking booking) {
+    //Dont delete this page
+    private void openReceiptPage(final OfflineParkingBooking booking) {
 
         final Dialog dialog = new Dialog(mCtx);
-        View view = LayoutInflater.from(mCtx).inflate(R.layout.dialog_receipt, null);
+        final View view = LayoutInflater.from(mCtx).inflate(R.layout.dialog_receipt, null);
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(view);
@@ -198,8 +194,8 @@ public class OfflineOngoingAdapter extends RecyclerView.Adapter<OfflineOngoingAd
         view.findViewById(R.id.print).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mCtx,"printing.......",Toast.LENGTH_SHORT).show();
-
+                ShareReceipt shareReceipt = new ShareReceipt(mCtx,booking,0);
+                shareReceipt.share();
             }
         });
 
@@ -213,4 +209,6 @@ public class OfflineOngoingAdapter extends RecyclerView.Adapter<OfflineOngoingAd
         dialog.show();
 
     }
+
+
 }

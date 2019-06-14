@@ -6,13 +6,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.MediaStore;
+import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -27,17 +36,24 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.mani.mekparkpartner.EmptyActivity;
+import com.example.mani.mekparkpartner.OffileParkingPartner.Model.OfflineParkingBooking;
 import com.example.mani.mekparkpartner.ParkingPartner.ParkingPartnerHomePage;
+import com.example.mani.mekparkpartner.R;
 import com.example.mani.mekparkpartner.TowingPartner.TowingPartnerHomePage;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_ID;
+import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_DESCRIPTION;
+import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_LOCATION;
 
 public class CoomanVarAndFun {
 
@@ -243,7 +259,6 @@ public class CoomanVarAndFun {
 
     }
 
-
     public static String getFormattedDate2(String TAG, String unix) {
 
         String formatedstring = "NA";
@@ -371,9 +386,5 @@ public class CoomanVarAndFun {
         return formattedTime;
 
     }
-
-
-
-
 
 }

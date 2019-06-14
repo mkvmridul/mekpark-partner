@@ -4,6 +4,7 @@ package com.example.mani.mekparkpartner.OffileParkingPartner;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -48,7 +49,7 @@ public class FragHistoryOffline extends Fragment {
     private View mRootView;
 
     private List<OfflineParkingBooking> mHistoryList;
-    private ProgressBar mProgressbar;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public FragHistoryOffline() { }
 
@@ -66,16 +67,24 @@ public class FragHistoryOffline extends Fragment {
 
         //same layout is used in frag_ongoing_offline and history part
         mRootView    =  inflater.inflate(R.layout.frag_ongoing_offline, container, false);
-        mProgressbar = mRootView.findViewById(R.id.progress_bar);
+        mSwipeRefreshLayout = mRootView.findViewById(R.id.swipe_to_refresh);
         mHistoryList = new ArrayList<>();
         fetchOfflineHistoryBooking();
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+               fetchOfflineHistoryBooking();
+            }
+        });
+
         return mRootView;
     }
 
     private void fetchOfflineHistoryBooking() {
 
         Log.e(TAG,"called : fetchOfflineHistoryBooking");
-        mProgressbar.setVisibility(View.VISIBLE);
+        mSwipeRefreshLayout.setRefreshing(true);
 
         String SEND_URL = BASE_URL + "get_offline_history_parking.php";
 
@@ -84,7 +93,11 @@ public class FragHistoryOffline extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         Log.e(TAG,response);
-                        mProgressbar.setVisibility(View.GONE);
+
+                        if(mHistoryList.size()>0)
+                            mHistoryList.clear();
+
+                        mSwipeRefreshLayout.setRefreshing(false);
 
                         try {
                             JSONArray jsonArray = new JSONArray(response);
@@ -154,7 +167,7 @@ public class FragHistoryOffline extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG,error.toString());
-                mProgressbar.setVisibility(View.GONE);
+                mSwipeRefreshLayout.setRefreshing(false);
                 Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_SHORT).show();
             }
         }){

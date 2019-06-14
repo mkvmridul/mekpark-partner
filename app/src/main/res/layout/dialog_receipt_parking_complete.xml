@@ -42,14 +42,14 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="64dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="64dp"
         android:background="@drawable/border_light_black"
+        android:layout_marginBottom="64dp"
+        android:layout_marginRight="20dp"
         android:orientation="vertical">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:padding="2dp"
             android:scrollbars="none">
 
@@ -58,8 +58,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/white"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:background="@color/white">
 
                 <TextView
                     android:id="@+id/parking_name"
@@ -183,6 +183,246 @@
                         android:text=""
                         android:textColor="@color/black"
                         android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/gotham_medium_regular"
+                            android:singleLine="true"
+                            android:text="Park In Time         :"
+                            android:textColor="@color/black2"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/park_in_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/gotham_medium_regular"
+                            android:singleLine="true"
+                            android:text="00:00 p.m"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/gotham_medium_regular"
+                            android:singleLine="true"
+                            android:text="Park Out Time      :"
+                            android:textColor="@color/black2"
+                            android:textSize="14sp" />
+
+
+                        <TextView
+                            android:id="@+id/park_out_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/gotham_medium_regular"
+                            android:singleLine="true"
+                            android:text="00:00 p.m"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/gotham_medium_regular"
+                            android:singleLine="true"
+                            android:text="Duration                :"
+                            android:textColor="@color/black2"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/duration"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/gotham_medium_regular"
+                            android:singleLine="true"
+                            android:text="0 Hrs"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:fontFamily="@font/gotham_medium_regular"
+                        android:text="Payment details "
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangular_background"
+                    android:orientation="vertical"
+                    android:layout_marginTop="4dp"
+                    android:padding="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="16dp"
+                        android:paddingBottom="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/gotham_medium_regular"
+                            android:text="Sub Total"
+                            android:textColor="@color/search_hint"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/parking_fare"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:fontFamily="@font/montserrat_semi_bold"
+                            android:gravity="end"
+                            android:text="\u20B9 0"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="16dp"
+                        android:paddingBottom="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/gotham_medium_regular"
+                            android:text="Tax"
+                            android:textColor="@color/search_hint"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tax_amount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:fontFamily="@font/montserrat_semi_bold"
+                            android:gravity="end"
+                            android:text="\u20B9 0"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="16dp"
+                        android:paddingBottom="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/gotham_medium_regular"
+                            android:singleLine="true"
+                            android:text="Additional charges*"
+                            android:textColor="@color/search_hint"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/additinal_charges"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:fontFamily="@font/montserrat_semi_bold"
+                            android:gravity="end"
+                            android:text="\u20B9 0"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="16dp"
+                        android:paddingBottom="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/gotham_medium_regular"
+                            android:text="Total"
+                            android:textColor="@color/search_hint"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/total_fare"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:fontFamily="@font/montserrat_semi_bold"
+                            android:gravity="end"
+                            android:text="\u20B9 0"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
 
                 </LinearLayout>
 
@@ -316,3 +556,4 @@
 
 
 </FrameLayout>
+

@@ -3,10 +3,18 @@ package com.example.mani.mekparkpartner.OffileParkingPartner.Details;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.media.audiofx.DynamicsProcessing;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.print.PrintManager;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -18,6 +26,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -32,17 +41,39 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.mani.mekparkpartner.CommanPart.LoginSessionManager;
 import com.example.mani.mekparkpartner.CommanPart.MySingleton;
 import com.example.mani.mekparkpartner.OffileParkingPartner.Model.OfflineParkingBooking;
+import com.example.mani.mekparkpartner.OffileParkingPartner.ShareReceipt;
 import com.example.mani.mekparkpartner.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.w3c.dom.Attr;
+import org.w3c.dom.CDATASection;
+import org.w3c.dom.Comment;
+import org.w3c.dom.DOMConfiguration;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.w3c.dom.DocumentFragment;
+import org.w3c.dom.DocumentType;
+import org.w3c.dom.Element;
+import org.w3c.dom.EntityReference;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.ProcessingInstruction;
+import org.w3c.dom.Text;
+import org.w3c.dom.UserDataHandler;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.BASE_URL;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.CUSTOMER_CARE;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.NO_OF_RETRY;
@@ -136,7 +167,8 @@ public class DialogHistoryOfflineDetail extends DialogFragment {
         mRootView.findViewById(R.id.share_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"Sharing...",Toast.LENGTH_SHORT).show();
+                ShareReceipt shareReceipt = new ShareReceipt(getActivity(),mBooking,1);
+                shareReceipt.share();
             }
         });
 
@@ -155,7 +187,7 @@ public class DialogHistoryOfflineDetail extends DialogFragment {
         mRootView.findViewById(R.id.print_receipt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openReceiptPage(mBooking);
+                openReceiptPage();
             }
         });
 
@@ -172,10 +204,10 @@ public class DialogHistoryOfflineDetail extends DialogFragment {
 
     }
 
-    private void openReceiptPage(OfflineParkingBooking booking) {
+    private void openReceiptPage() {
 
         final Dialog dialog = new Dialog(getActivity());
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_receipt, null);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_receipt_parking_complete, null);
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(view);
@@ -190,40 +222,13 @@ public class DialogHistoryOfflineDetail extends DialogFragment {
             }
         });
 
-        HashMap<String, String> serviceDetail = new LoginSessionManager(getActivity()).getServiceDetailFromSF();
-
-        TextView tv_parking_name = view.findViewById(R.id.parking_name);
-        TextView tv_location     = view.findViewById(R.id.location);
-        TextView tv_date         = view.findViewById(R.id.date);
-        TextView tv_time         = view.findViewById(R.id.time);
-        TextView tv_number_plate = view.findViewById(R.id.number_plate);
-        TextView tv_brand        = view.findViewById(R.id.brand);
-        TextView tv_model        = view.findViewById(R.id.model);
-        TextView tv_fare         = view.findViewById(R.id.fare_per_hr);
-        TextView tv_operator_id  = view.findViewById(R.id.operator_id);
-        TextView tv_message      = view.findViewById(R.id.message);
-
-        tv_parking_name.setText(serviceDetail.get(S_DESCRIPTION));
-        tv_location.setText(serviceDetail.get(S_LOCATION));
-        tv_date.setText(getFormattedDate(TAG,booking.getParkInTime()));
-        tv_time.setText(getFormattedTime(TAG,booking.getParkInTime()));
-        tv_number_plate.setText(booking.getLicencePlateNo());
-        tv_brand.setText(booking.getBrand());
-        tv_model.setText(booking.getBrand());
-
-
-        tv_fare.setText("Rs "+booking.getFarePerHr()+"/hr");
-        String partnerId = new LoginSessionManager(getActivity()).getEmpDetailsFromSP().get(KEY_PARTNER_ID);
-        tv_operator_id.setText(partnerId);
-
-        String text = "<font color=#5d636b>Parking at owners risk. No responsibility for valuable items like laptop, wallet, cash etc. </font>" +
-                "<b><font color=#000000>Lost ticket charges RS 20 </font></b><><font color=#5d636b>after verification.</font>";
-        tv_message.setText(Html.fromHtml(text));
+        setViewInReceipt(view);
 
         view.findViewById(R.id.print).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"printing.......",Toast.LENGTH_SHORT).show();
+                ShareReceipt shareReceipt = new ShareReceipt(getActivity(),mBooking,1);
+                shareReceipt.share();
 
             }
         });
@@ -238,6 +243,57 @@ public class DialogHistoryOfflineDetail extends DialogFragment {
         dialog.show();
 
     }
+
+
+    private void setViewInReceipt(View view) {
+
+        HashMap<String, String> serviceDetail = new LoginSessionManager(getActivity()).getServiceDetailFromSF();
+
+        TextView tv_parking_name = view.findViewById(R.id.parking_name);
+        TextView tv_location     = view.findViewById(R.id.location);
+        TextView tv_date         = view.findViewById(R.id.date);
+        TextView tv_time         = view.findViewById(R.id.time);
+        TextView tv_number_plate = view.findViewById(R.id.number_plate);
+        TextView tv_brand        = view.findViewById(R.id.brand);
+        TextView tv_model        = view.findViewById(R.id.model);
+        TextView tv_fare         = view.findViewById(R.id.fare_per_hr);
+        TextView tv_operator_id  = view.findViewById(R.id.operator_id);
+        TextView tv_message      = view.findViewById(R.id.message);
+
+
+        tv_fare.setText("Rs "+mBooking.getFarePerHr()+"/hr");
+        String partnerId = new LoginSessionManager(getActivity()).getEmpDetailsFromSP().get(KEY_PARTNER_ID);
+        tv_operator_id.setText(partnerId);
+
+        tv_parking_name.setText(serviceDetail.get(S_DESCRIPTION));
+        tv_location.setText(serviceDetail.get(S_LOCATION));
+        tv_date.setText(getFormattedDate(TAG, mBooking.getParkInTime()));
+        tv_time.setText(getFormattedTime(TAG,mBooking.getBookingTime()));
+        tv_number_plate.setText(mBooking.getLicencePlateNo());
+        tv_brand.setText(mBooking.getBrand());
+        tv_model.setText(mBooking.getModel());
+
+        ((TextView)view.findViewById(R.id.park_in_time)).setText(getFormattedTime(TAG,mBooking.getParkInTime()));
+        ((TextView)view.findViewById(R.id.park_out_time)).setText(getFormattedTime(TAG,mBooking.getParkOutTime()));
+        ((TextView)view.findViewById(R.id.duration)).setText(mBooking.getDuration()+" Hrs");
+        ((TextView)view.findViewById(R.id.parking_fare)).setText("\u20B9 "+mBooking.getBaseFare());
+        ((TextView)view.findViewById(R.id.tax_amount)).setText("\u20B9 "+mBooking.getTax());
+        ((TextView)view.findViewById(R.id.additinal_charges)).setText("\u20B9 "+mBooking.getAddCharges());
+        ((TextView)view.findViewById(R.id.total_fare)).setText("\u20B9 "+mBooking.getTotalFare());
+
+        String text = "<font color=#5d636b>Parking at owners risk. No responsibility for valuable items like laptop, wallet, cash etc.</font>" +
+                    "<b><font color=#000000>Lost ticket charges RS 20 </font></b><><font color=#5d636b>after verification.</font>";
+
+        tv_message.setText(Html.fromHtml(text));
+
+
+
+    }
+
+
+
+
+
 
 
 

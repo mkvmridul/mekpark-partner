@@ -4,6 +4,7 @@ package com.example.mani.mekparkpartner.OffileParkingPartner;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -55,7 +56,7 @@ public class FragOngoingOffline extends Fragment {
     private View mRootView;
 
     private List<OfflineParkingBooking> mOngoingList;
-    private ProgressBar mProgressbar;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public FragOngoingOffline() { }
 
@@ -70,10 +71,17 @@ public class FragOngoingOffline extends Fragment {
                              Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.frag_ongoing_offline, container, false);
 
-        mProgressbar = mRootView.findViewById(R.id.progress_bar);
+        mSwipeRefreshLayout = mRootView.findViewById(R.id.swipe_to_refresh);
         mOngoingList = new ArrayList<>();
 
         fetchOfflineOngoingBooking();
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchOfflineOngoingBooking();
+            }
+        });
 
         return mRootView;
     }
@@ -81,7 +89,7 @@ public class FragOngoingOffline extends Fragment {
     private void fetchOfflineOngoingBooking() {
 
         Log.e(TAG,"called : fetchOfflineOngoingBooking");
-        mProgressbar.setVisibility(View.VISIBLE);
+        mSwipeRefreshLayout.setRefreshing(true);
 
         String SEND_URL = BASE_URL + "get_offline_ongoing_parking.php";
 
@@ -90,7 +98,10 @@ public class FragOngoingOffline extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         Log.e(TAG,response);
-                        mProgressbar.setVisibility(View.GONE);
+                       mSwipeRefreshLayout.setRefreshing(false);
+
+                       if(mOngoingList.size()>0)
+                           mOngoingList.clear();
 
                         try {
                             JSONArray jsonArray = new JSONArray(response);
@@ -152,7 +163,7 @@ public class FragOngoingOffline extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG,error.toString());
-                mProgressbar.setVisibility(View.GONE);
+                mSwipeRefreshLayout.setRefreshing(false);
                 Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_SHORT).show();
             }
         }){
@@ -168,7 +179,4 @@ public class FragOngoingOffline extends Fragment {
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(RETRY_SECONDS*1000,NO_OF_RETRY,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MySingleton.getInstance(getActivity()).addToRequestQueue(stringRequest);
     }
-
-
-
 }

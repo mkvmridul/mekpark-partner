@@ -1,13 +1,18 @@
 package com.example.mani.mekparkpartner.OffileParkingPartner.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,18 +22,25 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mani.mekparkpartner.CommanPart.LoginSessionManager;
 import com.example.mani.mekparkpartner.OffileParkingPartner.Details.DialogHistoryOfflineDetail;
 import com.example.mani.mekparkpartner.OffileParkingPartner.Details.DialogOngoingOfflineDetail;
 import com.example.mani.mekparkpartner.OffileParkingPartner.Model.OfflineParkingBooking;
+import com.example.mani.mekparkpartner.OffileParkingPartner.ShareReceipt;
 import com.example.mani.mekparkpartner.ParkingPartner.Booking;
 import com.example.mani.mekparkpartner.ParkingPartner.ShowDetails.HistoryDetail;
 import com.example.mani.mekparkpartner.R;
 
+import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.CUSTOMER_CARE;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedDate;
 import static com.example.mani.mekparkpartner.CommanPart.CoomanVarAndFun.getFormattedTime;
+import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.KEY_PARTNER_ID;
+import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_DESCRIPTION;
+import static com.example.mani.mekparkpartner.CommanPart.LoginSessionManager.S_LOCATION;
 
 
 public class OfflineHistoryAdapter extends RecyclerView.Adapter<OfflineHistoryAdapter.HistoryViewHolder> {
@@ -59,7 +71,7 @@ public class OfflineHistoryAdapter extends RecyclerView.Adapter<OfflineHistoryAd
         holder.tv_model.setText(booking.getModel());
         holder.tv_licence_plate.setText(booking.getLicencePlateNo());
 
-        holder.tv_time.setText(getFormattedDate(TAG, booking.getBookingTime()));
+        holder.tv_date.setText(getFormattedDate(TAG, booking.getBookingTime()));
         holder.tv_time.setText(getFormattedTime(TAG, booking.getBookingTime()));
 
         holder.tv_needHelp.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +80,14 @@ public class OfflineHistoryAdapter extends RecyclerView.Adapter<OfflineHistoryAd
                 String phone = CUSTOMER_CARE;
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
                 mCtx.startActivity(intent);
+            }
+        });
+
+        holder.ll_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShareReceipt shareReceipt = new ShareReceipt(mCtx,booking,1);
+                shareReceipt.share();
             }
         });
 
@@ -83,6 +103,8 @@ public class OfflineHistoryAdapter extends RecyclerView.Adapter<OfflineHistoryAd
 
             }
         });
+
+
 
     }
 
@@ -121,4 +143,5 @@ public class OfflineHistoryAdapter extends RecyclerView.Adapter<OfflineHistoryAd
 
 
     }
+
 }
