@@ -12,8 +12,6 @@ public class MyFirebaseInstanceIdService extends FirebaseInstanceIdService {
     private final String TAG = "FCM";
     public static final String TOKEN_BROADCAST = "myFcmTokenBroadCast";
 
-
-
     @Override
     public void onTokenRefresh() {
         Log.e(TAG, "onTokennRefresh is called");
